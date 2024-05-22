@@ -3,5 +3,6 @@ import CTextInput from './CTextInput';
 import CIcon from './CIcon';
 import CView from './CView';
 import CStatusbar from './CStatusBar';
+import CFlatGrid from './CFlatGrid';
 
-export {CText, CTextInput, CIcon, CView, CStatusbar};
+export {CText, CTextInput, CIcon, CView, CStatusbar, CFlatGrid};

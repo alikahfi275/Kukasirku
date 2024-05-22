@@ -34,9 +34,7 @@ const Stacks = (props: any) => {
 
   return (
     <NavigationContainer ref={navigation}>
-      <Stack.Navigator
-        initialRouteName={Routes.Home}
-        screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={Routes.BottomTab} component={BottomTab} />
       </Stack.Navigator>
     </NavigationContainer>

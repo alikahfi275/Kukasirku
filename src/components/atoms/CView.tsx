@@ -7,11 +7,12 @@ interface CViewProps {
   children?: ReactNode;
   style?: ViewStyle;
   borderRadius?: number | undefined;
+  flex?: number | undefined;
 }
 
-const CView: React.FC<CViewProps> = ({children, style, borderRadius}) => {
+const CView: React.FC<CViewProps> = ({children, style, borderRadius, flex}) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, {flex: flex}, style]}>
       <CStatusbar backgroundColor={colors.white} barStyle="dark-content" />
       {children}
     </View>
