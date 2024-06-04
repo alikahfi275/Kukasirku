@@ -7,6 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {sizeScale} from '../../property';
 
 interface Props {
   name: String;
@@ -15,28 +16,29 @@ interface Props {
   style?: ViewStyle;
   color?: string;
   type?: string;
+  onPress?: () => void;
 }
 
 const CIcon: React.FC<Props> = props => {
   switch (props.type) {
     case 'FontAwesome5':
-      return <FontAwesome5 {...props} />;
+      return <FontAwesome5 {...props} size={sizeScale(props.size)} />;
     case 'AntDesign':
-      return <AntDesign {...props} />;
+      return <AntDesign {...props} size={sizeScale(props.size)} />;
     case 'Ionicons':
-      return <Ionicons {...props} />;
+      return <Ionicons {...props} size={sizeScale(props.size)} />;
 
     case 'Feather':
-      return <Feather {...props} />;
+      return <Feather {...props} size={sizeScale(props.size)} />;
 
     case 'MaterialIcons':
-      return <MaterialIcons {...props} />;
+      return <MaterialIcons {...props} size={sizeScale(props.size)} />;
 
     case 'Entypo':
-      return <Entypo {...props} />;
+      return <Entypo {...props} size={sizeScale(props.size)} />;
 
     default:
-      return <MaterialCommunityIcons {...props} />;
+      return <MaterialCommunityIcons {...props} size={sizeScale(props.size)} />;
   }
 };
 

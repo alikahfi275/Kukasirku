@@ -9,10 +9,6 @@ interface CustomStatusBarProps {
   animated?: boolean;
   networkActivityIndicatorVisible?: boolean;
   showHideTransition?: 'fade' | 'slide';
-  backgroundColorDarkMode?: string | false;
-  barStyleDarkMode?: 'default' | 'light-content' | 'dark-content';
-  translucentDarkMode?: boolean;
-  dynamicContentInsets?: number;
 }
 
 const CStatusbar: React.FC<CustomStatusBarProps> = ({
@@ -23,9 +19,6 @@ const CStatusbar: React.FC<CustomStatusBarProps> = ({
   animated,
   networkActivityIndicatorVisible,
   showHideTransition,
-  backgroundColorDarkMode,
-  barStyleDarkMode,
-  translucentDarkMode,
 }) => {
   return (
     <StatusBar
@@ -36,9 +29,6 @@ const CStatusbar: React.FC<CustomStatusBarProps> = ({
       animated={animated}
       networkActivityIndicatorVisible={networkActivityIndicatorVisible}
       showHideTransition={showHideTransition}
-      backgroundColorDarkMode={backgroundColorDarkMode}
-      barStyleDarkMode={barStyleDarkMode}
-      translucentDarkMode={translucentDarkMode}
     />
   );
 };

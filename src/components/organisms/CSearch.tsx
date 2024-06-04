@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, TextInputProps} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {CView} from '../atoms';
+import {horizontalScale, verticalScale} from '../../property';
 
 interface SearchInputProps extends TextInputProps {
   placeholder?: string;
@@ -30,18 +32,42 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <CView
+      paddingRight={10}
+      paddingLeft={10}
+      marginTop={10}
+      marginBottom={10}
+      style={[styles.container, containerStyle]}>
       {icon && (
-        <Icon name="search" size={20} style={[styles.icon, iconStyle]} />
+        <Icon
+          name="search"
+          size={20}
+          style={[
+            {
+              icon: {
+                marginRight: horizontalScale(8),
+                color: '#888',
+              },
+            },
+            iconStyle,
+          ]}
+        />
       )}
       <TextInput
-        style={[styles.input, inputStyle]}
+        style={[
+          {
+            flex: 1,
+            fontSize: 16,
+            height: verticalScale(30),
+          },
+          inputStyle,
+        ]}
         placeholder={placeholder}
         value={query}
         onChangeText={handleTextChange}
         {...props}
       />
-    </View>
+    </CView>
   );
 };
 
@@ -52,18 +78,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
-    paddingHorizontal: 10,
-    marginVertical: 10,
     flex: 1,
-  },
-  icon: {
-    marginRight: 5,
-    color: '#888',
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    height: 40,
   },
 });
 

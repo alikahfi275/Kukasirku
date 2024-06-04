@@ -120,6 +120,7 @@ export const colors = {
     "purple": "#800080",
     "rebeccapurple": "#663399",
     "red": "#ff0000",
+    "red1": "#C40C0C",
     "rosybrown": "#bc8f8f",
     "royalblue": "#4169e1",
     "saddlebrown": "#8b4513",

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
-import {CFlatGrid, CText} from '../atoms';
-import {colors} from '../../property';
+import {CFlatGrid, CText, CView} from '../atoms';
+import {colors, horizontalScale, verticalScale} from '../../property';
 
 interface FoodProduct {
   id: string;
@@ -141,7 +141,16 @@ const ListProduct = () => {
   ];
 
   const renderItem = ({item}: {item: Item}) => (
-    <View style={styles.itemContainer}>
+    <CView
+      backgroundColorStatusBar={colors.white}
+      barStyle="dark-content"
+      style={{
+        justifyContent: 'center',
+        backgroundColor: colors.white,
+        borderRadius: 5,
+        borderWidth: 1.5,
+        borderColor: colors.lightgray,
+      }}>
       <Image
         source={{uri: item.imageUrl}}
         style={{
@@ -152,36 +161,46 @@ const ListProduct = () => {
           borderTopLeftRadius: 3,
         }}
       />
-      <CText style={{marginTop: 5, marginLeft: 5}} weight={500}>
+      <CText marginTop={5} marginLeft={5} weight={500}>
         {item.name.substring(0, 20)}
       </CText>
-      <CText style={{marginLeft: 5}} weight={500} color={colors.gray}>
+      <CText marginLeft={5} weight={500} color={colors.gray}>
         {item.price}
       </CText>
-      <CText
-        style={{marginLeft: 5}}
-        weight={400}
-        color={colors.gray}
-        fontSize={12}>
+      <CText marginLeft={5} weight={400} color={colors.gray} fontSize={12}>
         {item.description.substring(0, 40)} ...
       </CText>
-      <Pressable style={styles.button}>
+      <Pressable
+        style={{
+          backgroundColor: colors.teal,
+          padding: 10,
+          marginBottom: verticalScale(5),
+          marginTop: verticalScale(5),
+          marginLeft: horizontalScale(5),
+          marginRight: horizontalScale(5),
+          borderRadius: 5,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <CText color={colors.white} weight={600}>
           Add To Cart
         </CText>
       </Pressable>
-    </View>
+    </CView>
   );
 
   return (
-    <View style={styles.container}>
+    <CView
+      style={styles.container}
+      backgroundColorStatusBar={colors.white}
+      barStyle="dark-content">
       <CFlatGrid
         items={foodProducts}
         renderItem={renderItem}
         itemDimension={120}
         spacing={15}
       />
-    </View>
+    </CView>
   );
 };
 
@@ -189,15 +208,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    marginHorizontal: 5,
-    marginTop: 5,
-  },
-  itemContainer: {
-    justifyContent: 'center',
-    backgroundColor: colors.white,
-    borderRadius: 5,
-    borderWidth: 1.5,
-    borderColor: colors.lightgray,
   },
   button: {
     backgroundColor: colors.teal,

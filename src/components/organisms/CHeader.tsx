@@ -2,7 +2,7 @@ import {Image, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 import CSearch from './CSearch';
 import {CIcon, CStatusbar, CText, CView} from '../atoms';
-import {colors} from '../../property';
+import {colors, horizontalScale, verticalScale} from '../../property';
 
 interface HeaderProps extends TextInputProps {
   onSearch?: (query: string) => void;
@@ -10,15 +10,32 @@ interface HeaderProps extends TextInputProps {
   value?: string;
   typeHeader?: string;
   titleHeader?: string;
+  iconRight?: string;
+  iconLeft?: string;
+  onPressLeft?: () => void;
+  onPressRight?: () => void;
+  sizeIconRight?: number;
+  sizeIconLeft?: number;
 }
 
 const CHeader: React.FC<HeaderProps> = props => {
-  const {typeHeader} = props;
+  const {
+    typeHeader,
+    iconRight,
+    iconLeft,
+    onPressLeft,
+    onPressRight,
+    sizeIconRight = 20,
+    sizeIconLeft = 20,
+  } = props;
   return (
     <>
       {typeHeader === 'search' ? (
-        <CView>
-          <CView style={styles.wapperHeaderSearch}>
+        <CView backgroundColorStatusBar={colors.white} barStyle="dark-content">
+          <CView
+            marginRight={15}
+            marginLeft={15}
+            style={styles.wapperHeaderSearch}>
             <CStatusbar
               backgroundColor={colors.white}
               barStyle="dark-content"
@@ -34,28 +51,33 @@ const CHeader: React.FC<HeaderProps> = props => {
               <CIcon
                 name="cart"
                 size={25}
-                style={styles.iconCart}
+                style={{
+                  marginRight: horizontalScale(10),
+                  marginLeft: horizontalScale(10),
+                }}
                 color={colors.teal}
               />
             </Pressable>
           </CView>
           <CView
+            marginTop={5}
+            backgroundColor={colors.teal}
+            paddingRight={15}
+            paddingLeft={15}
+            marginRight={15}
+            marginLeft={15}
             style={{
-              backgroundColor: colors.teal,
               borderTopLeftRadius: 20,
               borderTopRightRadius: 20,
-              marginTop: 10,
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingHorizontal: 15,
-              marginHorizontal: 20,
             }}>
             <Image
               source={require('../../property/assets/images/kukasirkuLogo.png')}
               style={{
-                width: 100,
-                height: 40,
+                width: horizontalScale(100),
+                height: verticalScale(35),
                 resizeMode: 'contain',
               }}
             />
@@ -65,17 +87,40 @@ const CHeader: React.FC<HeaderProps> = props => {
           </CView>
         </CView>
       ) : (
-        <CView style={styles.wapperHeader}>
+        <CView paddingTop={5} paddingBottom={5} style={styles.wapperHeader}>
           <CStatusbar backgroundColor={colors.teal} barStyle="light-content" />
-          <CText style={styles.text} weight={500} fontSize={20}>
+          {iconLeft && (
+            <CIcon
+              name={iconLeft}
+              size={sizeIconLeft}
+              style={{
+                marginRight: horizontalScale(10),
+                marginLeft: horizontalScale(10),
+              }}
+              color={colors.white}
+              onPress={onPressLeft}
+            />
+          )}
+          <CText
+            marginTop={5}
+            marginBottom={5}
+            style={styles.text}
+            weight={500}
+            fontSize={20}>
             {props.titleHeader}
           </CText>
-          <CIcon
-            name="cart"
-            size={25}
-            style={styles.iconCart}
-            color={colors.white}
-          />
+          {iconRight && (
+            <CIcon
+              name={iconRight}
+              size={sizeIconRight}
+              style={{
+                marginRight: horizontalScale(10),
+                marginLeft: horizontalScale(10),
+              }}
+              color={colors.white}
+              onPress={onPressRight}
+            />
+          )}
         </CView>
       )}
     </>
@@ -86,21 +131,14 @@ const styles = StyleSheet.create({
   wapperHeaderSearch: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 20,
   },
   wapperHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.teal,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  iconCart: {
-    marginLeft: 20,
   },
   text: {
     color: colors.white,
-    marginVertical: 50,
     flex: 1,
   },
 });

@@ -1,48 +1,36 @@
 import React, {ReactNode} from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
-import {colors, horizontalScale, verticalScale} from '../../property';
-import CStatusbar from './CStatusBar';
+import {ScrollView, View, ViewStyle} from 'react-native';
+import {horizontalScale, verticalScale} from '../../property';
 
 interface CViewProps {
   children?: ReactNode;
   style?: ViewStyle;
   borderRadius?: number | undefined;
   flex?: number | undefined;
-  barStyle?: 'default' | 'light-content' | 'dark-content';
-  backgroundColorStatusBar?: string;
+  marginVertical?: number;
+  marginHorizontal?: number;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
   marginRight?: number;
+  paddingVertical?: number;
+  paddingHorizontal?: number;
   paddingTop?: number;
   paddingBottom?: number;
   paddingLeft?: number;
   paddingRight?: number;
-  marginVertical?: number;
-  marginHorizontal?: number;
-  paddingHorizontal?: number;
-  paddingVertical?: number;
   backgroundColor?: string;
-  borderWidth?: number;
-  borderColor?: string;
 }
-const CView: React.FC<CViewProps> = ({
-  children,
-  style,
-  borderRadius,
-  flex,
-  backgroundColorStatusBar = colors.white,
-  barStyle = 'dark-content',
-  backgroundColor = colors.white,
-  borderWidth,
-  borderColor,
-  ...props
-}) => {
+
+const CScrolView: React.FC<CViewProps> = props => {
+  const {children, style, backgroundColor = 'white'} = props;
   return (
-    <View
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
       style={[
         {
-          flex: flex,
+          flex: props.flex,
           marginVertical: verticalScale(props.marginVertical || 0),
           marginHorizontal: horizontalScale(props.marginHorizontal || 0),
           marginTop: verticalScale(props.marginTop || 0),
@@ -56,19 +44,12 @@ const CView: React.FC<CViewProps> = ({
           paddingVertical: verticalScale(props.paddingVertical || 0),
           paddingHorizontal: horizontalScale(props.paddingHorizontal || 0),
           backgroundColor: backgroundColor,
-          borderRadius: borderRadius || 0,
-          borderWidth: borderWidth,
-          borderColor: borderColor,
         },
         style,
       ]}>
-      <CStatusbar
-        backgroundColor={backgroundColorStatusBar}
-        barStyle={barStyle}
-      />
       {children}
-    </View>
+    </ScrollView>
   );
 };
 
-export default CView;
+export default CScrolView;

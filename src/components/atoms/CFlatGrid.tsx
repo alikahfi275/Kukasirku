@@ -30,6 +30,8 @@ const CFlatGrid: React.FC<Props> = ({
       renderItem={renderItem}
       ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       {...props}
     />
   );
