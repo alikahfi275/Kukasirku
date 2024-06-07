@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import AddProductComponent from '../components/AddProductComponent';
-import {createProduct, updateProduct} from '../store/ProfileActions';
 import {AddProductContainerProps} from '../store/type';
+import {createProduct, updateProduct} from '../../../components';
 
 const AddProductContainer: React.FC<AddProductContainerProps> = props => {
   const {
@@ -43,10 +43,12 @@ const AddProductContainer: React.FC<AddProductContainerProps> = props => {
         console.warn('Product updated');
       } else {
         await createProduct(name, price, description, fotoProduct);
-        setDescription('');
-        setName('');
-        setPrice(0);
-        setFotoProduct('');
+        setTimeout(() => {
+          setDescription('');
+          setName('');
+          setPrice(0);
+          setFotoProduct('');
+        });
       }
       onSubmit();
     } catch (error) {}
