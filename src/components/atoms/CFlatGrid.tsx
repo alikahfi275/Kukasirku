@@ -11,6 +11,7 @@ interface Props {
   renderItem: any;
   ListHeaderComponent?: any;
   ListFooterComponent?: any;
+  keyExtractor: any;
 }
 
 const CFlatGrid: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const CFlatGrid: React.FC<Props> = ({
   spacing,
   ListHeaderComponent,
   ListFooterComponent,
+  keyExtractor,
   ...props
 }) => {
   return (
@@ -32,6 +34,7 @@ const CFlatGrid: React.FC<Props> = ({
       ListFooterComponent={ListFooterComponent}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
+      keyExtractor={(item: any) => item.id}
       {...props}
     />
   );

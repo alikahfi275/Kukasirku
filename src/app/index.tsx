@@ -4,6 +4,8 @@ import {createModalStack, ModalProvider} from 'react-native-modalfy';
 import {Dimensions} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 import Stacks from './routes/Stacks';
+import {DatabaseProvider} from '@nozbe/watermelondb/DatabaseProvider';
+import {database} from './database';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -44,9 +46,11 @@ const defaultOptions = {
 const stack = createModalStack(modalConfig, defaultOptions);
 const App: FC = () => {
   return (
-    <ModalProvider stack={stack}>
-      <Stacks />
-    </ModalProvider>
+    <DatabaseProvider database={database}>
+      <ModalProvider stack={stack}>
+        <Stacks />
+      </ModalProvider>
+    </DatabaseProvider>
   );
 };
 

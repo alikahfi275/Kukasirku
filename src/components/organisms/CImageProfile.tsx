@@ -1,18 +1,19 @@
 import {View, Text, Image, Pressable} from 'react-native';
-import React from 'react';
-import {DefaulProfile, colors, sizeScale} from '../../property';
+import React, {useState} from 'react';
+import {DefaulProfile, DefaulStore, colors, sizeScale} from '../../property';
 import {CText, CView} from '../atoms';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 const CImageProfile = () => {
-  const [profile, setProfile] = React.useState<any>([]);
+  const [profile, setProfile] = useState(null);
   const openFile = () => {
     ImageCropPicker.openPicker({
-      width: 300,
-      height: 400,
       cropping: true,
+      width: 500,
+      height: 500,
+      cropperCircleOverlay: false,
       includeBase64: true,
-    }).then(imageResult => {
+    }).then((imageResult: any) => {
       setProfile(imageResult);
     });
   };
@@ -26,7 +27,7 @@ const CImageProfile = () => {
         source={
           profile
             ? {uri: `data:${profile.mime};base64,${profile.data}`}
-            : DefaulProfile
+            : DefaulStore
         }
         style={{
           width: sizeScale(150),

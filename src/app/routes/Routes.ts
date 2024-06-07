@@ -80,6 +80,10 @@ const Route = {
     Rekap: 'rekap',
     Profile: 'profile',
     BottomTab: 'bottomtab',
+    AddProduct: 'addproduct',
+    DeleteProduct: 'deleteproduct',
+    EditProduct: 'editproduct',
+    EditDetailProduct: 'editdetailproduct',
 
     // Export Function
     navigate,

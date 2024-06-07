@@ -62,10 +62,6 @@ const CView: React.FC<CViewProps> = ({
         },
         style,
       ]}>
-      <CStatusbar
-        backgroundColor={backgroundColorStatusBar}
-        barStyle={barStyle}
-      />
       {children}
     </View>
   );

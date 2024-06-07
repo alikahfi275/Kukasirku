@@ -2,13 +2,26 @@ import {View, Text, Pressable, BackHandler} from 'react-native';
 import React from 'react';
 import {CText, CView} from '../atoms';
 import {colors, horizontalScale, verticalScale} from '../../property';
+import Route from '../../app/routes/Routes';
 
 const ListMenuProfile = () => {
   const ListMenuProfile = [
     {id: '1', title: 'Bluetooth', action: () => {}},
-    {id: '2', title: 'Tambah Product', action: () => {}},
-    {id: '3', title: 'Edit Product', action: () => {}},
-    {id: '4', title: 'Delete Product', action: () => {}},
+    {
+      id: '2',
+      title: 'Tambah Product',
+      action: () => Route.navigate(Route.AddProduct),
+    },
+    {
+      id: '3',
+      title: 'Edit Product',
+      action: () => Route.navigate(Route.EditProduct),
+    },
+    {
+      id: '4',
+      title: 'Delete Product',
+      action: () => Route.navigate(Route.DeleteProduct),
+    },
     {id: '5', title: 'Support', action: () => {}},
     {id: '6', title: 'Close Application', action: () => BackHandler.exitApp()},
   ];

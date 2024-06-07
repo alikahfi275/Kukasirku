@@ -6,16 +6,18 @@ import {useModal} from 'react-native-modalfy';
 
 // Bottom Tab
 import BottomTab from './BottomTab';
-import HomeContainer from '../../modules/Home/containers/HomeContainer';
-import HistoryContainer from '../../modules/History/containers/HistoryContainer';
-import RekapContainer from '../../modules/Rekap/containers/RekapContainer';
-import ProfileContainer from '../../modules/Profile/containers/ProfileContainer';
+
+// Screens
+import AddProductContainer from '../../modules/Profile/containers/AddProductContainer';
+import DeleteProductContainer from '../../modules/Profile/containers/DeleteProductContainer';
+import EditProductContainer from '../../modules/Profile/containers/EditProductContainer';
+import EditDetailProductContainer from '../../modules/Profile/containers/EditDetailProductContainer';
 
 // Re-Wrapped Screens
-const Home = HomeContainer;
-const History = HistoryContainer;
-const Rekap = RekapContainer;
-const Profile = ProfileContainer;
+const AddProduct = AddProductContainer;
+const DeleteProduct = DeleteProductContainer;
+const EditProduct = EditProductContainer;
+const EditDetailProduct = EditDetailProductContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -36,6 +38,13 @@ const Stacks = (props: any) => {
     <NavigationContainer ref={navigation}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={Routes.BottomTab} component={BottomTab} />
+        <Stack.Screen name={Routes.AddProduct} component={AddProduct} />
+        <Stack.Screen name={Routes.DeleteProduct} component={DeleteProduct} />
+        <Stack.Screen name={Routes.EditProduct} component={EditProduct} />
+        <Stack.Screen
+          name={Routes.EditDetailProduct}
+          component={EditDetailProduct}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

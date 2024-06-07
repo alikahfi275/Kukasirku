@@ -62,22 +62,22 @@ export const getFontFamily = (baseFont = 'Inter', weight: any) => {
             return `${baseFont}-Regular`;
     }
 };
-export const formatRupiah = (angka: number) => {
-    if (angka) {
-        var number_string = angka.toString(),
-            sisa = number_string.length % 3,
-            rupiah = number_string.substr(0, sisa),
-            ribuan = number_string.substr(sisa).match(/\d{3}/g);
-
-        if (ribuan) {
-            let separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-    } else {
-        rupiah = '';
+export const formatRupiah = (angka: number): string => {
+    if (angka === null || angka === undefined) {
+        return '';
     }
 
-    return rupiah;
+    let numberString = angka.toString();
+    let sisa = numberString.length % 3;
+    let rupiah = numberString.substr(0, sisa);
+    let ribuan = numberString.substr(sisa).match(/\d{3}/g);
+
+    if (ribuan) {
+        let separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    return rupiah ? `Rp${rupiah}` : 'Rp0';
 };
 
 export const mapperLocationSearch = (data: any) => {

@@ -1,29 +1,13 @@
-import React, {FC, useEffect} from 'react';
+import React from 'react';
 import {
   CHeader,
-  CStatusbar,
-  CText,
+  CImageProfile,
   CView,
   ListMenuProfile,
 } from '../../../components';
-import CImageProfile from '../../../components/organisms/CImageProfile';
 import {colors} from '../../../property';
-import {PermissionsAndroid} from 'react-native';
 
-const ProfileComponent: FC = () => {
-  const requestCameraPermission = async () => {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      const result = granted === PermissionsAndroid.RESULTS.GRANTED;
-    } else {
-    }
-  };
-
-  useEffect(() => {
-    requestCameraPermission();
-  });
+const ProfileComponent: React.FC = () => {
   return (
     <CView
       flex={1}

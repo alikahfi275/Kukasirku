@@ -27,7 +27,7 @@ const CTextInput: React.FC<ReusableTextInputProps> = ({
   ...props
 }) => {
   return (
-    <CView marginTop={8} marginBottom={8} style={containerStyle}>
+    <CView marginTop={2} marginBottom={5} style={containerStyle}>
       {label && (
         <CText marginBottom={4} fontSize={16} color={'#333'} style={labelStyle}>
           {label}
@@ -39,9 +39,11 @@ const CTextInput: React.FC<ReusableTextInputProps> = ({
             borderWidth: 1,
             borderColor: '#ccc',
             borderRadius: 4,
-            height: verticalScale(40),
             paddingLeft: horizontalScale(10),
+            textAlignVertical: label === 'Description' ? 'top' : 'center',
+            textAlign: 'left',
           },
+
           inputStyle,
         ]}
         {...props}

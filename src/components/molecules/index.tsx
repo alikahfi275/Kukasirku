@@ -1,3 +1,15 @@
 import ModalSucces from './ModalSucces';
+import {
+  createProduct,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
+} from './ProviderServices';
 
-export {ModalSucces};
+export {
+  ModalSucces,
+  createProduct,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
+};
