@@ -1,7 +1,7 @@
 import React from 'react';
 import EditDetailProductComponent from '../components/EditDetailProductComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {updateProduct} from '../../../components';
+import {AlertError, AlertSuccsess, updateProduct} from '../../../components';
 import {EditDetailContainerProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
 
@@ -41,12 +41,12 @@ const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
           description,
           changeFotoProduct || fotoProduct,
         );
-        console.warn('Product updated');
+        AlertSuccsess('Product Berhasil Di Edit');
         setTimeout(() => {
           Route.navigate(Route.EditProduct);
         }, 1000);
       } else {
-        console.log('Product Failed');
+        AlertError('Product Gagal Di Edit');
       }
       onSubmit();
     } catch (error) {}

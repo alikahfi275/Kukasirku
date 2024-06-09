@@ -3882,6 +3882,11 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
+hex-color-regex@~1.0.2:
+  version "1.0.3"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/hex-color-regex/-/hex-color-regex-1.0.3.tgz#2175693bc292fe06711b04faee9004790926f9b0"
+  integrity sha512-YJCMR6n7Gqrxp7HVggtxJF5XatzSrT3jX39hpLtEFQNf6x+xhlC07vI6omqDkjBtJrw8uCsCHYhppCsU+Y2m/w==
+
 hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
@@ -4199,6 +4204,13 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3:
   integrity sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==
   dependencies:
     is-extglob "^2.1.1"
+
+is-hexcolor@^1.0.0:
+  version "1.0.0"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/is-hexcolor/-/is-hexcolor-1.0.0.tgz#495fee1a12baaf009c102a799bdec3193211274a"
+  integrity sha512-exeAJKlQsEjg3Sc5604FLXt59MQXkUIVKdJTRLAdLwJM42zCngVyLbEt2gQtb9TSRVzCIbaWbzgDKjbJIBzBFQ==
+  dependencies:
+    hex-color-regex "~1.0.2"
 
 is-interactive@^1.0.0:
   version "1.0.0"
@@ -6356,6 +6368,13 @@ react-native-super-grid@^5.1.0:
   integrity sha512-pKzkjdc9pgrAIEJDr5k4HH5i9RSmUZ3mw21QEcZr2ECulg2HYrUV5FAdi8NMOmBeenXY4NNP3zVLckHBd2rBqA==
   dependencies:
     prop-types "^15.6.2"
+
+react-native-sweet-alert@^3.5.0:
+  version "3.5.0"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-native-sweet-alert/-/react-native-sweet-alert-3.5.0.tgz#e763df5a3603c20886eb6dcdc7396025c234fc96"
+  integrity sha512-h2W7zM+s7C/Ub4dvHK1mSSB3lQbwpYhbwkS3JOPKTY+w23t8rNTOFxUBNeA9K5F98fzz0fPqj6VX2gsuPD1h1A==
+  dependencies:
+    is-hexcolor "^1.0.0"
 
 react-native-vector-icons@^10.1.0:
   version "10.1.0"

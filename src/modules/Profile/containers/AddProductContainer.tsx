@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import AddProductComponent from '../components/AddProductComponent';
 import {AddProductContainerProps} from '../store/type';
-import {createProduct, updateProduct} from '../../../components';
+import {AlertSuccsess, createProduct, updateProduct} from '../../../components';
 
 const AddProductContainer: React.FC<AddProductContainerProps> = props => {
   const {
@@ -31,24 +31,22 @@ const AddProductContainer: React.FC<AddProductContainerProps> = props => {
         const imageUri = `data:${imageResult.mime};base64,${imageResult.data}`;
         setFotoProduct(imageUri);
       })
-      .catch(error => {
-        console.error('Error picking image:', error);
-      });
+      .catch(error => {});
   };
 
   const handleSubmit = async () => {
     try {
       if (id) {
         await updateProduct(id, name, price, description, fotoProduct);
-        console.warn('Product updated');
       } else {
         await createProduct(name, price, description, fotoProduct);
+        AlertSuccsess('Product Berhasil Dibuat');
         setTimeout(() => {
           setDescription('');
           setName('');
           setPrice(0);
           setFotoProduct('');
-        });
+        }, 500);
       }
       onSubmit();
     } catch (error) {}
