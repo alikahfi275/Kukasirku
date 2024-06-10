@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Image, Pressable} from 'react-native';
 import {CFlatGrid, CText, CView} from '../atoms';
 import {
@@ -7,7 +7,7 @@ import {
   horizontalScale,
   verticalScale,
 } from '../../property';
-import {deleteProduct} from '../molecules';
+import {CModal, deleteProduct} from '../molecules';
 import Route from '../../app/routes/Routes';
 
 interface Item {
@@ -17,18 +17,36 @@ interface Item {
   imageUrl: string;
   description: string;
 }
+
 interface ListProductProps {
   products: Item[];
   isDelete?: boolean;
-  onDelete?: any;
+  onDelete?: () => void;
   isEdit?: boolean;
 }
 
 const ListProduct: React.FC<ListProductProps> = props => {
   const {products = [], isDelete = false, onDelete, isEdit} = props;
-  const handleDelete = async (id: string) => {
-    await deleteProduct(id);
-    onDelete();
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Item | null>(null);
+
+  const openModal = (product: Item) => {
+    setSelectedProduct(product);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setSelectedProduct(null);
+  };
+
+  const handleDelete = async () => {
+    if (selectedProduct) {
+      await deleteProduct(selectedProduct.id);
+      onDelete && onDelete();
+      closeModal();
+    }
   };
 
   const renderItem = ({item}: {item: Item}) => (
@@ -82,7 +100,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
         }}
         onPress={() =>
           isDelete
-            ? handleDelete(item.id)
+            ? openModal(item)
             : isEdit
             ? Route.navigate(Route.EditDetailProduct, {item})
             : null
@@ -105,6 +123,12 @@ const ListProduct: React.FC<ListProductProps> = props => {
         renderItem={renderItem}
         itemDimension={120}
         spacing={15}
+      />
+      <CModal
+        visible={modalVisible}
+        onClose={closeModal}
+        Title="Apakah Anda yakin ingin menghapus ?"
+        onConfirm={handleDelete}
       />
     </CView>
   );

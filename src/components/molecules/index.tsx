@@ -6,6 +6,7 @@ import {
   deleteProduct,
 } from './ProviderServices';
 import {AlertError, AlertInfo, AlertSuccsess} from './CSweetAlert';
+import CModal from './CModal';
 
 export {
   ModalSucces,
@@ -16,4 +17,5 @@ export {
   AlertError,
   AlertInfo,
   AlertSuccsess,
+  CModal,
 };
