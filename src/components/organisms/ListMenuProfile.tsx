@@ -1,10 +1,12 @@
 import {View, Text, Pressable, BackHandler} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {CText, CView} from '../atoms';
 import {colors, horizontalScale, verticalScale} from '../../property';
 import Route from '../../app/routes/Routes';
+import {CModal} from '../molecules';
 
 const ListMenuProfile = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const ListMenuProfile = [
     {id: '1', title: 'Bluetooth', action: () => {}},
     {
@@ -23,21 +25,24 @@ const ListMenuProfile = () => {
       action: () => Route.navigate(Route.DeleteProduct),
     },
     {id: '5', title: 'Support', action: () => {}},
-    {id: '6', title: 'Close Application', action: () => BackHandler.exitApp()},
+    {id: '6', title: 'Close Application', action: () => openModal()},
   ];
 
   const isConnectedBluetooth = false;
 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   return (
-    <CView
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content"
-      marginTop={10}>
+    <CView marginTop={10}>
       {ListMenuProfile.map((item, index) => (
         <Pressable key={index} onPress={item.action}>
           <CView
-            backgroundColorStatusBar={colors.teal}
-            barStyle="light-content"
             key={index}
             marginTop={15}
             paddingTop={5}
@@ -55,8 +60,6 @@ const ListMenuProfile = () => {
               borderColor: colors.lightgray,
             }}>
             <CView
-              backgroundColorStatusBar={colors.teal}
-              barStyle="light-content"
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -99,6 +102,12 @@ const ListMenuProfile = () => {
           </CView>
         </Pressable>
       ))}
+      <CModal
+        visible={modalVisible}
+        onClose={closeModal}
+        Title="Apakah Anda yakin ingin Keluar ?"
+        onConfirm={() => BackHandler.exitApp()}
+      />
     </CView>
   );
 };

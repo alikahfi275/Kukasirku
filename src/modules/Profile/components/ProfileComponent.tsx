@@ -9,10 +9,7 @@ import {colors} from '../../../property';
 
 const ProfileComponent: React.FC = () => {
   return (
-    <CView
-      flex={1}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+    <CView flex={1}>
       <CHeader iconLeft="arrow-left" titleHeader="Profile" />
       <CImageProfile />
       <ListMenuProfile />

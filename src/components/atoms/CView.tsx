@@ -1,15 +1,12 @@
 import React, {ReactNode} from 'react';
 import {View, StyleSheet, ViewStyle} from 'react-native';
 import {colors, horizontalScale, verticalScale} from '../../property';
-import CStatusbar from './CStatusBar';
 
 interface CViewProps {
   children?: ReactNode;
   style?: ViewStyle;
   borderRadius?: number | undefined;
   flex?: number | undefined;
-  barStyle?: 'default' | 'light-content' | 'dark-content';
-  backgroundColorStatusBar?: string;
   marginTop?: number;
   marginBottom?: number;
   marginLeft?: number;
@@ -31,8 +28,6 @@ const CView: React.FC<CViewProps> = ({
   style,
   borderRadius,
   flex,
-  backgroundColorStatusBar = colors.white,
-  barStyle = 'dark-content',
   backgroundColor = colors.white,
   borderWidth,
   borderColor,

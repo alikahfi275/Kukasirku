@@ -26,10 +26,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = props => {
   } = props;
 
   return (
-    <CView
-      flex={1}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+    <CView flex={1}>
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Tambah Product"

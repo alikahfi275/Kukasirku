@@ -1,7 +1,7 @@
 import {Image, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 import CSearch from './CSearch';
-import {CIcon, CStatusbar, CText, CView} from '../atoms';
+import {CIcon, CText, CView} from '../atoms';
 import {colors, horizontalScale, verticalScale} from '../../property';
 
 interface HeaderProps extends TextInputProps {
@@ -31,15 +31,11 @@ const CHeader: React.FC<HeaderProps> = props => {
   return (
     <>
       {typeHeader === 'search' ? (
-        <CView backgroundColorStatusBar={colors.white} barStyle="dark-content">
+        <CView paddingTop={20}>
           <CView
             marginRight={15}
             marginLeft={15}
             style={styles.wapperHeaderSearch}>
-            <CStatusbar
-              backgroundColor={colors.white}
-              barStyle="dark-content"
-            />
             <CSearch
               icon={true}
               placeholder="Search ..."
@@ -87,8 +83,7 @@ const CHeader: React.FC<HeaderProps> = props => {
           </CView>
         </CView>
       ) : (
-        <CView paddingTop={5} paddingBottom={5} style={styles.wapperHeader}>
-          <CStatusbar backgroundColor={colors.teal} barStyle="light-content" />
+        <CView paddingTop={25} paddingBottom={5} style={styles.wapperHeader}>
           {iconLeft && (
             <CIcon
               name={iconLeft}

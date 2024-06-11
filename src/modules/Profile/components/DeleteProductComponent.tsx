@@ -7,10 +7,7 @@ import Route from '../../../app/routes/Routes';
 const DeleteProductComponent: React.FC<DeleteProductComponentProps> = props => {
   const {products} = props;
   return (
-    <CView
-      flex={1}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+    <CView flex={1}>
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Delete Product"

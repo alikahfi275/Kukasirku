@@ -23,10 +23,17 @@ interface ListProductProps {
   isDelete?: boolean;
   onDelete?: () => void;
   isEdit?: boolean;
+  onPressDetail?: boolean;
 }
 
 const ListProduct: React.FC<ListProductProps> = props => {
-  const {products = [], isDelete = false, onDelete, isEdit} = props;
+  const {
+    products = [],
+    isDelete = false,
+    onDelete,
+    isEdit,
+    onPressDetail = false,
+  } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Item | null>(null);
@@ -51,8 +58,6 @@ const ListProduct: React.FC<ListProductProps> = props => {
 
   const renderItem = ({item}: {item: Item}) => (
     <CView
-      backgroundColorStatusBar={colors.white}
-      barStyle="dark-content"
       style={{
         justifyContent: 'center',
         backgroundColor: colors.white,
@@ -61,25 +66,29 @@ const ListProduct: React.FC<ListProductProps> = props => {
         borderColor: colors.lightgray,
       }}
       key={item.id}>
-      <Image
-        source={{uri: item.imageUrl}}
-        style={{
-          width: '100%',
-          height: 150,
-          resizeMode: 'cover',
-          borderTopRightRadius: 3,
-          borderTopLeftRadius: 3,
-        }}
-      />
-      <CText marginTop={5} marginLeft={5} weight={500}>
-        {item.name.substring(0, 20)}
-      </CText>
-      <CText marginLeft={5} weight={500} color={colors.gray}>
-        {formatRupiah(item.price)}
-      </CText>
-      <CText marginLeft={5} weight={400} color={colors.gray} fontSize={12}>
-        {item.description.substring(0, 20) + '...'}
-      </CText>
+      <Pressable
+        onPress={() => Route.navigate(Route.DetailProduct, {item})}
+        disabled={onPressDetail ? false : true}>
+        <Image
+          source={{uri: item.imageUrl}}
+          style={{
+            width: '100%',
+            height: 150,
+            resizeMode: 'cover',
+            borderTopRightRadius: 3,
+            borderTopLeftRadius: 3,
+          }}
+        />
+        <CText marginTop={5} marginLeft={5} weight={500}>
+          {item.name.substring(0, 20)}
+        </CText>
+        <CText marginLeft={5} weight={500} color={colors.gray}>
+          {formatRupiah(item.price)}
+        </CText>
+        <CText marginLeft={5} weight={400} color={colors.gray} fontSize={12}>
+          {item.description.substring(0, 20) + '...'}
+        </CText>
+      </Pressable>
       <Pressable
         style={{
           backgroundColor: isDelete
@@ -113,10 +122,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
   );
 
   return (
-    <CView
-      style={styles.container}
-      backgroundColorStatusBar={colors.white}
-      barStyle="dark-content">
+    <CView style={styles.container}>
       <CFlatGrid
         items={products}
         keyExtractor={(item: any) => item.id}

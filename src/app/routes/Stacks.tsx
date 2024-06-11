@@ -12,12 +12,17 @@ import AddProductContainer from '../../modules/Profile/containers/AddProductCont
 import DeleteProductContainer from '../../modules/Profile/containers/DeleteProductContainer';
 import EditProductContainer from '../../modules/Profile/containers/EditProductContainer';
 import EditDetailProductContainer from '../../modules/Profile/containers/EditDetailProductContainer';
+import DetailProductContainer from '../../modules/Home/containers/DetailProductContainer';
+
+// Statusbar Default
+import {CStatusbar} from '../../components';
 
 // Re-Wrapped Screens
 const AddProduct = AddProductContainer;
 const DeleteProduct = DeleteProductContainer;
 const EditProduct = EditProductContainer;
 const EditDetailProduct = EditDetailProductContainer;
+const DetailProduct = DetailProductContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -36,6 +41,11 @@ const Stacks = (props: any) => {
 
   return (
     <NavigationContainer ref={navigation}>
+      <CStatusbar
+        backgroundColor={'transparent'}
+        translucent
+        barStyle="dark-content"
+      />
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name={Routes.BottomTab} component={BottomTab} />
         <Stack.Screen name={Routes.AddProduct} component={AddProduct} />
@@ -45,6 +55,7 @@ const Stacks = (props: any) => {
           name={Routes.EditDetailProduct}
           component={EditDetailProduct}
         />
+        <Stack.Screen name={Routes.DetailProduct} component={DetailProduct} />
       </Stack.Navigator>
     </NavigationContainer>
   );

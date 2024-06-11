@@ -24,10 +24,7 @@ const EditDetailProductComponent: React.FC<EditDetailProductProps> = props => {
   const [fotoProduct, setFotoProduct] = useState(item.imageUrl);
 
   return (
-    <CView
-      flex={1}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+    <CView flex={1}>
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Detail Edit Product"

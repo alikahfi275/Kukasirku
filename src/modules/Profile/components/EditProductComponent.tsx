@@ -17,10 +17,7 @@ interface EditProductComponentProps {
 const EditProductComponent: React.FC<EditProductComponentProps> = props => {
   const {products} = props;
   return (
-    <CView
-      flex={1}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+    <CView flex={1}>
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Edit Product"

@@ -1,11 +1,43 @@
 import {View, Text, Image, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DefaulProfile, DefaulStore, colors, sizeScale} from '../../property';
 import {CText, CView} from '../atoms';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CImageProfile = () => {
   const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    // Function to retrieve data from AsyncStorage when the app is opened
+    const loadData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('profileImage');
+        if (value !== null) {
+          setProfile(JSON.parse(value));
+        }
+      } catch (error) {
+        console.error('Error loading data from AsyncStorage', error);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const handleSave = async imageResult => {
+    try {
+      const imageData = {
+        mime: imageResult.mime,
+        data: imageResult.data,
+      };
+      await AsyncStorage.setItem('profileImage', JSON.stringify(imageData));
+      setProfile(imageData); // Update the profile state with new image data
+      console.log('Successfully saved data to AsyncStorage');
+    } catch (error) {
+      console.error('Error saving data to AsyncStorage', error);
+    }
+  };
+
   const openFile = () => {
     ImageCropPicker.openPicker({
       cropping: true,
@@ -13,16 +45,15 @@ const CImageProfile = () => {
       height: 500,
       cropperCircleOverlay: false,
       includeBase64: true,
-    }).then((imageResult: any) => {
-      setProfile(imageResult);
+    }).then(imageResult => {
+      handleSave(imageResult);
     });
   };
+
   return (
     <CView
       marginTop={50}
-      style={{alignItems: 'center', justifyContent: 'center'}}
-      backgroundColorStatusBar={colors.teal}
-      barStyle="light-content">
+      style={{alignItems: 'center', justifyContent: 'center'}}>
       <Image
         source={
           profile
