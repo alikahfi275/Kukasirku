@@ -1,7 +1,6 @@
 import {Image, Pressable} from 'react-native';
 import React from 'react';
 import {CIcon, CText, CView} from '../../../components';
-import {useRoute} from '@react-navigation/native';
 import {
   colors,
   formatRupiah,
@@ -10,10 +9,7 @@ import {
 } from '../../../property';
 import Route from '../../../app/routes/Routes';
 
-const DetailProductComponent = () => {
-  const route = useRoute<any>();
-  const {item} = route.params;
-
+const DetailProductComponent = ({item}: any) => {
   return (
     <CView flex={1}>
       <Pressable

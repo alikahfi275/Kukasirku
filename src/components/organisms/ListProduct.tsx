@@ -9,6 +9,7 @@ import {
 } from '../../property';
 import {CModal, deleteProduct} from '../molecules';
 import Route from '../../app/routes/Routes';
+import {useCartStore} from '../../modules/Home/store/useHomeStore';
 
 interface Item {
   id: string;
@@ -37,6 +38,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Item | null>(null);
+  const addToCart = useCartStore(state => state.addToCart);
 
   const openModal = (product: Item) => {
     setSelectedProduct(product);
@@ -67,7 +69,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
       }}
       key={item.id}>
       <Pressable
-        onPress={() => Route.navigate(Route.DetailProduct, {item})}
+        onPress={() => Route.navigate(Route.DetailProduct, {itemId: item.id})}
         disabled={onPressDetail ? false : true}>
         <Image
           source={{uri: item.imageUrl}}
@@ -112,7 +114,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
             ? openModal(item)
             : isEdit
             ? Route.navigate(Route.EditDetailProduct, {item})
-            : null
+            : addToCart(item)
         }>
         <CText color={isEdit ? colors.teal : colors.white} weight={600}>
           {isDelete ? 'Delete' : isEdit ? 'Edit' : 'Add To Cart'}
@@ -127,7 +129,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
         items={products}
         keyExtractor={(item: any) => item.id}
         renderItem={renderItem}
-        itemDimension={120}
+        itemDimension={150}
         spacing={15}
       />
       <CModal

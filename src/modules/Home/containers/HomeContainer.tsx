@@ -1,24 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import HomeComponent from '../components/HomeComponent';
-import Product from '../../../app/database/model/Product';
 import {getAllProducts} from '../../../components';
+import {HomeProps} from '../store/type';
+import {useHomeStore} from '../store/useHomeStore';
 
-interface item {
-  id: string;
-  name: string;
-  price: string;
-  imageUrl: string;
-  description: string;
-}
-interface HomeContainerProps {
-  products: item[];
-}
-const HomeContainer: React.FC<HomeContainerProps> = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
+const HomeContainer: React.FC<HomeProps> = () => {
+  const {products, setProducts, searchQuery} = useHomeStore();
   const loadProducts = async () => {
     try {
-      const result = await getAllProducts();
+      const result: any = await getAllProducts();
       setProducts(result);
     } catch (err) {
       console.error('Failed to load products:', err);
@@ -29,7 +19,11 @@ const HomeContainer: React.FC<HomeContainerProps> = () => {
     loadProducts();
   }, [products]);
 
-  return <HomeComponent products={products} />;
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  return <HomeComponent filteredProducts={filteredProducts} />;
 };
 
 export default HomeContainer;

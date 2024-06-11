@@ -16,6 +16,7 @@ interface HeaderProps extends TextInputProps {
   onPressRight?: () => void;
   sizeIconRight?: number;
   sizeIconLeft?: number;
+  onChangeText?: (text: string) => void;
 }
 
 const CHeader: React.FC<HeaderProps> = props => {
@@ -42,6 +43,7 @@ const CHeader: React.FC<HeaderProps> = props => {
               iconStyle={{color: colors.teal}}
               onSearch={props.onSearch}
               value={props.value}
+              onChangeText={props.onChangeText}
             />
             <Pressable onPress={props.onPressCart}>
               <CIcon

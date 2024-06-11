@@ -24,14 +24,14 @@ const CImageProfile = () => {
     loadData();
   }, []);
 
-  const handleSave = async imageResult => {
+  const handleSave = async (imageResult: any) => {
     try {
-      const imageData = {
+      const imageData: any = {
         mime: imageResult.mime,
         data: imageResult.data,
       };
       await AsyncStorage.setItem('profileImage', JSON.stringify(imageData));
-      setProfile(imageData); // Update the profile state with new image data
+      setProfile(imageData);
       console.log('Successfully saved data to AsyncStorage');
     } catch (error) {
       console.error('Error saving data to AsyncStorage', error);
@@ -63,7 +63,6 @@ const CImageProfile = () => {
         style={{
           width: sizeScale(150),
           height: sizeScale(150),
-          backgroundColor: colors.lightgray,
           borderRadius: sizeScale(5),
         }}
       />

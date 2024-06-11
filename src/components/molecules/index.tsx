@@ -4,6 +4,7 @@ import {
   getAllProducts,
   updateProduct,
   deleteProduct,
+  getProductById,
 } from './ProviderServices';
 import {AlertError, AlertInfo, AlertSuccsess} from './CSweetAlert';
 import CModal from './CModal';
@@ -18,4 +19,5 @@ export {
   AlertInfo,
   AlertSuccsess,
   CModal,
+  getProductById,
 };

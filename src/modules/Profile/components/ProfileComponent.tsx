@@ -5,7 +5,6 @@ import {
   CView,
   ListMenuProfile,
 } from '../../../components';
-import {colors} from '../../../property';
 
 const ProfileComponent: React.FC = () => {
   return (

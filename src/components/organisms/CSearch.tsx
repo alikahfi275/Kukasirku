@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, StyleSheet, TextInputProps} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {CView} from '../atoms';
-import {horizontalScale, verticalScale} from '../../property';
+import {fontSizeScale, horizontalScale, verticalScale} from '../../property';
 
 interface SearchInputProps extends TextInputProps {
   placeholder?: string;
@@ -39,25 +39,13 @@ const SearchInput: React.FC<SearchInputProps> = ({
       marginBottom={10}
       style={[styles.container, containerStyle]}>
       {icon && (
-        <Icon
-          name="search"
-          size={20}
-          style={[
-            {
-              icon: {
-                marginRight: horizontalScale(8),
-                color: '#888',
-              },
-            },
-            iconStyle,
-          ]}
-        />
+        <Icon name="search" size={fontSizeScale(20)} style={[{}, iconStyle]} />
       )}
       <TextInput
         style={[
           {
             flex: 1,
-            fontSize: 16,
+            fontSize: 14,
             height: verticalScale(30),
           },
           inputStyle,
@@ -78,6 +66,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
+    justifyContent: 'center',
     flex: 1,
   },
 });

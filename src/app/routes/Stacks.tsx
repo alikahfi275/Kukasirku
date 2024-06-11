@@ -13,6 +13,7 @@ import DeleteProductContainer from '../../modules/Profile/containers/DeleteProdu
 import EditProductContainer from '../../modules/Profile/containers/EditProductContainer';
 import EditDetailProductContainer from '../../modules/Profile/containers/EditDetailProductContainer';
 import DetailProductContainer from '../../modules/Home/containers/DetailProductContainer';
+import CartContainer from '../../modules/Home/containers/CartContainer';
 
 // Statusbar Default
 import {CStatusbar} from '../../components';
@@ -23,6 +24,7 @@ const DeleteProduct = DeleteProductContainer;
 const EditProduct = EditProductContainer;
 const EditDetailProduct = EditDetailProductContainer;
 const DetailProduct = DetailProductContainer;
+const Cart = CartContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -56,6 +58,7 @@ const Stacks = (props: any) => {
           component={EditDetailProduct}
         />
         <Stack.Screen name={Routes.DetailProduct} component={DetailProduct} />
+        <Stack.Screen name={Routes.Cart} component={Cart} />
       </Stack.Navigator>
     </NavigationContainer>
   );

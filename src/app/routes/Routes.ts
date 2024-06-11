@@ -85,6 +85,7 @@ const Route = {
     EditProduct: 'editproduct',
     EditDetailProduct: 'editdetailproduct',
     DetailProduct: 'detailproduct',
+    Cart: 'cart',
 
     // Export Function
     navigate,

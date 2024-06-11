@@ -23,6 +23,15 @@ export const createProduct = async (
   }
 };
 
+export const getProductById = async (id: string): Promise<Product | null> => {
+  try {
+    return await database.get<Product>('products').find(id);
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    throw error;
+  }
+};
+
 export const getAllProducts = async (): Promise<Product[]> => {
   try {
     return await database.get<Product>('products').query().fetch();
