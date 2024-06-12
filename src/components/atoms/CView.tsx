@@ -22,6 +22,15 @@ interface CViewProps {
   backgroundColor?: string;
   borderWidth?: number;
   borderColor?: string;
+  flexDirection?: 'row' | 'column' | 'column-reverse' | 'row-reverse';
+  alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+  justifyContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
 }
 const CView: React.FC<CViewProps> = ({
   children,
@@ -31,6 +40,9 @@ const CView: React.FC<CViewProps> = ({
   backgroundColor = colors.white,
   borderWidth,
   borderColor,
+  flexDirection,
+  alignItems,
+  justifyContent,
   ...props
 }) => {
   return (
@@ -54,6 +66,9 @@ const CView: React.FC<CViewProps> = ({
           borderRadius: borderRadius || 0,
           borderWidth: borderWidth,
           borderColor: borderColor,
+          flexDirection: flexDirection,
+          alignItems: alignItems,
+          justifyContent: justifyContent,
         },
         style,
       ]}>

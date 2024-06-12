@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Image, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  Pressable,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import {CFlatGrid, CText, CView} from '../atoms';
 import {
   colors,
@@ -40,6 +46,16 @@ const ListProduct: React.FC<ListProductProps> = props => {
   const [selectedProduct, setSelectedProduct] = useState<Item | null>(null);
   const addToCart = useCartStore(state => state.addToCart);
 
+  const handleAddToCart = (item: any) => {
+    const newItem: any = {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      imageUrl: item.imageUrl,
+    };
+    addToCart(newItem);
+  };
+
   const openModal = (product: Item) => {
     setSelectedProduct(product);
     setModalVisible(true);
@@ -58,7 +74,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
     }
   };
 
-  const renderItem = ({item}: {item: Item}) => (
+  const renderItem = ({item}: any) => (
     <CView
       style={{
         justifyContent: 'center',
@@ -91,35 +107,45 @@ const ListProduct: React.FC<ListProductProps> = props => {
           {item.description.substring(0, 20) + '...'}
         </CText>
       </Pressable>
-      <Pressable
-        style={{
-          backgroundColor: isDelete
-            ? colors.red1
-            : isEdit
-            ? colors.white
-            : colors.teal,
-          padding: 10,
-          marginBottom: verticalScale(5),
-          marginTop: verticalScale(5),
-          marginLeft: horizontalScale(5),
-          marginRight: horizontalScale(5),
-          borderRadius: 5,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderWidth: isEdit ? 1.5 : 0,
-          borderColor: isEdit ? colors.teal : null,
-        }}
-        onPress={() =>
-          isDelete
-            ? openModal(item)
-            : isEdit
-            ? Route.navigate(Route.EditDetailProduct, {item})
-            : addToCart(item)
-        }>
-        <CText color={isEdit ? colors.teal : colors.white} weight={600}>
-          {isDelete ? 'Delete' : isEdit ? 'Edit' : 'Add To Cart'}
-        </CText>
-      </Pressable>
+      {onPressDetail ? (
+        <CView marginTop={1} marginRight={5} marginLeft={5} marginBottom={5}>
+          <Button
+            color={colors.teal}
+            title="Add To Cart"
+            onPress={() => handleAddToCart(item)}
+          />
+        </CView>
+      ) : (
+        <Pressable
+          style={{
+            backgroundColor: isDelete
+              ? colors.red1
+              : isEdit
+              ? colors.white
+              : colors.teal,
+            padding: 10,
+            marginBottom: verticalScale(5),
+            marginTop: verticalScale(5),
+            marginLeft: horizontalScale(5),
+            marginRight: horizontalScale(5),
+            borderRadius: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderWidth: isEdit ? 1.5 : 0,
+            borderColor: isEdit ? colors.teal : null,
+          }}
+          onPress={() =>
+            isDelete
+              ? openModal(item)
+              : isEdit
+              ? Route.navigate(Route.EditDetailProduct, {item})
+              : {}
+          }>
+          <CText color={isEdit ? colors.teal : colors.white} weight={600}>
+            {isDelete ? 'Delete' : isEdit ? 'Edit' : 'Add To Cart'}
+          </CText>
+        </Pressable>
+      )}
     </CView>
   );
 
@@ -128,7 +154,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
       <CFlatGrid
         items={products}
         keyExtractor={(item: any) => item.id}
-        renderItem={renderItem}
+        renderItem={({item}: any) => renderItem({item})}
         itemDimension={150}
         spacing={15}
       />

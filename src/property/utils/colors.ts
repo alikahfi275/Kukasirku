@@ -148,6 +148,6 @@ export const colors = {
     "whitesmoke": "#f5f5f5",
     "yellow": "#ffff00",
     "yellowgreen": "#9acd32",
-
-
+    "secondary1": "#EEEEEE",
+    "secondary2": "#9D9D9D",
 };

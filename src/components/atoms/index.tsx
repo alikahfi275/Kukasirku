@@ -6,6 +6,7 @@ import CStatusbar from './CStatusBar';
 import CFlatGrid from './CFlatGrid';
 import CButton from './CButton';
 import CScrolView from './CScrolView';
+import CFlatList from './CFlatlist';
 
 export {
   CText,
@@ -16,4 +17,5 @@ export {
   CFlatGrid,
   CButton,
   CScrolView,
+  CFlatList,
 };

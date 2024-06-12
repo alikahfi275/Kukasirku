@@ -17,6 +17,7 @@ interface HeaderProps extends TextInputProps {
   sizeIconRight?: number;
   sizeIconLeft?: number;
   onChangeText?: (text: string) => void;
+  badge?: number;
 }
 
 const CHeader: React.FC<HeaderProps> = props => {
@@ -28,6 +29,7 @@ const CHeader: React.FC<HeaderProps> = props => {
     onPressRight,
     sizeIconRight = 20,
     sizeIconLeft = 20,
+    badge = 0,
   } = props;
   return (
     <>
@@ -55,6 +57,24 @@ const CHeader: React.FC<HeaderProps> = props => {
                 }}
                 color={colors.teal}
               />
+              <CView
+                style={{
+                  position: 'absolute',
+                  top: -5,
+                  right: 0,
+                  backgroundColor: colors.red1,
+                  width: 15,
+                  height: 15,
+                  borderRadius: 15 / 2,
+                }}>
+                <CText
+                  color={colors.white}
+                  weight={500}
+                  fontSize={10}
+                  style={{textAlign: 'center'}}>
+                  {badge}
+                </CText>
+              </CView>
             </Pressable>
           </CView>
           <CView
@@ -85,7 +105,17 @@ const CHeader: React.FC<HeaderProps> = props => {
           </CView>
         </CView>
       ) : (
-        <CView paddingTop={25} paddingBottom={5} style={styles.wapperHeader}>
+        <CView
+          paddingTop={25}
+          paddingBottom={5}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: typeHeader === 'cart' ? colors.white : colors.teal,
+            borderBottomColor:
+              typeHeader === 'cart' ? colors.secondary1 : colors.teal,
+            borderBottomWidth: typeHeader === 'cart' ? 1 : 0,
+          }}>
           {iconLeft && (
             <CIcon
               name={iconLeft}
@@ -101,7 +131,11 @@ const CHeader: React.FC<HeaderProps> = props => {
           <CText
             marginTop={5}
             marginBottom={5}
-            style={styles.text}
+            style={{
+              color: typeHeader === 'cart' ? colors.teal : colors.white,
+              flex: 1,
+              textAlign: typeHeader === 'cart' ? 'center' : 'left',
+            }}
             weight={500}
             fontSize={20}>
             {props.titleHeader}
@@ -128,15 +162,6 @@ const styles = StyleSheet.create({
   wapperHeaderSearch: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  wapperHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.teal,
-  },
-  text: {
-    color: colors.white,
-    flex: 1,
   },
 });
 

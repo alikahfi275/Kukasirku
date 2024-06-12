@@ -47,7 +47,6 @@ const AddProductComponent: React.FC<AddProductComponentProps> = props => {
             style={{
               width: sizeScale(200),
               height: sizeScale(200),
-              backgroundColor: colors.lightgray,
               borderRadius: sizeScale(5),
             }}
           />

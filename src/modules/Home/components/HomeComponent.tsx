@@ -2,12 +2,13 @@ import React, {FC, useState} from 'react';
 import {CView, CHeader, ListProduct} from '../../../components';
 import {EmptyPage, sizeScale} from '../../../property';
 import {Image} from 'react-native';
-import {useHomeStore} from '../store/useHomeStore';
+import {useCartStore, useHomeStore} from '../store/useHomeStore';
 import {HomeProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
 
 const HomeComponent: FC<HomeProps> = props => {
   const {products, searchQuery, setSearchQuery} = useHomeStore();
+  const {cart} = useCartStore();
   const {filteredProducts} = props;
 
   return (
@@ -17,6 +18,7 @@ const HomeComponent: FC<HomeProps> = props => {
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
         onPressCart={() => Route.navigate(Route.Cart)}
+        badge={cart.length}
       />
       {products.length === 0 ? (
         <CView
