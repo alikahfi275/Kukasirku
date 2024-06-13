@@ -6,11 +6,12 @@ import {
   getFontFamily,
   horizontalScale,
   mapperLocationSearch,
-  marginScale,
-  paddingScale,
   sizeScale,
   sleep,
   verticalScale,
+  capitalizeFirstLetter,
+  generateRandomOrderId,
+  transformCheckoutData,
 } from './Helpers';
 
 export {
@@ -21,9 +22,10 @@ export {
   getFontFamily,
   horizontalScale,
   mapperLocationSearch,
-  marginScale,
-  paddingScale,
   sizeScale,
   sleep,
   verticalScale,
+  capitalizeFirstLetter,
+  generateRandomOrderId,
+  transformCheckoutData,
 };

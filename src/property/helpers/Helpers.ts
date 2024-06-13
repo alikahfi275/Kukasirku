@@ -109,3 +109,28 @@ export function formatDateToDdMmYyyy(date: Date) {
     return `${day}-${month}-${year}`;
 }
 
+export const transformCheckoutData = (rawCheckouts: any) => {
+    return rawCheckouts.map(checkout => ({
+        id: checkout._raw.id,
+        orderId: checkout._raw.order_id,
+        totalPrice: checkout._raw.total_price,
+        date: new Date(checkout._raw.date),
+    }));
+};
+
+export const generateRandomOrderId = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 15;
+    let orderId = 'ordr_';
+
+    for (let i = 0; i < length; i++) {
+        const randomChar = characters.charAt(Math.floor(Math.random() * characters.length));
+        orderId += randomChar;
+    }
+
+    return orderId = orderId.toUpperCase()
+}
+
+export const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};

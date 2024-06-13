@@ -111,10 +111,11 @@ const CHeader: React.FC<HeaderProps> = props => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: typeHeader === 'cart' ? colors.white : colors.teal,
+            backgroundColor:
+              typeHeader === 'noPrimary' ? colors.white : colors.teal,
             borderBottomColor:
-              typeHeader === 'cart' ? colors.secondary1 : colors.teal,
-            borderBottomWidth: typeHeader === 'cart' ? 1 : 0,
+              typeHeader === 'noPrimary' ? colors.secondary1 : colors.teal,
+            borderBottomWidth: typeHeader === 'noPrimary' ? 1 : 0,
           }}>
           {iconLeft && (
             <CIcon
@@ -132,9 +133,9 @@ const CHeader: React.FC<HeaderProps> = props => {
             marginTop={5}
             marginBottom={5}
             style={{
-              color: typeHeader === 'cart' ? colors.teal : colors.white,
+              color: typeHeader === 'noPrimary' ? colors.teal : colors.white,
               flex: 1,
-              textAlign: typeHeader === 'cart' ? 'center' : 'left',
+              textAlign: typeHeader === 'noPrimary' ? 'center' : 'left',
             }}
             weight={500}
             fontSize={20}>

@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Image,
-  Pressable,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
+import {StyleSheet, Image, Pressable, Button} from 'react-native';
 import {CFlatGrid, CText, CView} from '../atoms';
 import {
   colors,
@@ -108,7 +102,12 @@ const ListProduct: React.FC<ListProductProps> = props => {
         </CText>
       </Pressable>
       {onPressDetail ? (
-        <CView marginTop={1} marginRight={5} marginLeft={5} marginBottom={5}>
+        <CView
+          marginTop={1}
+          marginRight={5}
+          marginLeft={5}
+          marginBottom={5}
+          borderWidth={0}>
           <Button
             color={colors.teal}
             title="Add To Cart"

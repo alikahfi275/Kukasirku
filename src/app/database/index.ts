@@ -2,6 +2,8 @@ import { Database } from '@nozbe/watermelondb';
 import SQLiteAdapter from '@nozbe/watermelondb/adapters/sqlite';
 import { mySchema } from './schema';
 import Product from './model/Product';
+import Checkout from './model/Checkout';
+import CheckoutItem from './model/CheckoutItem';
 
 const adapter = new SQLiteAdapter({
     schema: mySchema,
@@ -9,6 +11,6 @@ const adapter = new SQLiteAdapter({
 
 export const database = new Database({
     adapter,
-    modelClasses: [Product],
+    modelClasses: [Product, Checkout, CheckoutItem],
     actionsEnabled: true,
 });
