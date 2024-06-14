@@ -77,7 +77,7 @@ export const formatRupiah = (angka: number): string => {
         rupiah += separator + ribuan.join('.');
     }
 
-    return rupiah ? `Rp${rupiah}` : 'Rp0';
+    return rupiah ? `Rp ${rupiah}` : 'Rp0';
 };
 
 export const mapperLocationSearch = (data: any) => {

@@ -31,6 +31,7 @@ interface CViewProps {
     | 'space-between'
     | 'space-around'
     | 'space-evenly';
+  padding?: number;
 }
 const CView: React.FC<CViewProps> = ({
   children,
@@ -43,6 +44,7 @@ const CView: React.FC<CViewProps> = ({
   flexDirection,
   alignItems,
   justifyContent,
+  padding,
   ...props
 }) => {
   return (
@@ -56,10 +58,10 @@ const CView: React.FC<CViewProps> = ({
           marginBottom: verticalScale(props.marginBottom || 0),
           marginLeft: horizontalScale(props.marginLeft || 0),
           marginRight: horizontalScale(props.marginRight || 0),
-          paddingTop: verticalScale(props.paddingTop || 0),
-          paddingBottom: verticalScale(props.paddingBottom || 0),
-          paddingLeft: horizontalScale(props.paddingLeft || 0),
-          paddingRight: horizontalScale(props.paddingRight || 0),
+          paddingTop: verticalScale(padding || props.paddingTop || 0),
+          paddingBottom: verticalScale(padding || props.paddingBottom || 0),
+          paddingLeft: horizontalScale(padding || props.paddingLeft || 0),
+          paddingRight: horizontalScale(padding || props.paddingRight || 0),
           paddingVertical: verticalScale(props.paddingVertical || 0),
           paddingHorizontal: horizontalScale(props.paddingHorizontal || 0),
           backgroundColor: backgroundColor,

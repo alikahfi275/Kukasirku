@@ -4,6 +4,7 @@ import ListProduct from './ListProduct';
 import CImageProfile from './CImageProfile';
 import ListMenuProfile from './ListMenuProfile';
 import ListCart from './ListCart';
+import ListHistory from './ListHistory';
 
 export {
   CSearch,
@@ -12,4 +13,5 @@ export {
   CImageProfile,
   ListMenuProfile,
   ListCart,
+  ListHistory,
 };

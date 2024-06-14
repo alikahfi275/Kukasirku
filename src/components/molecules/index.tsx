@@ -6,6 +6,8 @@ import {
   deleteProduct,
   getProductById,
   handleCheckout,
+  getAllCheckouts,
+  getCheckoutItemsByCheckoutId,
 } from './ProviderServices';
 import {AlertError, AlertInfo, AlertSuccsess} from './CSweetAlert';
 import CModal from './CModal';
@@ -22,4 +24,6 @@ export {
   CModal,
   getProductById,
   handleCheckout,
+  getAllCheckouts,
+  getCheckoutItemsByCheckoutId,
 };

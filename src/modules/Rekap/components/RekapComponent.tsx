@@ -24,7 +24,6 @@ interface CheckoutItem {
 
 const RekapComponent = () => {
   const [checkouts, setCheckouts] = useState<Checkout[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchCheckouts = async () => {
@@ -34,16 +33,11 @@ const RekapComponent = () => {
         setCheckouts(transformedCheckouts);
       } catch (error) {
       } finally {
-        setLoading(false);
       }
     };
 
     fetchCheckouts();
   }, []);
-
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
 
   return (
     <ScrollView style={{padding: 20}}>

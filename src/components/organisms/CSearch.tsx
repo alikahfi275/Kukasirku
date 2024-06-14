@@ -11,6 +11,7 @@ interface SearchInputProps extends TextInputProps {
   inputStyle?: object;
   iconStyle?: object;
   icon?: boolean;
+  typeSearch?: string;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -20,6 +21,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   inputStyle,
   iconStyle,
   icon = false,
+  typeSearch = 'default',
   ...props
 }) => {
   const [query, setQuery] = useState('');
@@ -37,7 +39,19 @@ const SearchInput: React.FC<SearchInputProps> = ({
       paddingLeft={10}
       marginTop={10}
       marginBottom={10}
-      style={[styles.container, containerStyle]}>
+      style={[
+        {
+          flexDirection: 'row',
+          alignItems: 'center',
+          borderWidth: 1,
+          borderColor: '#ccc',
+          borderRadius: 8,
+          justifyContent: 'center',
+          flex: typeSearch === 'default' ? 0 : 1,
+        },
+        ,
+        containerStyle,
+      ]}>
       {icon && (
         <Icon name="search" size={fontSizeScale(20)} style={[{}, iconStyle]} />
       )}
@@ -59,16 +73,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    justifyContent: 'center',
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default SearchInput;

@@ -46,6 +46,7 @@ const CHeader: React.FC<HeaderProps> = props => {
               onSearch={props.onSearch}
               value={props.value}
               onChangeText={props.onChangeText}
+              typeSearch="header"
             />
             <Pressable onPress={props.onPressCart}>
               <CIcon
