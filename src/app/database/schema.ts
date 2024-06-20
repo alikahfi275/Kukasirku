@@ -29,5 +29,14 @@ export const mySchema = appSchema({
                 { name: 'checkout_id', type: 'string', isIndexed: true },
             ],
         }),
+        tableSchema({
+            name: 'store_profiles',
+            columns: [
+                { name: 'photo_url', type: 'string' },
+                { name: 'store_name', type: 'string' },
+                { name: 'store_phone', type: 'string' }, // Changed to string
+                { name: 'store_address', type: 'string' },
+            ],
+        }),
     ],
 });

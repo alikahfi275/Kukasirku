@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import HomeComponent from '../components/HomeComponent';
-import {getAllProducts} from '../../../components';
-import {HomeProps} from '../store/type';
+import {getAllProducts} from '../store/HomeService';
 import {useHomeStore} from '../store/useHomeStore';
 
-const HomeContainer: React.FC<HomeProps> = () => {
+const HomeContainer: React.FC = () => {
   const {products, setProducts, searchQuery} = useHomeStore();
   const loadProducts = async () => {
     try {

@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import AddProductComponent from '../components/AddProductComponent';
 import {AddProductContainerProps} from '../store/type';
-import {AlertSuccsess, createProduct, updateProduct} from '../../../components';
+import {AlertSuccsess} from '../../../components';
+import {createProduct, updateProduct} from '../store/ProfileService';
 
 const AddProductContainer: React.FC<AddProductContainerProps> = props => {
   const {

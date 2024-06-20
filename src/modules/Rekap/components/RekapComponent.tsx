@@ -1,90 +1,96 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import {
-  getAllCheckouts,
-  getCheckoutItemsByCheckoutId,
-} from '../../../components/molecules/ProviderServices';
-import {transformCheckoutData} from '../../../property/helpers/Helpers';
-import moment from 'moment';
+  View,
+  Text,
+  Button,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
+import {getCheckoutsByMonth} from '../store/RekapService'; // Pastikan jalur impor benar
 
-interface Checkout {
-  id: string;
-  orderId: string;
-  totalPrice: number;
-  date: Date;
-}
-
-interface CheckoutItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  checkoutId: string;
-}
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const RekapComponent = () => {
-  const [checkouts, setCheckouts] = useState<Checkout[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    new Date().getMonth(),
+  );
+  const [productCount, setProductCount] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCheckouts = async () => {
+      setLoading(true);
       try {
-        const rawCheckouts = await getAllCheckouts();
-        const transformedCheckouts = transformCheckoutData(rawCheckouts);
-        setCheckouts(transformedCheckouts);
+        const {productCount, totalPrice} = await getCheckoutsByMonth(
+          selectedMonth,
+        );
+        setProductCount(productCount);
+        setTotalPrice(totalPrice);
       } catch (error) {
+        Alert.alert('Error', 'Failed to fetch checkouts');
       } finally {
+        setLoading(false);
       }
     };
 
     fetchCheckouts();
-  }, []);
+  }, [selectedMonth]);
 
   return (
-    <ScrollView style={{padding: 20}}>
-      <Text style={{fontSize: 24, marginBottom: 20}}>Checkout History</Text>
-      {checkouts.map(checkout => (
-        <View key={checkout.id} style={{marginBottom: 20}}>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-            Order ID: {checkout.orderId}
-          </Text>
-          <Text>Total Price: ${checkout.totalPrice.toFixed(2)}</Text>
-          <Text>
-            Date: {moment(checkout.date).format('DD MMMM YYYY HH:mm')}
-          </Text>
-          <CheckoutItemsList checkoutId={checkout.id} />
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        {months.map((month, index) => (
+          <Button
+            key={index}
+            title={month}
+            onPress={() => setSelectedMonth(index)}
+            color={selectedMonth === index ? 'blue' : 'gray'}
+          />
+        ))}
+      </View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <View style={styles.summary}>
+          <Text>Jumlah Produk: {productCount}</Text>
+          <Text>Total Harga: {totalPrice}</Text>
         </View>
-      ))}
-    </ScrollView>
-  );
-};
-
-const CheckoutItemsList = ({checkoutId}: {checkoutId: string}) => {
-  const [items, setItems] = useState<CheckoutItem[]>([]);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const itemsData = await getCheckoutItemsByCheckoutId(checkoutId);
-        setItems(itemsData);
-      } catch (error) {
-        console.error('Error fetching checkout items:', error);
-      }
-    };
-
-    fetchItems();
-  }, [checkoutId]);
-
-  return (
-    <View style={{marginTop: 10}}>
-      {items.map(item => (
-        <View key={item.id} style={{marginBottom: 5}}>
-          <Text>
-            {item.name} - {item.quantity} x ${item.price.toFixed(2)}
-          </Text>
-        </View>
-      ))}
+      )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  summary: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+});
 
 export default RekapComponent;

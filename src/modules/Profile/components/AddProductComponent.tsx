@@ -77,6 +77,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = props => {
           multiline
           value={description}
           onChangeText={setDescription}
+          typeMultiline
         />
         <CButton
           title="Add Product"

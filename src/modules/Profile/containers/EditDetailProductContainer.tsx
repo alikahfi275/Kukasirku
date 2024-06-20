@@ -1,9 +1,10 @@
 import React from 'react';
 import EditDetailProductComponent from '../components/EditDetailProductComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {AlertError, AlertSuccsess, updateProduct} from '../../../components';
 import {EditDetailContainerProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
+import {updateProduct} from '../store/ProfileService';
+import {AlertError, AlertSuccsess} from '../../../components';
 
 const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
   const {onSubmit} = props;

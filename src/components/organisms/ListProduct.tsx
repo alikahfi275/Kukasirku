@@ -7,9 +7,10 @@ import {
   horizontalScale,
   verticalScale,
 } from '../../property';
-import {CModal, deleteProduct} from '../molecules';
+import {CModal} from '../molecules';
 import Route from '../../app/routes/Routes';
 import {useCartStore} from '../../modules/Home/store/useHomeStore';
+import {deleteProduct} from '../../modules/Profile/store/ProfileService';
 
 interface Item {
   id: string;

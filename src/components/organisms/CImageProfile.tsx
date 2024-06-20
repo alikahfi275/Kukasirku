@@ -52,7 +52,7 @@ const CImageProfile = () => {
 
   return (
     <CView
-      marginTop={50}
+      marginTop={10}
       style={{alignItems: 'center', justifyContent: 'center'}}>
       <Image
         source={

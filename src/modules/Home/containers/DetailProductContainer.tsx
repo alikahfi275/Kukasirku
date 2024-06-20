@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import DetailProductComponent from '../components/DetailProductComponent';
 import {useRoute} from '@react-navigation/native';
-import {getProductById} from '../../../components';
+import {getProductById} from '../store/HomeService';
 import {useHomeStore} from '../store/useHomeStore';
+import {Product} from '../store/type';
 
-const DetailProductContainer = () => {
+const DetailProductContainer: React.FC = () => {
   const route = useRoute<any>();
   const {itemId} = route.params;
   const {productById, setProductById} = useHomeStore();

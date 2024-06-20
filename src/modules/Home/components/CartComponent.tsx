@@ -1,16 +1,11 @@
 import React from 'react';
 import {Button} from 'react-native';
 import {useCartStore} from '../store/useHomeStore';
-import {
-  CHeader,
-  CText,
-  CView,
-  handleCheckout,
-  ListCart,
-} from '../../../components';
+import {CHeader, CText, CView, ListCart} from '../../../components';
 import {colors, formatRupiah} from '../../../property';
+import {handleCheckout} from '../store/HomeService';
 
-const CartComponent = () => {
+const CartComponent: React.FC = () => {
   const {totalPrice} = useCartStore();
 
   return (

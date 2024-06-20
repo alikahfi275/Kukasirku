@@ -82,6 +82,7 @@ const EditDetailProductComponent: React.FC<EditDetailProductProps> = props => {
           multiline
           value={description}
           onChangeText={setDescription}
+          typeMultiline
         />
         <CButton
           title="Update Product"

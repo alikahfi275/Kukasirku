@@ -5,7 +5,12 @@ export interface Product {
     imageUrl: string;
     description: string;
 }
-export interface HomeProps {
+export interface HomeComponentProps {
     filteredProducts: Product[];
 
 }
+
+export interface DetailProductComponentProps {
+    item: any;
+}
+

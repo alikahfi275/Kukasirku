@@ -80,3 +80,22 @@ export interface itemDeleteProduct {
 export interface DeleteProductComponentProps {
     products: itemDeleteProduct[];
 }
+
+interface item {
+    id: string;
+    name: string;
+    price: string;
+    imageUrl: string;
+    description: string;
+}
+
+export interface EditProductComponentProps {
+    products: item[];
+}
+
+export interface ProfileContainerProps {
+    photoUrl: string;
+}
+export interface ProfileComponentProps {
+    photoUrl: string;
+}

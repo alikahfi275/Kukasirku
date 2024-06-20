@@ -1,10 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {getCheckoutItemsByCheckoutId} from '../molecules';
 import {CText, CView} from '../atoms';
 import {formatRupiah} from '../../property';
+import {getCheckoutItemsByCheckoutId} from '../../modules/History/store/HistoryService';
 
-const ListItemsCheckout = ({checkoutId}: any) => {
-  const [itemsCheckout, setLocalItemsCheckout] = useState([]);
+type Item = {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number;
+  checkoutId: string;
+  productId: string;
+  product: any;
+};
+interface ListItemsCheckoutProps {
+  checkoutId: string;
+}
+const ListItemsCheckout: React.FC<ListItemsCheckoutProps> = ({checkoutId}) => {
+  const [itemsCheckout, setLocalItemsCheckout] = useState<Item[]>([]);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -18,7 +30,7 @@ const ListItemsCheckout = ({checkoutId}: any) => {
     };
 
     fetchItems();
-  }, [checkoutId]);
+  }, [itemsCheckout]);
 
   return (
     <CView marginTop={5}>

@@ -8,8 +8,11 @@ import {
   verticalScale,
 } from '../../../property';
 import Route from '../../../app/routes/Routes';
+import {DetailProductComponentProps} from '../store/type';
 
-const DetailProductComponent = ({item}: any) => {
+const DetailProductComponent: React.FC<DetailProductComponentProps> = ({
+  item,
+}: any) => {
   return (
     <CView flex={1}>
       <Pressable

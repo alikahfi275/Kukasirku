@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import HistoryComponent from '../components/HistoryComponent';
-import {getAllCheckouts} from '../../../components';
 import {transformCheckoutData} from '../../../property';
 import {useHistoryStore} from '../store/useHistoryStore';
 import {Checkout} from '../store/type';
+import {getAllCheckouts} from '../store/HistoryService';
 
 const HistoryContainer: FC = () => {
   const {checkouts, setCheckouts, searchQueryHistory} = useHistoryStore();

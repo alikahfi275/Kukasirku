@@ -11,21 +11,26 @@ const ListMenuProfile = () => {
     {id: '1', title: 'Bluetooth', action: () => {}},
     {
       id: '2',
+      title: 'Edit Profile',
+      action: () => Route.navigate(Route.EditProfile),
+    },
+    {
+      id: '3',
       title: 'Tambah Product',
       action: () => Route.navigate(Route.AddProduct),
     },
     {
-      id: '3',
+      id: '4',
       title: 'Edit Product',
       action: () => Route.navigate(Route.EditProduct),
     },
     {
-      id: '4',
+      id: '5',
       title: 'Delete Product',
       action: () => Route.navigate(Route.DeleteProduct),
     },
-    {id: '5', title: 'Support', action: () => {}},
-    {id: '6', title: 'Close Application', action: () => openModal()},
+    {id: '6', title: 'Support Developer', action: () => {}},
+    {id: '7', title: 'Close Application', action: () => openModal()},
   ];
 
   const isConnectedBluetooth = false;
@@ -49,8 +54,8 @@ const ListMenuProfile = () => {
             paddingBottom={5}
             paddingRight={10}
             paddingLeft={10}
-            marginRight={10}
-            marginLeft={10}
+            marginRight={15}
+            marginLeft={15}
             style={{
               flexDirection: 'row',
               alignItems: 'center',

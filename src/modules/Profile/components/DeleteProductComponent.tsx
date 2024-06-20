@@ -1,6 +1,5 @@
 import React from 'react';
 import {CHeader, CView, ListProduct} from '../../../components';
-import {colors} from '../../../property';
 import {DeleteProductComponentProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
 

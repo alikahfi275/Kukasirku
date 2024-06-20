@@ -1,7 +1,7 @@
 import React from 'react';
 import CartComponent from '../components/CartComponent';
 
-const CartContainer = () => {
+const CartContainer: React.FC = () => {
   return <CartComponent />;
 };
 

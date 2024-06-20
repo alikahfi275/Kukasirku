@@ -17,6 +17,7 @@ interface ReusableTextInputProps extends TextInputProps {
   containerStyle?: ViewStyle;
   labelStyle?: TextStyle;
   inputStyle?: TextStyle;
+  typeMultiline?: boolean;
 }
 
 const CTextInput: React.FC<ReusableTextInputProps> = ({
@@ -24,6 +25,7 @@ const CTextInput: React.FC<ReusableTextInputProps> = ({
   containerStyle,
   labelStyle,
   inputStyle,
+  typeMultiline = false,
   ...props
 }) => {
   return (
@@ -40,7 +42,7 @@ const CTextInput: React.FC<ReusableTextInputProps> = ({
             borderColor: '#ccc',
             borderRadius: 4,
             paddingLeft: horizontalScale(10),
-            textAlignVertical: label === 'Description' ? 'top' : 'center',
+            textAlignVertical: typeMultiline ? 'top' : 'center',
             textAlign: 'left',
           },
 
