@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import HomeComponent from '../components/HomeComponent';
 import {getAllProducts} from '../store/HomeService';
 import {useHomeStore} from '../store/useHomeStore';
+import {Platform} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
 const HomeContainer: React.FC = () => {
   const {products, setProducts, searchQuery} = useHomeStore();
@@ -13,6 +15,11 @@ const HomeContainer: React.FC = () => {
       console.error('Failed to load products:', err);
     }
   };
+  useEffect(() => {
+    setTimeout(() => {
+      if (Platform.OS === 'android') SplashScreen.hide();
+    }, 500);
+  }, []);
 
   useEffect(() => {
     loadProducts();
