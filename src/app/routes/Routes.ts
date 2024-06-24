@@ -87,6 +87,8 @@ const Route = {
     DetailProduct: 'detailproduct',
     Cart: 'cart',
     EditProfile: 'editprofile',
+    DetailRekap: 'detailrekap',
+    Struk: 'struk',
 
     // Export Function
     navigate,

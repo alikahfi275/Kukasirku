@@ -6,11 +6,11 @@ import {colors, formatRupiah} from '../../property';
 
 const ListHistory = ({checkouts}: {checkouts: any[]}) => {
   return (
-    <CScrolView paddingBottom={10} paddingTop={10}>
+    <CScrolView paddingBottom={30} paddingTop={10}>
       {checkouts.map(checkout => (
         <CView
           key={checkout.id}
-          marginBottom={10}
+          marginBottom={20}
           padding={8}
           marginRight={20}
           marginLeft={20}

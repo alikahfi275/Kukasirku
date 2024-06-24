@@ -13,6 +13,7 @@ import {
   generateRandomOrderId,
   transformCheckoutData,
 } from './Helpers';
+import LineDashed from './LineDashed';
 
 export {
   fontSizeScale,
@@ -28,4 +29,5 @@ export {
   capitalizeFirstLetter,
   generateRandomOrderId,
   transformCheckoutData,
+  LineDashed,
 };

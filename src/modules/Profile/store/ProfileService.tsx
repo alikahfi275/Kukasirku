@@ -44,7 +44,7 @@ export const updateStoreProfile = async (
   storeAddress: string,
 ): Promise<void> => {
   try {
-    const profile = await database.get<StoreProfile>('store_profile').find(id);
+    const profile = await database.get<StoreProfile>('store_profiles').find(id);
     if (profile) {
       await database.write(async () => {
         await profile.update(prof => {
@@ -55,9 +55,7 @@ export const updateStoreProfile = async (
         });
       });
     }
-  } catch (error) {
-    AlertError('Gagal mengupdate data profil');
-  }
+  } catch (error) {}
 };
 
 export const updateProduct = async (

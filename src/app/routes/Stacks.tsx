@@ -15,6 +15,8 @@ import EditDetailProductContainer from '../../modules/Profile/containers/EditDet
 import DetailProductContainer from '../../modules/Home/containers/DetailProductContainer';
 import CartContainer from '../../modules/Home/containers/CartContainer';
 import EditProfileContainer from '../../modules/Profile/containers/EditProfileContainer';
+import DetailRekapContainer from '../../modules/Rekap/containers/DetailRekapContainer';
+import StrukContainer from '../../modules/Home/containers/StrukContainer';
 
 // Statusbar Default
 import {CStatusbar} from '../../components';
@@ -27,6 +29,8 @@ const EditDetailProduct = EditDetailProductContainer;
 const DetailProduct = DetailProductContainer;
 const Cart = CartContainer;
 const EditProfile = EditProfileContainer;
+const DetailRekap = DetailRekapContainer;
+const Struk = StrukContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -62,6 +66,8 @@ const Stacks = (props: any) => {
         <Stack.Screen name={Routes.DetailProduct} component={DetailProduct} />
         <Stack.Screen name={Routes.Cart} component={Cart} />
         <Stack.Screen name={Routes.EditProfile} component={EditProfile} />
+        <Stack.Screen name={Routes.DetailRekap} component={DetailRekap} />
+        <Stack.Screen name={Routes.Struk} component={Struk} />
       </Stack.Navigator>
     </NavigationContainer>
   );

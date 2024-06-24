@@ -20,15 +20,15 @@ const ListItemsCheckout: React.FC<ListItemsCheckoutProps> = ({checkoutId}) => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      try {
-        const itemsData: any = await getCheckoutItemsByCheckoutId(checkoutId);
-        setLocalItemsCheckout(itemsData);
-      } catch (error) {
-        console.error('Error fetching checkout items:', error);
-      } finally {
+      if (checkoutId) {
+        try {
+          const itemsData: any = await getCheckoutItemsByCheckoutId(checkoutId);
+          setLocalItemsCheckout(itemsData);
+        } catch (error) {
+          console.error('Error fetching checkout items:', error);
+        }
       }
     };
-
     fetchItems();
   }, [itemsCheckout]);
 

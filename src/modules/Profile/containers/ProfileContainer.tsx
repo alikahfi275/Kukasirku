@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ProfileComponent from '../components/ProfileComponent';
 import {PermissionsAndroid} from 'react-native';
 import {getStoreProfile} from '../store/ProfileService';
 import {ProfileContainerProps} from '../store/type';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ProfileContainer: React.FC<ProfileContainerProps> = () => {
   const [photoUrl, setPhotoUrl] = useState<string>('');
@@ -16,18 +17,22 @@ const ProfileContainer: React.FC<ProfileContainerProps> = () => {
     } else {
     }
   };
-  useEffect(() => {
-    const fetchStoreProfile = async () => {
-      try {
-        const profile = await getStoreProfile();
-        if (profile) {
-          setPhotoUrl(profile.photoUrl);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchStoreProfile = async () => {
+        try {
+          const profile = await getStoreProfile();
+          if (profile) {
+            setPhotoUrl(profile.photoUrl);
+          }
+        } catch (error) {
+          console.error('Failed to fetch store profile', error);
         }
-      } catch (error) {}
-    };
+      };
 
-    fetchStoreProfile();
-  }, [photoUrl]);
+      fetchStoreProfile();
+    }, []),
+  );
 
   useEffect(() => {
     requestCameraPermission();

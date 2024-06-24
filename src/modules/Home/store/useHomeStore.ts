@@ -5,20 +5,24 @@ interface HomeState {
     products: Product[];
     productById: Product[];
     searchQuery: string;
+    loadingCart: boolean
 
     setSearchQuery: (query: string) => void;
     setProducts: (products: Product[]) => void;
     setProductById: (productById: Product[]) => void;
+    setLoadingCart: (loadingCart: boolean) => void
 }
 
 export const useHomeStore = create<HomeState>((set, get) => ({
     products: [],
     productById: [],
     searchQuery: '',
+    loadingCart: false,
 
     setSearchQuery: (query: string) => set({ searchQuery: query }),
     setProducts: (products: Product[]) => set({ products }),
     setProductById: (productById: Product[]) => set({ productById }),
+    setLoadingCart: (loadingCart: boolean) => set({ loadingCart })
 }));
 
 type CartItem = {

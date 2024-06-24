@@ -59,7 +59,7 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
           id,
           photoUrl,
           storeName,
-          storePhone.toString(),
+          storePhone,
           storeAddress,
         );
         AlertSuccsess('Data Berhasil Diupdate');

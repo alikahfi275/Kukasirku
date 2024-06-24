@@ -4,7 +4,26 @@ import Checkout from '../../../app/database/model/Checkout';
 import CheckoutItem from '../../../app/database/model/CheckoutItem';
 import { useCartStore } from '../../../modules/Home/store/useHomeStore';
 import { generateRandomOrderId } from '../../../property/helpers/Helpers';
-import { AlertSuccsess } from '../../../components/molecules/CSweetAlert';
+
+export const getCheckoutsReverse = async (): Promise<Checkout[]> => {
+    try {
+        const checkouts = await database
+            .get<Checkout>('checkouts')
+            .query()
+            .fetch();
+
+        const sortedCheckouts = checkouts.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB.getTime() - dateA.getTime(); // Descending order
+        });
+
+        return sortedCheckouts;
+    } catch (error) {
+        console.error('Error fetching checkouts:', error);
+        throw error;
+    }
+};
 
 export const handleCheckout = async () => {
     const { cart, clearCart } = useCartStore.getState();
@@ -44,7 +63,6 @@ export const handleCheckout = async () => {
                     });
             }
         });
-        AlertSuccsess('Checkout Berhasil');
 
         clearCart(); // Clear the cart after successful checkout
     } catch (error) {

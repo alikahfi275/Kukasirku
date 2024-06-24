@@ -1,16 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from 'react-native';
 import {useCartStore} from '../store/useHomeStore';
-import {CHeader, CText, CView, ListCart} from '../../../components';
+import {CHeader, CLoading, CText, CView, ListCart} from '../../../components';
 import {colors, formatRupiah} from '../../../property';
 import {handleCheckout} from '../store/HomeService';
+import Route from '../../../app/routes/Routes';
 
 const CartComponent: React.FC = () => {
   const {totalPrice} = useCartStore();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmitCheckout = () => {
+    handleCheckout();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      Route.navigate(Route.Struk);
+    }, 2000);
+  };
 
   return (
     <CView flex={1}>
       <CHeader titleHeader="Cart" typeHeader="noPrimary" />
+      <CLoading visible={loading} />
       <ListCart />
       <CView>
         <CView
@@ -32,7 +44,7 @@ const CartComponent: React.FC = () => {
           <Button
             disabled={totalPrice === 0}
             title="Checkout"
-            onPress={() => handleCheckout()}
+            onPress={handleSubmitCheckout}
             color={colors.teal}
           />
         </CView>

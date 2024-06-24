@@ -3,9 +3,15 @@ import { database } from '../../../app/database';
 import Checkout from '../../../app/database/model/Checkout';
 import CheckoutItem from '../../../app/database/model/CheckoutItem';
 
+interface ItemSummary {
+    count: number;
+    totalPrice: number;
+}
+
 interface MonthlySummary {
     productCount: number;
     totalPrice: number;
+    itemSummaries: Record<string, ItemSummary>;
 }
 
 export const getCheckoutsByMonth = async (month: number): Promise<MonthlySummary> => {
@@ -23,6 +29,7 @@ export const getCheckoutsByMonth = async (month: number): Promise<MonthlySummary
 
         let productCount = 0;
         let totalPrice = 0;
+        const itemSummaries: Record<string, ItemSummary> = {};
 
         for (const checkout of checkouts) {
             const checkoutItems = await database
@@ -30,19 +37,29 @@ export const getCheckoutsByMonth = async (month: number): Promise<MonthlySummary
                 .query(Q.where('checkout_id', checkout.id))
                 .fetch();
 
-            productCount += checkoutItems.reduce((sum, item) => sum + item.quantity, 0);
-            totalPrice += checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            for (const item of checkoutItems) {
+                if (!itemSummaries[item.name]) {
+                    itemSummaries[item.name] = { count: 0, totalPrice: 0 };
+                }
+
+                itemSummaries[item.name].count += item.quantity;
+                itemSummaries[item.name].totalPrice += item.price * item.quantity;
+
+                productCount += item.quantity;
+                totalPrice += item.price * item.quantity;
+            }
         }
 
         return {
             productCount,
             totalPrice,
+            itemSummaries,
         };
     } catch (error) {
-        console.error('Error fetching checkouts by month:', error);
         return {
             productCount: 0,
             totalPrice: 0,
+            itemSummaries: {},
         };
     }
 };

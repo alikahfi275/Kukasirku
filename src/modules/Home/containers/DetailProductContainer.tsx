@@ -13,7 +13,6 @@ const DetailProductContainer: React.FC = () => {
   const fetchProduct = async () => {
     try {
       const result: any = await getProductById(itemId);
-      console.log(result);
       setProductById(result);
     } catch (error) {
       console.error('Error fetching product:', error);
