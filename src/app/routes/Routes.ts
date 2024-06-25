@@ -89,7 +89,7 @@ const Route = {
     EditProfile: 'editprofile',
     DetailRekap: 'detailrekap',
     Struk: 'struk',
-    SupportDeveloper: 'supportdeveloper',
+    ContributionDeveloper: 'contributiondeveloper',
 
     // Export Function
     navigate,

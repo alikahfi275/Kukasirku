@@ -811,6 +811,11 @@
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@brooons/react-native-bluetooth-escpos-printer@^1.2.0":
+  version "1.2.0"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@brooons/react-native-bluetooth-escpos-printer/-/react-native-bluetooth-escpos-printer-1.2.0.tgz"
+  integrity sha512-QVXqxI11qUirwpIMeMfwgAtHI++YaNs3M2BI4tLQP/alNngQzGtuuKsASNY6FAOkN5RaCjUDfZv5yUSXRSUJOw==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@cnakazawa/watch/-/watch-1.0.4.tgz"
@@ -1159,6 +1164,11 @@
     lokijs "npm:@nozbe/lokijs@1.5.12-wmelon6"
     rxjs "^7.8.0"
     sql-escape-string "^1.1.0"
+
+"@react-native-clipboard/clipboard@^1.14.1":
+  version "1.14.1"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@react-native-clipboard/clipboard/-/clipboard-1.14.1.tgz#835f82fc86881a0808a8405f2576617bb5383554"
+  integrity sha512-SM3el0A28SwoeJljVNhF217o0nI4E7RfalLmuRQcT1/7tGcxUjgFa3jyrEndYUct8/uxxK5EUNGUu1YEDqzxqw==
 
 "@react-native-community/cli-clean@^9.2.1":
   version "9.2.1"
@@ -1775,7 +1785,7 @@
 
 "@welldone-software/why-did-you-render@^8.0.3":
   version "8.0.3"
-  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@welldone-software/why-did-you-render/-/why-did-you-render-8.0.3.tgz#3a90c12a2236834478a8a48900110fc9166dc903"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/@welldone-software/why-did-you-render/-/why-did-you-render-8.0.3.tgz"
   integrity sha512-bb5bKPMStYnocyTBVBu4UTegZdBqzV1mPhxc0UIV/S43KFUSRflux9gvzJfu2aM4EWLJ3egTvdjOi+viK+LKGA==
   dependencies:
     lodash "^4"

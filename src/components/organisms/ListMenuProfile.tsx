@@ -31,8 +31,8 @@ const ListMenuProfile = () => {
     },
     {
       id: '6',
-      title: 'Support Developer',
-      action: () => Route.navigate(Route.SupportDeveloper),
+      title: 'Contribution Developer',
+      action: () => Route.navigate(Route.ContributionDeveloper),
     },
     {id: '7', title: 'Close Application', action: () => openModal()},
   ];
