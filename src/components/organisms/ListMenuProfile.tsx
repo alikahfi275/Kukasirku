@@ -29,7 +29,11 @@ const ListMenuProfile = () => {
       title: 'Delete Product',
       action: () => Route.navigate(Route.DeleteProduct),
     },
-    {id: '6', title: 'Support Developer', action: () => {}},
+    {
+      id: '6',
+      title: 'Support Developer',
+      action: () => Route.navigate(Route.SupportDeveloper),
+    },
     {id: '7', title: 'Close Application', action: () => openModal()},
   ];
 
