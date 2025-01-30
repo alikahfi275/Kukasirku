@@ -9,7 +9,7 @@ import {
 } from '../../../components';
 import Route from '../../../app/routes/Routes';
 import {Image, Pressable} from 'react-native';
-import {DefaulFood, colors, sizeScale} from '../../../property';
+import {colors, sizeScale, DefaulStore} from '../../../property';
 
 const EditProfileComponent = (props: any) => {
   const {
@@ -37,7 +37,7 @@ const EditProfileComponent = (props: any) => {
           marginTop={10}
           marginBottom={10}>
           <Image
-            source={photoUrl ? {uri: photoUrl} : DefaulFood}
+            source={photoUrl ? {uri: photoUrl} : DefaulStore}
             style={{
               width: sizeScale(200),
               height: sizeScale(200),

@@ -30,7 +30,7 @@ const ListItemsCheckout: React.FC<ListItemsCheckoutProps> = ({checkoutId}) => {
       }
     };
     fetchItems();
-  }, [itemsCheckout]);
+  }, [itemsCheckout, checkoutId]);
 
   return (
     <CView marginTop={5}>

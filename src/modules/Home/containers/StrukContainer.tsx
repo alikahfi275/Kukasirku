@@ -49,7 +49,7 @@ const StrukContainer = () => {
         } catch (error) {}
       };
       fetchCheckouts();
-    }, []),
+    }, [checkoutLatest]),
   );
 
   const requestEksternalStoragePermission = async () => {
