@@ -33,9 +33,10 @@ const ListMonths = () => {
           onPress={() => handleMonthPress({month, index})}
           key={index}
           style={{
-            marginTop: verticalScale(20),
+            marginTop: index === 0 ? verticalScale(20) : 0,
             marginRight: horizontalScale(15),
             marginLeft: horizontalScale(15),
+            marginBottom: verticalScale(20),
             borderRadius: 10,
             borderWidth: 1,
             borderColor: colors.teal,

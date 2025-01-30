@@ -108,7 +108,7 @@ const StrukComponent = (props: any) => {
               fontSize={10}
               marginTop={10}
               style={{textAlign: 'center'}}>
-              Powerd By Akael Project
+              Powerd By Akael Xd Project
             </CText>
           </CScrolView>
         </ViewShot>

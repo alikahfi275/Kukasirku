@@ -69,8 +69,8 @@ const ListRekap = ({month, viewShotRef}: any) => {
 
         {totalProducts === 0 ? (
           <CView
-            marginTop={10}
-            marginBottom={10}
+            marginTop={30}
+            marginBottom={30}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -170,7 +170,19 @@ const ListRekap = ({month, viewShotRef}: any) => {
           }}
         />
         <CText style={{textAlign: 'center'}} marginTop={5}>
-          Print : {moment().format('DD MMMM YYYY HH:mm')}
+          Print: {moment().format('DD MMMM YYYY HH:mm')}
+        </CText>
+        <CView
+          marginTop={5}
+          marginBottom={5}
+          style={{
+            borderTopWidth: 1,
+            borderStyle: 'dashed',
+            borderColor: colors.secondary2,
+          }}
+        />
+        <CText weight={400} fontSize={10} style={{textAlign: 'center'}}>
+          Powerd By Akael Xd Project
         </CText>
         <CView
           marginTop={5}
