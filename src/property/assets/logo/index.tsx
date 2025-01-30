@@ -1,4 +1,4 @@
-import LogoOvo from './LogoOvo.png';
-import LogoShopeePay from './LogoShopeePay.png';
+const LogoOvo = require('./LogoOvo.png');
+const LogoShopeePay = require('./LogoShopeePay.png');
 
 export {LogoOvo, LogoShopeePay};

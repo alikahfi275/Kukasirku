@@ -1,7 +1,7 @@
-import DefaulProfile from './DefaulProfile.png';
-import DefaulStore from './DefaultStore.png';
-import DefaulFood from './DefaultFood.png';
-import SplashScreen from './SplashScreen.jpg';
-import EmptyPage from './EmptyPage.png';
+const DefaulProfile = require('./DefaulProfile.png');
+const DefaulStore = require('./DefaultStore.png');
+const DefaulFood = require('./DefaultFood.png');
+const SplashScreen = require('./SplashScreen.jpg');
+const EmptyPage = require('./EmptyPage.png');
 
 export {DefaulProfile, DefaulStore, DefaulFood, SplashScreen, EmptyPage};
