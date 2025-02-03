@@ -16,7 +16,7 @@ const CStatusbar: React.FC<CustomStatusBarProps> = ({
   barStyle,
   hidden,
   translucent,
-  animated,
+  animated = true,
   networkActivityIndicatorVisible,
   showHideTransition,
 }) => {

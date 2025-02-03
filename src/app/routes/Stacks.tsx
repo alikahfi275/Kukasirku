@@ -18,6 +18,7 @@ import EditProfileContainer from '../../modules/Profile/containers/EditProfileCo
 import DetailRekapContainer from '../../modules/Rekap/containers/DetailRekapContainer';
 import StrukContainer from '../../modules/Home/containers/StrukContainer';
 import ContributionDeveloperContainer from '../../modules/Profile/containers/ContributionDeveloperContainer';
+import BluetoothContainer from '../../modules/Profile/containers/BluetoothContainer';
 
 // Statusbar Default
 import {CStatusbar} from '../../components';
@@ -33,6 +34,7 @@ const EditProfile = EditProfileContainer;
 const DetailRekap = DetailRekapContainer;
 const Struk = StrukContainer;
 const ContributionDeveloper = ContributionDeveloperContainer;
+const BluetoothPrint = BluetoothContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -70,6 +72,7 @@ const Stacks = (props: any) => {
         <Stack.Screen name={Routes.EditProfile} component={EditProfile} />
         <Stack.Screen name={Routes.DetailRekap} component={DetailRekap} />
         <Stack.Screen name={Routes.Struk} component={Struk} />
+        <Stack.Screen name={Routes.BluetoothPrint} component={BluetoothPrint} />
         <Stack.Screen
           name={Routes.ContributionDeveloper}
           component={ContributionDeveloper}

@@ -34,7 +34,7 @@ const CHeader: React.FC<HeaderProps> = props => {
   return (
     <>
       {typeHeader === 'search' ? (
-        <CView paddingTop={20}>
+        <CView paddingTop={35}>
           <CView
             marginRight={15}
             marginLeft={15}
@@ -107,7 +107,7 @@ const CHeader: React.FC<HeaderProps> = props => {
         </CView>
       ) : (
         <CView
-          paddingTop={25}
+          paddingTop={35}
           paddingBottom={5}
           style={{
             flexDirection: 'row',

@@ -6,9 +6,12 @@ import {CText} from '../atoms';
 
 interface CModalProps {
   visible: boolean;
-  onClose: any;
+  onClose?: any;
   Title: string;
-  onConfirm: any;
+  onConfirm?: any;
+  isOneButton?: boolean;
+  onOneButton?: any;
+  titleOneButton?: string;
 }
 
 const CModal: React.FC<CModalProps> = ({
@@ -16,6 +19,9 @@ const CModal: React.FC<CModalProps> = ({
   onClose,
   Title,
   onConfirm,
+  isOneButton,
+  onOneButton,
+  titleOneButton,
 }) => {
   return (
     <Modal
@@ -26,16 +32,48 @@ const CModal: React.FC<CModalProps> = ({
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <CText fontSize={15}>{Title}</CText>
-          <View style={{flexDirection: 'row'}}>
+          {isOneButton ? (
             <TouchableOpacity
-              style={styles.closeButtonCancel}
-              onPress={onClose}>
-              <Text style={styles.closeButtonTextCancel}>Cancel</Text>
+              onPress={onOneButton}
+              style={{
+                marginTop: 20,
+                padding: 10,
+                paddingHorizontal: 20,
+                backgroundColor: colors.teal,
+                borderRadius: 5,
+                marginLeft: 'auto',
+              }}>
+              <CText style={styles.closeButtonText}>{titleOneButton}</CText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.closeButton} onPress={onConfirm}>
-              <Text style={styles.closeButtonText}>Yes</Text>
-            </TouchableOpacity>
-          </View>
+          ) : (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={{
+                  marginTop: 20,
+                  padding: 10,
+                  borderWidth: 1,
+                  borderColor: colors.teal,
+                  borderRadius: 5,
+                  marginRight: horizontalScale(40),
+                }}
+                onPress={onClose}>
+                <Text style={styles.closeButtonTextCancel}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{
+                  marginTop: 20,
+                  padding: 10,
+                  paddingHorizontal: 20,
+                  backgroundColor: colors.teal,
+                  borderRadius: 5,
+                  marginLeft: horizontalScale(40),
+                }}
+                onPress={onConfirm}>
+                <Text style={styles.closeButtonText}>Yes</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
     </Modal>
@@ -59,22 +97,6 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     marginBottom: 20,
-  },
-  closeButtonCancel: {
-    marginTop: 20,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: colors.teal,
-    borderRadius: 5,
-    marginRight: horizontalScale(40),
-  },
-  closeButton: {
-    marginTop: 20,
-    padding: 10,
-    paddingHorizontal: 20,
-    backgroundColor: colors.teal,
-    borderRadius: 5,
-    marginLeft: horizontalScale(40),
   },
   closeButtonText: {
     color: 'white',

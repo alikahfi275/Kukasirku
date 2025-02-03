@@ -1,14 +1,31 @@
 import React from 'react';
-import {CHeader, CView, ListMenuProfile} from '../../../components';
-import {Image} from 'react-native';
+import {CHeader, CModal, CView, ListMenuProfile} from '../../../components';
+import {Image, Linking} from 'react-native';
 import {DefaulStore, sizeScale} from '../../../property';
 import {ProfileComponentProps} from '../store/type';
+import {useProfileStore} from '../store/useProfileStore';
 
 const ProfileComponent: React.FC<ProfileComponentProps> = (props: any) => {
+  const {
+    permissionLocation,
+    permissionBluetooth,
+    showModalValidation,
+    setShowModalValidation,
+  } = useProfileStore();
   const {photoUrl} = props;
   return (
     <CView flex={1}>
       <CHeader iconLeft="arrow-left" titleHeader="Profile" />
+      <CModal
+        isOneButton
+        visible={showModalValidation}
+        Title="Berikan Izin Akses Perangkat Disekitar dan Lokasi Terlebih Dahulu"
+        onOneButton={() => {
+          setShowModalValidation(false);
+          Linking.openSettings();
+        }}
+        titleOneButton="Ke Pengaturan"
+      />
       <CView
         style={{alignItems: 'center', justifyContent: 'center'}}
         marginTop={15}>
@@ -21,7 +38,11 @@ const ProfileComponent: React.FC<ProfileComponentProps> = (props: any) => {
           }}
         />
       </CView>
-      <ListMenuProfile />
+      <ListMenuProfile
+        permissionLocation={permissionLocation}
+        permissionBluetooth={permissionBluetooth}
+        setShowModalValidation={setShowModalValidation}
+      />
     </CView>
   );
 };

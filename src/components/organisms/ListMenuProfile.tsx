@@ -1,14 +1,26 @@
 import {View, Text, Pressable, BackHandler} from 'react-native';
 import React, {useState} from 'react';
 import {CText, CView} from '../atoms';
-import {colors, horizontalScale, verticalScale} from '../../property';
+import {colors} from '../../property';
 import Route from '../../app/routes/Routes';
 import {CModal} from '../molecules';
 
-const ListMenuProfile = () => {
+const ListMenuProfile = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {permissionLocation, permissionBluetooth, setShowModalValidation} =
+    props;
   const ListMenuProfile = [
-    {id: '1', title: 'Bluetooth', action: () => {}},
+    {
+      id: '1',
+      title: 'Bluetooth',
+      action: () => {
+        if (permissionLocation && permissionBluetooth) {
+          Route.navigate(Route.BluetoothPrint);
+        } else {
+          setShowModalValidation(true);
+        }
+      },
+    },
     {
       id: '2',
       title: 'Edit Profile',
@@ -73,40 +85,13 @@ const ListMenuProfile = () => {
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
-              {index === 0 && (
-                <CView
-                  style={{
-                    width: horizontalScale(12),
-                    height: verticalScale(10),
-                    borderRadius: 50,
-                    backgroundColor: isConnectedBluetooth
-                      ? colors.teal
-                      : colors.red1,
-                  }}
-                  marginRight={10}
-                />
-              )}
               <CText
                 style={{flex: 1}}
-                color={
-                  item.title === 'Bluetooth'
-                    ? isConnectedBluetooth
-                      ? colors.teal
-                      : colors.red1
-                    : colors.teal
-                }
+                color={colors.teal}
                 fontSize={16}
                 weight={600}>
                 {item.title}
               </CText>
-              {item.title === 'Bluetooth' && (
-                <CText
-                  color={isConnectedBluetooth ? colors.teal : colors.red1}
-                  fontSize={16}
-                  weight={600}>
-                  {isConnectedBluetooth ? 'Connected' : 'Not Connected'}
-                </CText>
-              )}
             </CView>
           </CView>
         </Pressable>
