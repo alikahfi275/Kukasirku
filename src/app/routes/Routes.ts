@@ -91,6 +91,7 @@ const Route = {
   Struk: 'struk',
   ContributionDeveloper: 'contributiondeveloper',
   BluetoothPrint: 'bluetoothprint',
+  Access: 'access',
 
   // Export Function
   navigate,

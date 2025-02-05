@@ -2,8 +2,6 @@ import React, {useEffect} from 'react';
 import HomeComponent from '../components/HomeComponent';
 import {getAllProducts} from '../store/HomeService';
 import {useHomeStore} from '../store/useHomeStore';
-import {Platform} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import {BluetoothManager} from '@brooons/react-native-bluetooth-escpos-printer';
 import {useProfileStore} from '../../Profile/store/useProfileStore';
 import {getStoreProfile} from '../../Profile/store/ProfileService';
@@ -19,11 +17,6 @@ const HomeContainer: React.FC = () => {
       console.error('Failed to load products:', err);
     }
   };
-  useEffect(() => {
-    setTimeout(() => {
-      if (Platform.OS === 'android') SplashScreen.hide();
-    }, 500);
-  }, []);
 
   const checkBluetoothConnect = async () => {
     try {

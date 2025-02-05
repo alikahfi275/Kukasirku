@@ -11,4 +11,5 @@ export default class StoreProfile extends Model {
   @field('store_address') storeAddress;
   @field('status_bluetooth') statusBluetooth;
   @field('device_terhubung') deviceTerhubung;
+  @field('is_access') isAccess;
 }

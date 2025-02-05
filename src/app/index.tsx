@@ -1,11 +1,13 @@
-import React, {FC} from 'react';
-import {CText, CIcon, CView, CSearch, ModalSucces} from '../components';
+import React, {FC, useEffect} from 'react';
+import {ModalSucces} from '../components';
 import {createModalStack, ModalProvider} from 'react-native-modalfy';
 import {Dimensions} from 'react-native';
 import {Easing} from 'react-native-reanimated';
 import Stacks from './routes/Stacks';
 import {DatabaseProvider} from '@nozbe/watermelondb/DatabaseProvider';
 import {database} from './database';
+import {getStoreProfile} from '../modules/Profile/store/ProfileService';
+import Route from './routes/Routes';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -45,6 +47,20 @@ const defaultOptions = {
 
 const stack = createModalStack(modalConfig, defaultOptions);
 const App: FC = () => {
+  useEffect(() => {
+    const fetchStoreProfile = async () => {
+      try {
+        const profile = await getStoreProfile();
+        if (profile?.isAccess) {
+          Route.navigate(Route.BottomTab);
+        } else {
+          Route.navigate(Route.Access);
+        }
+      } catch (error) {}
+    };
+
+    fetchStoreProfile();
+  }, []);
   return (
     <DatabaseProvider database={database}>
       <ModalProvider stack={stack}>

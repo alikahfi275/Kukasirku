@@ -19,6 +19,7 @@ import DetailRekapContainer from '../../modules/Rekap/containers/DetailRekapCont
 import StrukContainer from '../../modules/Home/containers/StrukContainer';
 import ContributionDeveloperContainer from '../../modules/Profile/containers/ContributionDeveloperContainer';
 import BluetoothContainer from '../../modules/Profile/containers/BluetoothContainer';
+import AccessContainer from '../../modules/Access/containers/AccessContainer';
 
 // Statusbar Default
 import {CStatusbar} from '../../components';
@@ -35,6 +36,7 @@ const DetailRekap = DetailRekapContainer;
 const Struk = StrukContainer;
 const ContributionDeveloper = ContributionDeveloperContainer;
 const BluetoothPrint = BluetoothContainer;
+const Access = AccessContainer;
 
 // Refs :
 export const modalRef: any = React.createContext();
@@ -59,6 +61,7 @@ const Stacks = (props: any) => {
         barStyle="dark-content"
       />
       <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name={Routes.Access} component={Access} />
         <Stack.Screen name={Routes.BottomTab} component={BottomTab} />
         <Stack.Screen name={Routes.AddProduct} component={AddProduct} />
         <Stack.Screen name={Routes.DeleteProduct} component={DeleteProduct} />

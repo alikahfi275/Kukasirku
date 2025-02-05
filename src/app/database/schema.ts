@@ -38,6 +38,7 @@ export const mySchema = appSchema({
         {name: 'store_address', type: 'string'},
         {name: 'status_bluetooth', type: 'boolean'},
         {name: 'device_terhubung', type: 'string'},
+        {name: 'is_access', type: 'boolean'},
       ],
     }),
   ],

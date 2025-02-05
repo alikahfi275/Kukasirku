@@ -147,3 +147,33 @@ export const createConfigBluetooth = async (address: string): Promise<void> => {
     });
   } catch (error) {}
 };
+
+export const updateConfigAccess = async (
+  id: string,
+  isAccess: boolean,
+): Promise<void> => {
+  try {
+    const profile = await database.get<StoreProfile>('store_profiles').find(id);
+    if (profile) {
+      await database.write(async () => {
+        await profile.update(prof => {
+          prof.isAccess = isAccess;
+        });
+      });
+    }
+  } catch (error) {
+    console.log('=== ERROR: ', error);
+  }
+};
+
+export const createConfigAccess = async (isAccess: boolean): Promise<void> => {
+  try {
+    await database.write(async () => {
+      await database.get<StoreProfile>('store_profiles').create(profile => {
+        profile.isAccess = isAccess;
+      });
+    });
+  } catch (error) {
+    console.log('=== ERROR: 2 ', error);
+  }
+};
