@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CButton,
+  CModal,
   CScrolView,
   CText,
   CView,
@@ -17,6 +18,7 @@ import {
 } from '../../../property';
 import moment from 'moment';
 import ViewShot from 'react-native-view-shot';
+import Route from '../../../app/routes/Routes';
 
 const StrukComponent = (props: any) => {
   const {
@@ -26,14 +28,26 @@ const StrukComponent = (props: any) => {
     checkoutLatest,
     captureView,
     viewShotRefStruk,
+    printLabel,
+    showModalCetak,
+    setShowModalCetak,
   } = props;
 
   return (
     <CView flex={1}>
-      <CView flex={1}>
+      <CView flex={1} marginTop={20}>
+        <CModal
+          visible={showModalCetak}
+          onConfirm={() => {
+            Route.navigate(Route.BluetoothPrint);
+            setShowModalCetak(false);
+          }}
+          onClose={() => setShowModalCetak(false)}
+          Title="Harap Koneksikan Ke Printer Bluetooth"
+        />
         <ViewShot ref={viewShotRefStruk} style={{backgroundColor: 'white'}}>
           <CScrolView
-            paddingTop={30}
+            paddingTop={20}
             paddingRight={20}
             paddingLeft={20}
             paddingBottom={20}>
@@ -46,12 +60,17 @@ const StrukComponent = (props: any) => {
                   />
                 }
               />
-              <CText weight={400} fontSize={12} marginTop={2}>
-                {storePhone}
-              </CText>
-              <CText weight={400} fontSize={12}>
-                {storeAddress}
-              </CText>
+              {storePhone && (
+                <CText weight={400} fontSize={12} marginTop={2}>
+                  {storePhone}
+                </CText>
+              )}
+
+              {storeAddress && (
+                <CText weight={400} fontSize={12}>
+                  {storeAddress}
+                </CText>
+              )}
             </CView>
             <LineDashed marginTop={5} />
             <CView>
@@ -98,17 +117,17 @@ const StrukComponent = (props: any) => {
             <LineDashed marginTop={5} />
             <CText
               weight={400}
-              fontSize={16}
-              marginTop={10}
+              fontSize={12}
+              marginTop={15}
               style={{textAlign: 'center'}}>
-              Terimakasih Atas Kunjungan Anda
+              Powered By Akael Xd Project
             </CText>
             <CText
               weight={400}
-              fontSize={10}
+              fontSize={16}
               marginTop={10}
               style={{textAlign: 'center'}}>
-              Powerd By Akael Xd Project
+              Terimakasih
             </CText>
           </CScrolView>
         </ViewShot>
@@ -132,7 +151,7 @@ const StrukComponent = (props: any) => {
         />
         <CButton
           title="Cetak"
-          onPress={() => {}}
+          onPress={() => printLabel()}
           style={{flex: 1}}
           marginLeft={15}
         />

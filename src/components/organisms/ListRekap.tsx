@@ -182,7 +182,7 @@ const ListRekap = ({month, viewShotRef}: any) => {
           }}
         />
         <CText weight={400} fontSize={10} style={{textAlign: 'center'}}>
-          Powerd By Akael Xd Project
+          Powered By Akael Xd Project
         </CText>
         <CView
           marginTop={5}

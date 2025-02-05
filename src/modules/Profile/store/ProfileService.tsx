@@ -122,3 +122,28 @@ export const deleteProduct = async (id: string): Promise<void> => {
     throw error;
   }
 };
+
+export const updateConfigBluetooth = async (
+  id: string,
+  address: string,
+): Promise<void> => {
+  try {
+    const profile = await database.get<StoreProfile>('store_profiles').find(id);
+    if (profile) {
+      await database.write(async () => {
+        await profile.update(prof => {
+          prof.deviceTerhubung = address;
+        });
+      });
+    }
+  } catch (error) {}
+};
+export const createConfigBluetooth = async (address: string): Promise<void> => {
+  try {
+    await database.write(async () => {
+      await database.get<StoreProfile>('store_profiles').create(profile => {
+        profile.deviceTerhubung = address;
+      });
+    });
+  } catch (error) {}
+};

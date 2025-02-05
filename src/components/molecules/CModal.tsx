@@ -50,11 +50,14 @@ const CModal: React.FC<CModalProps> = ({
               <TouchableOpacity
                 style={{
                   marginTop: 20,
-                  padding: 10,
+                  paddingVertical: 10,
                   borderWidth: 1,
                   borderColor: colors.teal,
                   borderRadius: 5,
-                  marginRight: horizontalScale(40),
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: horizontalScale(10),
                 }}
                 onPress={onClose}>
                 <Text style={styles.closeButtonTextCancel}>Cancel</Text>
@@ -62,12 +65,13 @@ const CModal: React.FC<CModalProps> = ({
 
               <TouchableOpacity
                 style={{
+                  flex: 1,
                   marginTop: 20,
-                  padding: 10,
-                  paddingHorizontal: 20,
                   backgroundColor: colors.teal,
                   borderRadius: 5,
-                  marginLeft: horizontalScale(40),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginLeft: horizontalScale(10),
                 }}
                 onPress={onConfirm}>
                 <Text style={styles.closeButtonText}>Yes</Text>

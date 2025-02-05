@@ -14,7 +14,7 @@ const ListMenuProfile = (props: any) => {
       id: '1',
       title: 'Bluetooth',
       action: () => {
-        if (permissionLocation && permissionBluetooth) {
+        if (permissionLocation || permissionBluetooth) {
           Route.navigate(Route.BluetoothPrint);
         } else {
           setShowModalValidation(true);

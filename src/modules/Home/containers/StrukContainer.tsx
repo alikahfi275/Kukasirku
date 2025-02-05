@@ -8,16 +8,24 @@ import {PermissionsAndroid} from 'react-native';
 import {captureRef} from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
 import {AlertError, AlertSuccsess} from '../../../components';
+import {BluetoothEscposPrinter} from '@brooons/react-native-bluetooth-escpos-printer';
+import moment from 'moment';
+import {getCheckoutItemsByCheckoutId} from '../../History/store/HistoryService';
+import {formatUang} from '../../../property/helpers/Helpers';
 
 const StrukContainer = () => {
   const viewShotRefStruk = useRef(null);
-  const [imageViewShot, setimageViewShot] = useState<string>('');
   const [photoUrl, setPhotoUrl] = useState<string>('');
   const [storePhone, setStorePhone] = useState('');
   const [storeAddress, setStoreAddress] = useState('');
+  const [storeName, setStoreName] = useState('');
   const [listCheckout, setListCheckout] = useState([]);
+  const [deviceTerhubung, setDeviceTerhubung] = useState('');
+  const [showModalCetak, setShowModalCetak] = useState(false);
+  const [checkoutItems, setCheckoutItems] = useState([]);
 
   const checkoutLatest = listCheckout[0];
+  const checkoutId = checkoutLatest?.id;
 
   useFocusEffect(
     useCallback(() => {
@@ -28,6 +36,8 @@ const StrukContainer = () => {
             setPhotoUrl(profile.photoUrl);
             setStorePhone(profile.storePhone);
             setStoreAddress(profile.storeAddress);
+            setDeviceTerhubung(profile.deviceTerhubung);
+            setStoreName(profile.storeName);
           }
         } catch (error) {
           console.error('Failed to fetch store profile', error);
@@ -36,6 +46,20 @@ const StrukContainer = () => {
       fetchStoreProfile();
     }, []),
   );
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      if (checkoutId) {
+        try {
+          const itemsData: any = await getCheckoutItemsByCheckoutId(checkoutId);
+          setCheckoutItems(itemsData);
+        } catch (error) {
+          console.error('Error fetching checkout items:', error);
+        }
+      }
+    };
+    fetchItems();
+  }, [checkoutItems, checkoutLatest]);
 
   useFocusEffect(
     useCallback(() => {
@@ -72,7 +96,6 @@ const StrukContainer = () => {
         format: 'jpg',
         quality: 0.8,
       });
-      setimageViewShot(uri);
       const filePath = `${
         RNFS.PicturesDirectoryPath
       }/capture_${Date.now()}.jpg`;
@@ -83,6 +106,154 @@ const StrukContainer = () => {
     }
   };
 
+  const printLabel = async () => {
+    if (!deviceTerhubung) {
+      setShowModalCetak(true);
+      return;
+    }
+
+    const props = {
+      dataitems: [
+        {
+          iname: 'Produk A',
+          vol: 2,
+          amount_price: 15000,
+          amount_subtotal: 30000,
+          tgltrans: '2025-01-30T12:00:00Z',
+        },
+        {
+          iname: 'Produk B',
+          vol: 1,
+          amount_price: 50000,
+          amount_subtotal: 50000,
+          tgltrans: '2025-01-30T12:00:00Z',
+        },
+        {
+          iname: 'Produk C',
+          vol: 3,
+          amount_price: 10000,
+          amount_subtotal: 30000,
+          tgltrans: '2025-01-30T12:00:00Z',
+        },
+      ],
+      atasnama: 'PT. Contoh Abadi',
+      nomorinv: 'INV-123456',
+      databill: 110000,
+    };
+
+    const {dataitems: rows, atasnama, nomorinv, databill} = props;
+
+    try {
+      await BluetoothEscposPrinter.printerAlign(
+        BluetoothEscposPrinter.ALIGN.CENTER,
+      );
+
+      if (photoUrl) {
+        await BluetoothEscposPrinter.printPic(photoUrl, {
+          width: 100,
+          left: 100,
+        });
+      }
+
+      await BluetoothEscposPrinter.printerAlign(
+        BluetoothEscposPrinter.ALIGN.CENTER,
+      );
+      if (storeName) {
+        await BluetoothEscposPrinter.printText(`${storeName}\r\n`, {});
+      }
+      if (storeAddress) {
+        await BluetoothEscposPrinter.printText(`${storeAddress}\r\n`, {});
+      }
+      if (storePhone) {
+        await BluetoothEscposPrinter.printText(`${storePhone}\r\n`, {});
+      }
+
+      await BluetoothEscposPrinter.printerAlign(
+        BluetoothEscposPrinter.ALIGN.LEFT,
+      );
+      await BluetoothEscposPrinter.printText(
+        '--------------------------------\r\n',
+        {},
+      );
+
+      await BluetoothEscposPrinter.printText(`${checkoutLatest.orderId}\r\n`, {
+        fonttype: 1,
+      });
+      await BluetoothEscposPrinter.printText(
+        `${moment(new Date()).format('DD-MMM-YYYY HH:mm')}\r\n`,
+        {fonttype: 1},
+      );
+      await BluetoothEscposPrinter.printText(
+        '--------------------------------\r\n',
+        {},
+      );
+
+      for (const row of checkoutItems) {
+        const price = formatUang(row.price);
+        await BluetoothEscposPrinter.printColumn(
+          [30],
+          [BluetoothEscposPrinter.ALIGN.LEFT],
+          [row.name],
+          {},
+        );
+
+        await BluetoothEscposPrinter.printColumn(
+          [10, 1, 10, 11],
+          [
+            BluetoothEscposPrinter.ALIGN.RIGHT,
+            BluetoothEscposPrinter.ALIGN.LEFT,
+            BluetoothEscposPrinter.ALIGN.RIGHT,
+            BluetoothEscposPrinter.ALIGN.RIGHT,
+          ],
+          [row.quantity.toString(), 'x', price, price],
+          {},
+        );
+      }
+
+      // Footer
+      await BluetoothEscposPrinter.printerAlign(
+        BluetoothEscposPrinter.ALIGN.LEFT,
+      );
+      await BluetoothEscposPrinter.printText(
+        '--------------------------------\r\n',
+        {},
+      );
+
+      const totalCheckout = formatUang(checkoutLatest.totalPrice);
+
+      const footerData = [['TOTAL', totalCheckout]];
+
+      for (const [label, value] of footerData) {
+        await BluetoothEscposPrinter.printColumn(
+          [19, 2, 11],
+          [
+            BluetoothEscposPrinter.ALIGN.LEFT,
+            BluetoothEscposPrinter.ALIGN.LEFT,
+            BluetoothEscposPrinter.ALIGN.RIGHT,
+          ],
+          [label, ':', value],
+          {},
+        );
+      }
+
+      await BluetoothEscposPrinter.printText(
+        '--------------------------------\r\n',
+        {},
+      );
+      await BluetoothEscposPrinter.printerAlign(
+        BluetoothEscposPrinter.ALIGN.CENTER,
+      );
+      await BluetoothEscposPrinter.printText(
+        `Powered by Akael Xd Project\r\n`,
+        {fonttype: 1},
+      );
+      await BluetoothEscposPrinter.printText(`Terima Kasih\r\n`, {
+        fonttype: 1,
+      });
+      await BluetoothEscposPrinter.printText('\r\n', {});
+    } catch (error) {}
+  };
+
   return (
     <StrukComponent
       photoUrl={photoUrl}
@@ -91,6 +262,10 @@ const StrukContainer = () => {
       checkoutLatest={checkoutLatest}
       captureView={captureView}
       viewShotRefStruk={viewShotRefStruk}
+      deviceTerhubung={deviceTerhubung}
+      printLabel={printLabel}
+      showModalCetak={showModalCetak}
+      setShowModalCetak={setShowModalCetak}
     />
   );
 };
