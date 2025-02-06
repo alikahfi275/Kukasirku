@@ -52,10 +52,10 @@ const App: FC = () => {
   useEffect(() => {
     const fetchStoreProfile = async () => {
       try {
-        const device = await DeviceInfo.getManufacturer();
+        const device = DeviceInfo.getModel();
         const profile = await getStoreProfile();
 
-        if (device.toLowerCase() === accesCode.device) {
+        if (device.toLowerCase() === accesCode.device.toLowerCase()) {
           if (profile?.isAccess) {
             Route.navigate(Route.BottomTab);
           } else {
