@@ -7,7 +7,6 @@ import {getCheckoutsReverse} from '../store/HomeService';
 import {PermissionsAndroid} from 'react-native';
 import {captureRef} from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
-import {AlertError, AlertSuccsess} from '../../../components';
 import {BluetoothEscposPrinter} from '@brooons/react-native-bluetooth-escpos-printer';
 import moment from 'moment';
 import {getCheckoutItemsByCheckoutId} from '../../History/store/HistoryService';
@@ -23,6 +22,8 @@ const StrukContainer = () => {
   const [deviceTerhubung, setDeviceTerhubung] = useState('');
   const [showModalCetak, setShowModalCetak] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState([]);
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
 
   const checkoutLatest = listCheckout[0];
   const checkoutId = checkoutLatest?.id;
@@ -100,9 +101,9 @@ const StrukContainer = () => {
         RNFS.PicturesDirectoryPath
       }/capture_${Date.now()}.jpg`;
       await RNFS.copyFile(uri, filePath);
-      AlertSuccsess('Berhasil Menyimpan Ke Gallery');
+      setShowModalSuccess(true);
     } catch (error) {
-      AlertError('Gagal Menyimpan Ke Gallery');
+      setShowModalError(false);
     }
   };
 
@@ -235,6 +236,10 @@ const StrukContainer = () => {
       printLabel={printLabel}
       showModalCetak={showModalCetak}
       setShowModalCetak={setShowModalCetak}
+      showModalSuccess={showModalSuccess}
+      setShowModalSuccess={setShowModalSuccess}
+      showModalError={showModalError}
+      setShowModalError={setShowModalError}
     />
   );
 };

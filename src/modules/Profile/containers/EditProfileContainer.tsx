@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import EditProfileComponent from '../components/EditProfileComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {AlertSuccsess} from '../../../components';
 import {useProfileStore} from '../store/useProfileStore';
 import {
   createStoreProfile,
@@ -18,6 +17,8 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
   const [storePhone, setStorePhone] = useState('');
   const [storeAddress, setStoreAddress] = useState('');
   const {setDisplayPhotoUrl, setPhotoBase64} = useProfileStore();
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
 
   useEffect(() => {
     const fetchStoreProfile = async () => {
@@ -63,12 +64,14 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
           storePhone,
           storeAddress,
         );
-        AlertSuccsess('Data Berhasil Diupdate');
+        setShowModalSuccess(true);
       } else {
         await createStoreProfile(photoUrl, storeName, storePhone, storeAddress);
-        AlertSuccsess('Data Berhasil Disimpan');
+        setShowModalSuccess(true);
       }
-    } catch (error) {}
+    } catch (error) {
+      setShowModalError(true);
+    }
   };
 
   return (
@@ -82,6 +85,10 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
       setStoreName={setStoreName}
       setStorePhone={setStorePhone}
       setStoreAddress={setStoreAddress}
+      showModalSuccess={showModalSuccess}
+      showModalError={showModalError}
+      setShowModalSuccess={setShowModalSuccess}
+      setShowModalError={setShowModalError}
     />
   );
 };

@@ -2,11 +2,12 @@ import React, {useRef, useState} from 'react';
 import DetailRekapComponent from '../components/DetailRekapComponent';
 import {captureRef} from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
-import {AlertError, AlertSuccsess} from '../../../components';
 
 const DetailRekapContainer: React.FC = () => {
   const viewShotRef = useRef(null);
   const [imageViewShot, setimageViewShot] = useState<string>('');
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
 
   const captureView = async () => {
     try {
@@ -19,14 +20,21 @@ const DetailRekapContainer: React.FC = () => {
         RNFS.PicturesDirectoryPath
       }/capture_${Date.now()}.jpg`;
       await RNFS.copyFile(uri, filePath);
-      AlertSuccsess('Berhasil Menyimpan Ke Gallery');
+      setShowModalSuccess(true);
     } catch (error) {
-      AlertError('Gagal Menyimpan Ke Gallery');
+      setShowModalError(false);
     }
   };
 
   return (
-    <DetailRekapComponent captureView={captureView} viewShotRef={viewShotRef} />
+    <DetailRekapComponent
+      captureView={captureView}
+      viewShotRef={viewShotRef}
+      showModalSuccess={showModalSuccess}
+      showModalError={showModalError}
+      setShowModalSuccess={setShowModalSuccess}
+      setShowModalError={setShowModalError}
+    />
   );
 };
 

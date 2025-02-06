@@ -1,7 +1,6 @@
 import {database} from '../../../app/database';
 import Product from '../../../app/database/model/Product';
 import StoreProfile from '../../../app/database/model/StoreProfile';
-import {AlertError} from '../../../components';
 
 export const getStoreProfile = async (): Promise<StoreProfile | null> => {
   try {
@@ -31,9 +30,7 @@ export const createStoreProfile = async (
         profile.storeAddress = storeAddress;
       });
     });
-  } catch (error) {
-    AlertError('Gagal membuat data profil');
-  }
+  } catch (error) {}
 };
 
 export const updateStoreProfile = async (

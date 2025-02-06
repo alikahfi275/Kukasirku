@@ -1,5 +1,11 @@
 import React from 'react';
-import {CButton, CView, ListRekap, CLoading} from '../../../components';
+import {
+  CButton,
+  CView,
+  ListRekap,
+  CLoading,
+  CModalSuccesFailed,
+} from '../../../components';
 import {useRoute} from '@react-navigation/native';
 import {colors} from '../../../property';
 import {useRekapStore} from '../store/useRekapStore';
@@ -9,14 +15,32 @@ interface DetailRekapComponentProps {
   captureView: () => void;
 }
 
-const DetailRekapComponent: React.FC<DetailRekapComponentProps> = props => {
-  const {viewShotRef, captureView} = props;
+const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
+  props: any,
+) => {
+  const {
+    viewShotRef,
+    captureView,
+    showModalSuccess,
+    showModalError,
+    setShowModalSuccess,
+    setShowModalError,
+  } = props;
   const {params} = useRoute<any>();
   const {month} = params;
   const {loading} = useRekapStore();
 
   return (
     <CView flex={1}>
+      <CModalSuccesFailed
+        visible={showModalSuccess}
+        onConfirm={() => setShowModalSuccess(false)}
+        isSuccess
+      />
+      <CModalSuccesFailed
+        visible={showModalError}
+        onConfirm={() => setShowModalError(false)}
+      />
       <CView flex={1}>
         <CLoading visible={loading} />
         <ListRekap month={month} viewShotRef={viewShotRef} />

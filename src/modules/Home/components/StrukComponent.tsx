@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CButton,
   CModal,
+  CModalSuccesFailed,
   CScrolView,
   CText,
   CView,
@@ -31,6 +32,10 @@ const StrukComponent = (props: any) => {
     printLabel,
     showModalCetak,
     setShowModalCetak,
+    showModalSuccess,
+    setShowModalSuccess,
+    showModalError,
+    setShowModalError,
   } = props;
 
   return (
@@ -156,6 +161,15 @@ const StrukComponent = (props: any) => {
           marginLeft={15}
         />
       </CView>
+      <CModalSuccesFailed
+        visible={showModalSuccess}
+        onConfirm={() => setShowModalSuccess(false)}
+        isSuccess
+      />
+      <CModalSuccesFailed
+        visible={showModalError}
+        onConfirm={() => setShowModalError(false)}
+      />
     </CView>
   );
 };

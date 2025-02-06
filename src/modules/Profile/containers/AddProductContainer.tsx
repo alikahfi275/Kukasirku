@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import AddProductComponent from '../components/AddProductComponent';
 import {AddProductContainerProps} from '../store/type';
-import {AlertSuccsess} from '../../../components';
 import {createProduct, updateProduct} from '../store/ProfileService';
 
 const AddProductContainer: React.FC<AddProductContainerProps> = props => {
@@ -19,6 +18,8 @@ const AddProductContainer: React.FC<AddProductContainerProps> = props => {
   const [name, setName] = useState<string>(initialName);
   const [price, setPrice] = useState<number>(Number(initialPrice));
   const [description, setDescription] = useState<string>(initialDescription);
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
 
   const openFile = () => {
     ImageCropPicker.openPicker({
@@ -39,9 +40,10 @@ const AddProductContainer: React.FC<AddProductContainerProps> = props => {
     try {
       if (id) {
         await updateProduct(id, name, price, description, fotoProduct);
+        setShowModalSuccess(true);
       } else {
         await createProduct(name, price, description, fotoProduct);
-        AlertSuccsess('Product Berhasil Dibuat');
+        setShowModalSuccess(true);
         setTimeout(() => {
           setDescription('');
           setName('');
@@ -64,6 +66,10 @@ const AddProductContainer: React.FC<AddProductContainerProps> = props => {
       setName={setName}
       setPrice={setPrice}
       setDescription={setDescription}
+      showModalSuccess={showModalSuccess}
+      showModalError={showModalError}
+      setShowModalSuccess={setShowModalSuccess}
+      setShowModalError={setShowModalError}
     />
   );
 };

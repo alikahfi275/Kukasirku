@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CButton,
   CHeader,
+  CModalSuccesFailed,
   CScrolView,
   CText,
   CTextInput,
@@ -22,10 +23,23 @@ const EditProfileComponent = (props: any) => {
     setStoreName,
     setStorePhone,
     setStoreAddress,
+    showModalSuccess,
+    showModalError,
+    setShowModalSuccess,
+    setShowModalError,
   } = props;
 
   return (
     <CView flex={1}>
+      <CModalSuccesFailed
+        visible={showModalSuccess}
+        onConfirm={() => setShowModalSuccess(false)}
+        isSuccess
+      />
+      <CModalSuccesFailed
+        visible={showModalError}
+        onConfirm={() => setShowModalError(false)}
+      />
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Edit Profile"

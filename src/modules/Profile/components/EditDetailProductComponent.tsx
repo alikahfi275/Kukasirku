@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {
   CButton,
   CHeader,
+  CModalSuccesFailed,
   CScrolView,
   CText,
   CTextInput,
@@ -13,8 +14,18 @@ import {useRoute, RouteProp} from '@react-navigation/native';
 import {EditDetailProductProps, RootStackParamList} from '../store/type';
 import Route from '../../../app/routes/Routes';
 
-const EditDetailProductComponent: React.FC<EditDetailProductProps> = props => {
-  const {changeFotoProduct, openFile, handleUpdate} = props;
+const EditDetailProductComponent: React.FC<EditDetailProductProps> = (
+  props: any,
+) => {
+  const {
+    changeFotoProduct,
+    openFile,
+    handleUpdate,
+    setShowModalSuccess,
+    setShowModalError,
+    showModalSuccess,
+    showModalError,
+  } = props;
   const route = useRoute<RouteProp<RootStackParamList, 'EditDetailProduct'>>();
   const {item} = route.params;
   const {id} = item;
@@ -25,6 +36,15 @@ const EditDetailProductComponent: React.FC<EditDetailProductProps> = props => {
 
   return (
     <CView flex={1}>
+      <CModalSuccesFailed
+        visible={showModalSuccess}
+        onConfirm={() => setShowModalSuccess(false)}
+        isSuccess
+      />
+      <CModalSuccesFailed
+        visible={showModalError}
+        onConfirm={() => setShowModalError(false)}
+      />
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Detail Edit Product"

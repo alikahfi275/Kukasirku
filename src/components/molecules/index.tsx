@@ -1,6 +1,6 @@
 import ModalSucces from './ModalSucces';
-import {AlertError, AlertInfo, AlertSuccsess} from './CSweetAlert';
 import CModal from './CModal';
 import CLoading from './CLoading';
+import CModalSuccesFailed from './CModalSuccesFailed';
 
-export {ModalSucces, AlertError, AlertInfo, AlertSuccsess, CModal, CLoading};
+export {ModalSucces, CModal, CLoading, CModalSuccesFailed};

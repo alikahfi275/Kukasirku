@@ -7,7 +7,6 @@ import {
 } from '../store/ProfileService';
 import {useProfileStore} from '../store/useProfileStore';
 import {BluetoothManager} from '@brooons/react-native-bluetooth-escpos-printer';
-import {AlertError, AlertSuccsess} from '../../../components';
 
 const BluetoothContainer = () => {
   const [id, setId] = useState('');
@@ -15,6 +14,8 @@ const BluetoothContainer = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
   const {
     isBluetoothEnabled,
     setIsBluetoothEnabled,
@@ -64,7 +65,7 @@ const BluetoothContainer = () => {
         const parsedDevices = JSON.parse(devices);
         setDevices(parsedDevices.found);
       } catch (error) {
-        AlertError('Gagal Mencari Perangkat');
+        setShowModalError(true);
       } finally {
         setIsScanning(false);
       }
@@ -82,7 +83,7 @@ const BluetoothContainer = () => {
         await createConfigBluetooth(address);
       }
       setIsLoading(false);
-      AlertSuccsess('Berhasil Menghubungkan');
+      setShowModalSuccess(true);
     } catch (error) {
       setIsLoading(false);
       if (id) {
@@ -90,7 +91,7 @@ const BluetoothContainer = () => {
       } else {
         await createConfigBluetooth('');
       }
-      AlertError('Gagal Menghubungkan');
+      setShowModalError(true);
     }
   };
 
@@ -114,6 +115,10 @@ const BluetoothContainer = () => {
       setIsLoading={setIsLoading}
       setModalVisible={setModalVisible}
       disconnectFromDevice={disconnectFromDevice}
+      showModalSuccess={showModalSuccess}
+      setShowModalSuccess={setShowModalSuccess}
+      showModalError={showModalError}
+      setShowModalError={setShowModalError}
     />
   );
 };
