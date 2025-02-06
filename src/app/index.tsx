@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ModalSucces} from '../components';
 import {createModalStack, ModalProvider} from 'react-native-modalfy';
 import {Dimensions} from 'react-native';
@@ -8,6 +8,8 @@ import {DatabaseProvider} from '@nozbe/watermelondb/DatabaseProvider';
 import {database} from './database';
 import {getStoreProfile} from '../modules/Profile/store/ProfileService';
 import Route from './routes/Routes';
+import DeviceInfo from 'react-native-device-info';
+import {accesCode} from './accesCode';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -50,11 +52,17 @@ const App: FC = () => {
   useEffect(() => {
     const fetchStoreProfile = async () => {
       try {
+        const device = await DeviceInfo.getManufacturer();
         const profile = await getStoreProfile();
-        if (profile?.isAccess) {
-          Route.navigate(Route.BottomTab);
+
+        if (device.toLowerCase() === accesCode.device) {
+          if (profile?.isAccess) {
+            Route.navigate(Route.BottomTab);
+          } else {
+            Route.navigate(Route.Access);
+          }
         } else {
-          Route.navigate(Route.Access);
+          Route.navigate(Route.NotAccess);
         }
       } catch (error) {}
     };

@@ -112,37 +112,6 @@ const StrukContainer = () => {
       return;
     }
 
-    const props = {
-      dataitems: [
-        {
-          iname: 'Produk A',
-          vol: 2,
-          amount_price: 15000,
-          amount_subtotal: 30000,
-          tgltrans: '2025-01-30T12:00:00Z',
-        },
-        {
-          iname: 'Produk B',
-          vol: 1,
-          amount_price: 50000,
-          amount_subtotal: 50000,
-          tgltrans: '2025-01-30T12:00:00Z',
-        },
-        {
-          iname: 'Produk C',
-          vol: 3,
-          amount_price: 10000,
-          amount_subtotal: 30000,
-          tgltrans: '2025-01-30T12:00:00Z',
-        },
-      ],
-      atasnama: 'PT. Contoh Abadi',
-      nomorinv: 'INV-123456',
-      databill: 110000,
-    };
-
-    const {dataitems: rows, atasnama, nomorinv, databill} = props;
-
     try {
       await BluetoothEscposPrinter.printerAlign(
         BluetoothEscposPrinter.ALIGN.CENTER,

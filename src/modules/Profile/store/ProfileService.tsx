@@ -27,7 +27,7 @@ export const createStoreProfile = async (
       await database.get<StoreProfile>('store_profiles').create(profile => {
         profile.photoUrl = photoUrl;
         profile.storeName = storeName;
-        profile.storePhone = storePhone;
+        profile.storePhone = storePhone.toString();
         profile.storeAddress = storeAddress;
       });
     });
@@ -50,7 +50,7 @@ export const updateStoreProfile = async (
         await profile.update(prof => {
           prof.photoUrl = photoUrl;
           prof.storeName = storeName;
-          prof.storePhone = storePhone;
+          prof.storePhone = storePhone.toString();
           prof.storeAddress = storeAddress;
         });
       });

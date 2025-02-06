@@ -92,6 +92,7 @@ const Route = {
   ContributionDeveloper: 'contributiondeveloper',
   BluetoothPrint: 'bluetoothprint',
   Access: 'access',
+  NotAccess: 'notaccess',
 
   // Export Function
   navigate,

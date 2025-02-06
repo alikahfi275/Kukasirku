@@ -17,7 +17,7 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
   const [storeName, setStoreName] = useState('');
   const [storePhone, setStorePhone] = useState('');
   const [storeAddress, setStoreAddress] = useState('');
-  const {setDisplayPhotoUrl} = useProfileStore();
+  const {setDisplayPhotoUrl, setPhotoBase64} = useProfileStore();
 
   useEffect(() => {
     const fetchStoreProfile = async () => {
@@ -48,6 +48,7 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
         const imageUri = `data:${imageResult.mime};base64,${imageResult.data}`;
         setPhotoUrl(imageUri);
         setDisplayPhotoUrl(imageUri);
+        setPhotoBase64(imageResult.data);
       })
       .catch(error => {});
   };

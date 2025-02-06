@@ -9,6 +9,7 @@ interface ProfileState {
   permissionBluetoothScan: boolean;
   showModalValidation: boolean;
   permissionLocation: boolean;
+  photoBase64: string;
 
   setDisplayPhotoUrl: (displayPhotoUrl: string) => void;
   setIsBluetoothEnabled: (isBluetoothEnabled: boolean) => void;
@@ -18,6 +19,7 @@ interface ProfileState {
   setPermissionBluetoothScan: (permissionBluetoothScan: boolean) => void;
   setShowModalValidation: (showModalValidation: boolean) => void;
   setPermissionLocation: (permissionLocation: boolean) => void;
+  setPhotoBase64: (photoBase64: string) => void;
 }
 
 export const useProfileStore = create<ProfileState>(set => ({
@@ -29,6 +31,7 @@ export const useProfileStore = create<ProfileState>(set => ({
   permissionBluetoothScan: false,
   permissionLocation: false,
   showModalValidation: false,
+  photoBase64: '',
 
   setDisplayPhotoUrl: (displayPhotoUrl: string) => set({displayPhotoUrl}),
   setIsBluetoothEnabled: (isBluetoothEnabled: boolean) =>
@@ -43,4 +46,5 @@ export const useProfileStore = create<ProfileState>(set => ({
     set({permissionLocation}),
   setShowModalValidation: (showModalValidation: boolean) =>
     set({showModalValidation}),
+  setPhotoBase64: (photoBase64: string) => set({photoBase64}),
 }));
