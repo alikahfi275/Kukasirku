@@ -11,6 +11,7 @@ import {BluetoothEscposPrinter} from '@brooons/react-native-bluetooth-escpos-pri
 import moment from 'moment';
 import {getCheckoutItemsByCheckoutId} from '../../History/store/HistoryService';
 import {formatUang} from '../../../property/helpers/Helpers';
+import {modalError, modalSuccess} from '../../../components';
 
 const StrukContainer = () => {
   const viewShotRefStruk = useRef(null);
@@ -22,8 +23,6 @@ const StrukContainer = () => {
   const [deviceTerhubung, setDeviceTerhubung] = useState('');
   const [showModalCetak, setShowModalCetak] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState([]);
-  const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalError, setShowModalError] = useState(false);
 
   const checkoutLatest = listCheckout[0];
   const checkoutId = checkoutLatest?.id;
@@ -104,9 +103,9 @@ const StrukContainer = () => {
         RNFS.PicturesDirectoryPath
       }/capture_${Date.now()}.jpg`;
       await RNFS.copyFile(uri, filePath);
-      setShowModalSuccess(true);
+      modalSuccess('Berhasil disimpan digallery');
     } catch (error) {
-      setShowModalError(false);
+      modalError('Gagal disimpan digallery');
     }
   };
 
@@ -239,10 +238,6 @@ const StrukContainer = () => {
       printLabel={printLabel}
       showModalCetak={showModalCetak}
       setShowModalCetak={setShowModalCetak}
-      showModalSuccess={showModalSuccess}
-      setShowModalSuccess={setShowModalSuccess}
-      showModalError={showModalError}
-      setShowModalError={setShowModalError}
     />
   );
 };
