@@ -29,9 +29,6 @@ const BluetoothComponent = (props: any) => {
     .filter((device: any) => device.name) // Hanya ambil yang `name`-nya ada
     .map((device: any) => device.name);
 
-  console.log('====================================');
-  console.log('=== devicesName: ', devicesName);
-  console.log('====================================');
   const {isBluetoothEnabled, connectedDevice} = useProfileStore();
 
   return (
@@ -79,7 +76,7 @@ const BluetoothComponent = (props: any) => {
           {connectedDevice ? connectedDevice : 'Tidak Ada'}
         </CText>
       </CView>
-      {connectToDevice ? null : (
+      {connectToDevice === '' && (
         <CView
           flexDirection="row"
           marginLeft={20}
