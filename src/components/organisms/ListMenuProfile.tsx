@@ -1,4 +1,4 @@
-import {View, Text, Pressable, BackHandler} from 'react-native';
+import {Pressable, BackHandler} from 'react-native';
 import React, {useState} from 'react';
 import {CText, CView} from '../atoms';
 import {colors} from '../../property';
@@ -43,13 +43,11 @@ const ListMenuProfile = (props: any) => {
     },
     {
       id: '6',
-      title: 'Contribution Developer',
+      title: 'Syarat Ketentuan',
       action: () => Route.navigate(Route.ContributionDeveloper),
     },
     {id: '7', title: 'Close Application', action: () => openModal()},
   ];
-
-  const isConnectedBluetooth = false;
 
   const openModal = () => {
     setModalVisible(true);

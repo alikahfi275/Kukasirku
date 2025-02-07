@@ -1,32 +1,49 @@
 import React from 'react';
 import ContributionDeveloperComponent from '../components/ContributionDevelopersComponent';
-import {ToastAndroid} from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
-import {LogoOvo, LogoShopeePay} from '../../../property';
 
-interface ContributionDeveloperContainerProps {
-  listPayment: [];
-  copyToClipboard: (item: any) => void;
-}
-
-const ContributionDeveloperContainer: React.FC<
-  ContributionDeveloperContainerProps
-> = () => {
-  const listPayment: any = [
-    {id: '1', value: '08987165755', logo: LogoShopeePay},
-    {id: '2', value: '08987165755', logo: LogoOvo},
+const ContributionDeveloperContainer: React.FC = () => {
+  const policyTerms = [
+    {
+      id: 1,
+      deskripsi: 'Aplikasi ini adalah aplikasi offline tanpa internet',
+    },
+    {
+      id: 2,
+      deskripsi: 'Jika aplikasi ini di uninstall maka semua data akan terhapus',
+    },
+    {
+      id: 3,
+      deskripsi:
+        'Pastikan untuk mengizinkan semua izin yang dibutuhkan demi kelancaran fitur aplikasi',
+    },
+    {
+      id: 4,
+      deskripsi: 'Dilarang menjual kembali aplikasi ini',
+    },
+    {
+      id: 5,
+      deskripsi:
+        'Pengembang tidak bertanggung jawab atas kesalahan penggunaan aplikasi ini',
+    },
+    {
+      id: 6,
+      deskripsi: 'Pengembang tidak bertanggung jawab atas kesalahan bisnis',
+    },
+    {
+      id: 7,
+      deskripsi: 'Aplikasi ini tidak ada iklan',
+    },
+    {
+      id: 8,
+      deskripsi: 'Aplikasi ini tidak ada langganan',
+    },
+    {
+      id: 9,
+      deskripsi:
+        'Hak pengembang untuk menghentikan akses aplikasi jika pengguna melanggar ketentuan',
+    },
   ];
-
-  const copyToClipboard = (item: any) => {
-    ToastAndroid.show(`${item.value} Berhasil Dicopy`, ToastAndroid.SHORT);
-    Clipboard.setString(item.value);
-  };
-  return (
-    <ContributionDeveloperComponent
-      listPayment={listPayment}
-      copyToClipboard={copyToClipboard}
-    />
-  );
+  return <ContributionDeveloperComponent policyTerms={policyTerms} />;
 };
 
 export default ContributionDeveloperContainer;
