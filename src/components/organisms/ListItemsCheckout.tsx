@@ -34,17 +34,23 @@ const ListItemsCheckout: React.FC<ListItemsCheckoutProps> = ({checkoutId}) => {
 
   return (
     <CView marginTop={5}>
-      {itemsCheckout.map(item => (
-        <CView key={item.id} flexDirection="row">
-          <CView flex={1} flexDirection="row">
-            <CText style={{flex: 1}}>{item.name} </CText>
-            <CText marginRight={10}>{item.quantity}x</CText>
+      {itemsCheckout.map(item => {
+        const totalPrice = item.price * item.quantity;
+        return (
+          <CView key={item.id} flexDirection="row">
+            <CView flex={1} flexDirection="row">
+              <CText style={{flex: 1}}>{item.name} </CText>
+              <CText marginRight={10}>{item.quantity}x</CText>
+            </CView>
+            <CView style={{justifyContent: 'flex-start'}} flex={0.5}>
+              <CText>{formatRupiah(item.price)}</CText>
+            </CView>
+            <CView style={{justifyContent: 'flex-start'}} flex={0.5}>
+              <CText>{formatRupiah(totalPrice)}</CText>
+            </CView>
           </CView>
-          <CView style={{justifyContent: 'flex-start'}} flex={0.5}>
-            <CText>{formatRupiah(item.price)}</CText>
-          </CView>
-        </CView>
-      ))}
+        );
+      })}
     </CView>
   );
 };
