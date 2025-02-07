@@ -25,6 +25,13 @@ const BluetoothComponent = (props: any) => {
     disconnectFromDevice,
   } = props;
 
+  const devicesName = devices
+    .filter((device: any) => device.name) // Hanya ambil yang `name`-nya ada
+    .map((device: any) => device.name);
+
+  console.log('====================================');
+  console.log('=== devicesName: ', devicesName);
+  console.log('====================================');
   const {isBluetoothEnabled, connectedDevice} = useProfileStore();
 
   return (
@@ -94,7 +101,7 @@ const BluetoothComponent = (props: any) => {
         </CView>
       )}
 
-      {devices.length > 0 ? (
+      {devices.length > 0 && (
         <FlatList
           data={devices}
           keyExtractor={(item: any) => item.address}
@@ -121,7 +128,9 @@ const BluetoothComponent = (props: any) => {
             )
           }
         />
-      ) : (
+      )}
+
+      {devicesName.length === 0 && (
         <CView flex={1} justifyContent="center" alignItems="center">
           <CText weight={300} color={colors.secondary2}>
             Tidak Ada List Bluetooth

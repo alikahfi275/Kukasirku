@@ -46,7 +46,7 @@ const AccessComponent = (props: any) => {
   useEffect(() => {
     setTimeout(() => {
       if (Platform.OS === 'android') SplashScreen.hide();
-    }, 500);
+    }, 1000);
   }, []);
 
   const submitAccess = async () => {
