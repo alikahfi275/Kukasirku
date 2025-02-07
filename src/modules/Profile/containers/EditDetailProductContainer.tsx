@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import EditDetailProductComponent from '../components/EditDetailProductComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {EditDetailContainerProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
 import {updateProduct} from '../store/ProfileService';
+import {modalError, modalSuccess} from '../../../components';
 
 const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
   const {onSubmit} = props;
   const [changeFotoProduct, setChangeFotoProduct] = React.useState<string>('');
-  const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalError, setShowModalError] = useState(false);
+
   const openFile = () => {
     ImageCropPicker.openPicker({
       cropping: true,
@@ -43,13 +43,16 @@ const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
           description,
           changeFotoProduct || fotoProduct,
         );
-        setShowModalSuccess(true);
+        modalSuccess('Berhasil Update Product');
+
         setTimeout(() => {
           Route.navigate(Route.EditProduct);
         }, 1000);
       }
       onSubmit();
-    } catch (error) {}
+    } catch (error) {
+      modalError('Gagal Update Product');
+    }
   };
 
   return (
@@ -57,10 +60,6 @@ const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
       openFile={openFile}
       handleUpdate={handleUpdate}
       changeFotoProduct={changeFotoProduct}
-      showModalSuccess={showModalSuccess}
-      showModalError={showModalError}
-      setShowModalSuccess={setShowModalSuccess}
-      setShowModalError={setShowModalError}
     />
   );
 };
