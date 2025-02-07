@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Routes, {navigation} from './Routes';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -24,6 +24,8 @@ import NotAccessContainer from '../../modules/Access/containers/NotAccessContain
 
 // Statusbar Default
 import {CStatusbar} from '../../components';
+import {getStoreProfile} from '../../modules/Profile/store/ProfileService';
+import Route from './Routes';
 
 // Re-Wrapped Screens
 const AddProduct = AddProductContainer;
@@ -54,6 +56,22 @@ const Stacks = (props: any) => {
     open: (modalName: any, params = {}) => openModal(modalName, params),
     close: (modalName: any) => closeModal(modalName),
   };
+
+  useEffect(() => {
+    const fetchStoreProfile = async () => {
+      try {
+        const profile = await getStoreProfile();
+
+        if (profile?.isAccess) {
+          Route.navigate(Route.BottomTab);
+        } else {
+          Route.navigate(Route.Access);
+        }
+      } catch (error) {}
+    };
+
+    fetchStoreProfile();
+  }, [Route]);
 
   return (
     <NavigationContainer ref={navigation}>

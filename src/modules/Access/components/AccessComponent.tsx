@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {CButton, CText, CTextInput, CView} from '../../../components';
+import {
+  CButton,
+  CText,
+  CTextInput,
+  CView,
+  modalError,
+} from '../../../components';
 import {colors} from '../../../property';
-import {accesCode} from '../../../app/accesCode';
+import {accessCode} from '../../../app/accessCode';
 import DeviceInfo from 'react-native-device-info';
 import Route from '../../../app/routes/Routes';
 import {CommonActions, useNavigation} from '@react-navigation/native';
@@ -15,12 +21,13 @@ import {
 
 const AccessComponent = (props: any) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [deviceUser, setDeviceUser] = useState('');
   const [valueAccess, setValueAccess] = useState('');
   const [messageValidation, setMessageValidation] = useState('');
   const [id, setId] = useState('');
 
   const navigation = useNavigation();
+
+  const deviceModel = DeviceInfo.getModel();
 
   useEffect(() => {
     const fetchStoreProfile = async () => {
@@ -36,40 +43,36 @@ const AccessComponent = (props: any) => {
   }, [id]);
 
   useEffect(() => {
-    const getDevice = async () => {
-      const device = await DeviceInfo.getManufacturer();
-      setDeviceUser(device.toLowerCase());
-    };
-    getDevice();
-  }, []);
-
-  useEffect(() => {
     setTimeout(() => {
       if (Platform.OS === 'android') SplashScreen.hide();
-    }, 1000);
+    }, 500);
   }, []);
 
   const submitAccess = async () => {
-    setMessageValidation('');
-    setIsLoading(true);
-    const isAccess = true;
-    if (valueAccess === accesCode.code) {
-      if (id) {
-        await updateConfigAccess(id, isAccess);
-      } else {
-        await createConfigAccess(isAccess);
-      }
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: Route.BottomTab}],
-        }),
-      );
-      setIsLoading(false);
-      setMessageValidation('');
+    if (deviceModel !== accessCode.device) {
+      modalError('Maaf Akses Anda Tidak Resmi');
     } else {
-      setMessageValidation('Kode Akses Salah');
-      setIsLoading(false);
+      setMessageValidation('');
+      setIsLoading(true);
+      const isAccess = true;
+      if (valueAccess === accessCode.code) {
+        if (id) {
+          await updateConfigAccess(id, isAccess);
+        } else {
+          await createConfigAccess(isAccess);
+        }
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: Route.BottomTab}],
+          }),
+        );
+        setIsLoading(false);
+        setMessageValidation('');
+      } else {
+        setMessageValidation('Kode Akses Salah');
+        setIsLoading(false);
+      }
     }
   };
 

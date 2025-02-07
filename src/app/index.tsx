@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import {ModalSucces} from '../components';
 import {createModalStack, ModalProvider} from 'react-native-modalfy';
 import {Dimensions} from 'react-native';
@@ -6,10 +6,6 @@ import {Easing} from 'react-native-reanimated';
 import Stacks from './routes/Stacks';
 import {DatabaseProvider} from '@nozbe/watermelondb/DatabaseProvider';
 import {database} from './database';
-import {getStoreProfile} from '../modules/Profile/store/ProfileService';
-import Route from './routes/Routes';
-import DeviceInfo from 'react-native-device-info';
-import {accesCode} from './accesCode';
 import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 const screenHeight = Dimensions.get('screen').height;
@@ -50,34 +46,14 @@ const defaultOptions = {
 
 const stack = createModalStack(modalConfig, defaultOptions);
 const App: FC = () => {
-  useEffect(() => {
-    const fetchStoreProfile = async () => {
-      try {
-        const device = DeviceInfo.getModel();
-        const profile = await getStoreProfile();
-
-        if (device.toLowerCase() === accesCode.device.toLowerCase()) {
-          if (profile?.isAccess) {
-            Route.navigate(Route.BottomTab);
-          } else {
-            Route.navigate(Route.Access);
-          }
-        } else {
-          Route.navigate(Route.NotAccess);
-        }
-      } catch (error) {}
-    };
-
-    fetchStoreProfile();
-  }, []);
   return (
-    <AlertNotificationRoot>
-      <DatabaseProvider database={database}>
-        <ModalProvider stack={stack}>
+    <DatabaseProvider database={database}>
+      <ModalProvider stack={stack}>
+        <AlertNotificationRoot>
           <Stacks />
-        </ModalProvider>
-      </DatabaseProvider>
-    </AlertNotificationRoot>
+        </AlertNotificationRoot>
+      </ModalProvider>
+    </DatabaseProvider>
   );
 };
 
