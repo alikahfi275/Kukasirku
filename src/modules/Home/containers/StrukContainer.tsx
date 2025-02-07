@@ -44,6 +44,7 @@ const StrukContainer = () => {
           console.error('Failed to fetch store profile', error);
         }
       };
+
       fetchStoreProfile();
     }, []),
   );
@@ -60,7 +61,8 @@ const StrukContainer = () => {
       }
     };
     fetchItems();
-  }, [checkoutItems, checkoutLatest]);
+    console.log('jlnnn');
+  }, [checkoutItems.length, checkoutId]);
 
   useFocusEffect(
     useCallback(() => {
@@ -73,8 +75,9 @@ const StrukContainer = () => {
           }
         } catch (error) {}
       };
+
       fetchCheckouts();
-    }, [checkoutLatest]),
+    }, [checkoutId]),
   );
 
   const requestEksternalStoragePermission = async () => {
