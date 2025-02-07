@@ -5,7 +5,6 @@ import {
   CHeader,
   CLoading,
   CModal,
-  CModalSuccesFailed,
   CText,
   CView,
 } from '../../../components';
@@ -24,25 +23,12 @@ const BluetoothComponent = (props: any) => {
     setModalVisible,
     devices,
     disconnectFromDevice,
-    showModalSuccess,
-    setShowModalSuccess,
-    showModalError,
-    setShowModalError,
   } = props;
 
   const {isBluetoothEnabled, connectedDevice} = useProfileStore();
 
   return (
     <CView flex={1}>
-      <CModalSuccesFailed
-        visible={showModalSuccess}
-        onConfirm={() => setShowModalSuccess(false)}
-        isSuccess
-      />
-      <CModalSuccesFailed
-        visible={showModalError}
-        onConfirm={() => setShowModalError(false)}
-      />
       <CHeader
         iconLeft="arrow-left"
         titleHeader="Bluetooth Printer"

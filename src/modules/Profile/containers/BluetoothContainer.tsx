@@ -7,6 +7,7 @@ import {
 } from '../store/ProfileService';
 import {useProfileStore} from '../store/useProfileStore';
 import {BluetoothManager} from '@brooons/react-native-bluetooth-escpos-printer';
+import {modalError, modalSuccess} from '../../../components';
 
 const BluetoothContainer = () => {
   const [id, setId] = useState('');
@@ -14,8 +15,6 @@ const BluetoothContainer = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalError, setShowModalError] = useState(false);
   const {
     isBluetoothEnabled,
     setIsBluetoothEnabled,
@@ -64,10 +63,10 @@ const BluetoothContainer = () => {
         const devices = await BluetoothManager.scanDevices();
         const parsedDevices = JSON.parse(devices);
         setDevices(parsedDevices.found);
-      } catch (error) {
-        setShowModalError(true);
-      } finally {
         setIsScanning(false);
+      } catch (error) {
+        setIsScanning(false);
+        modalError('Gagal Scan Bluetooth Device');
       }
     }
   };
@@ -83,7 +82,7 @@ const BluetoothContainer = () => {
         await createConfigBluetooth(address);
       }
       setIsLoading(false);
-      setShowModalSuccess(true);
+      modalSuccess('Berhasil terhubung');
     } catch (error) {
       setIsLoading(false);
       if (id) {
@@ -91,7 +90,7 @@ const BluetoothContainer = () => {
       } else {
         await createConfigBluetooth('');
       }
-      setShowModalError(true);
+      modalError('Gagal terhubung');
     }
   };
 
@@ -115,10 +114,6 @@ const BluetoothContainer = () => {
       setIsLoading={setIsLoading}
       setModalVisible={setModalVisible}
       disconnectFromDevice={disconnectFromDevice}
-      showModalSuccess={showModalSuccess}
-      setShowModalSuccess={setShowModalSuccess}
-      showModalError={showModalError}
-      setShowModalError={setShowModalError}
     />
   );
 };
