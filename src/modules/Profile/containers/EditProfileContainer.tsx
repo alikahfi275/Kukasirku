@@ -17,8 +17,6 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
   const [storePhone, setStorePhone] = useState('');
   const [storeAddress, setStoreAddress] = useState('');
   const {setDisplayPhotoUrl, setPhotoBase64} = useProfileStore();
-  const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalError, setShowModalError] = useState(false);
 
   useEffect(() => {
     const fetchStoreProfile = async () => {
@@ -64,14 +62,10 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
           storePhone,
           storeAddress,
         );
-        setShowModalSuccess(true);
       } else {
         await createStoreProfile(photoUrl, storeName, storePhone, storeAddress);
-        setShowModalSuccess(true);
       }
-    } catch (error) {
-      setShowModalError(true);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -85,10 +79,6 @@ const EditProfileContainer: React.FC<EditProfileContainerProps> = props => {
       setStoreName={setStoreName}
       setStorePhone={setStorePhone}
       setStoreAddress={setStoreAddress}
-      showModalSuccess={showModalSuccess}
-      showModalError={showModalError}
-      setShowModalSuccess={setShowModalSuccess}
-      setShowModalError={setShowModalError}
     />
   );
 };

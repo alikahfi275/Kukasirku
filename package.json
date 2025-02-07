@@ -19,6 +19,7 @@
     "moment": "^2.30.1",
     "react": "18.1.0",
     "react-native": "0.70.10",
+    "react-native-alert-notification": "^0.4.2",
     "react-native-device-info": "^10.12.0",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.16.2",

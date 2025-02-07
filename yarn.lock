@@ -6323,6 +6323,11 @@ react-is@^17.0.1, react-is@^17.0.2:
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-alert-notification@^0.4.2:
+  version "0.4.2"
+  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-native-alert-notification/-/react-native-alert-notification-0.4.2.tgz#fabb1bc94e4f7d459dd8e47e8aed03a93651b8c7"
+  integrity sha512-98EQ+DtI7thEAHzoXMbN8dZRCFcoGXMRYYIKvooPPdASuuZIuON4oxCbJNDb6r6lebnPc/25JCD1tJPaoPNWnw==
+
 react-native-codegen@^0.70.6:
   version "0.70.7"
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-native-codegen/-/react-native-codegen-0.70.7.tgz"

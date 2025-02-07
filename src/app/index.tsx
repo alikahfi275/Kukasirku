@@ -10,6 +10,7 @@ import {getStoreProfile} from '../modules/Profile/store/ProfileService';
 import Route from './routes/Routes';
 import DeviceInfo from 'react-native-device-info';
 import {accesCode} from './accesCode';
+import {AlertNotificationRoot} from 'react-native-alert-notification';
 
 const screenHeight = Dimensions.get('screen').height;
 
@@ -70,11 +71,13 @@ const App: FC = () => {
     fetchStoreProfile();
   }, []);
   return (
-    <DatabaseProvider database={database}>
-      <ModalProvider stack={stack}>
-        <Stacks />
-      </ModalProvider>
-    </DatabaseProvider>
+    <AlertNotificationRoot>
+      <DatabaseProvider database={database}>
+        <ModalProvider stack={stack}>
+          <Stacks />
+        </ModalProvider>
+      </DatabaseProvider>
+    </AlertNotificationRoot>
   );
 };
 

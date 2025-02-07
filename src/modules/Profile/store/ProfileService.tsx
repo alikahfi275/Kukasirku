@@ -1,6 +1,7 @@
 import {database} from '../../../app/database';
 import Product from '../../../app/database/model/Product';
 import StoreProfile from '../../../app/database/model/StoreProfile';
+import {modalError, modalSuccess} from '../../../components';
 
 export const getStoreProfile = async (): Promise<StoreProfile | null> => {
   try {
@@ -30,7 +31,10 @@ export const createStoreProfile = async (
         profile.storeAddress = storeAddress;
       });
     });
-  } catch (error) {}
+    modalSuccess('Profile berhasil dibuat');
+  } catch (error) {
+    modalError('Profile gagal dibuat');
+  }
 };
 
 export const updateStoreProfile = async (
@@ -51,8 +55,11 @@ export const updateStoreProfile = async (
           prof.storeAddress = storeAddress;
         });
       });
+      modalSuccess('Profile berhasil diupdate');
     }
-  } catch (error) {}
+  } catch (error) {
+    modalError('Profile gagal diupdate');
+  }
 };
 
 export const updateProduct = async (
