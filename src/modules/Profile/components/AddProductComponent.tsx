@@ -7,7 +7,6 @@ import {
   CTextInput,
   CView,
   CScrolView,
-  CModalSuccesFailed,
 } from '../../../components';
 import {DefaulFood, colors, sizeScale} from '../../../property';
 import {AddProductComponentProps} from '../store/type';
@@ -26,10 +25,6 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
     setDescription,
     openFile,
     handleSubmit,
-    showModalSuccess,
-    showModalError,
-    setShowModalSuccess,
-    setShowModalError,
   } = props;
 
   return (
@@ -91,15 +86,6 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           onPress={handleSubmit}
           marginTop={20}
           marginBottom={20}
-        />
-        <CModalSuccesFailed
-          visible={showModalSuccess}
-          onConfirm={() => setShowModalSuccess(false)}
-          isSuccess
-        />
-        <CModalSuccesFailed
-          visible={showModalError}
-          onConfirm={() => setShowModalError(false)}
         />
       </CScrolView>
     </CView>

@@ -79,8 +79,9 @@ export const updateProduct = async (
         prod.imageUrl = imageUrl;
       });
     });
+    modalSuccess('Product berhasil diupdate');
   } catch (error) {
-    console.error('Error updating product:', error);
+    modalError('Product gagal diupdate');
     throw error;
   }
 };
@@ -100,9 +101,9 @@ export const createProduct = async (
         product.imageUrl = imageUrl;
       });
     });
+    modalSuccess('Product berhasil dibuat');
   } catch (error) {
-    console.error('Error creating product:', error);
-    throw error; // Rethrow the error for handling by the caller
+    modalError('Product gagal dibuat');
   }
 };
 
