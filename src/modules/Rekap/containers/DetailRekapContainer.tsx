@@ -2,12 +2,11 @@ import React, {useRef, useState} from 'react';
 import DetailRekapComponent from '../components/DetailRekapComponent';
 import {captureRef} from 'react-native-view-shot';
 import RNFS from 'react-native-fs';
+import {modalError, modalSuccess} from '../../../components';
 
 const DetailRekapContainer: React.FC = () => {
   const viewShotRef = useRef(null);
   const [imageViewShot, setimageViewShot] = useState<string>('');
-  const [showModalSuccess, setShowModalSuccess] = useState(false);
-  const [showModalError, setShowModalError] = useState(false);
 
   const captureView = async () => {
     try {
@@ -20,21 +19,14 @@ const DetailRekapContainer: React.FC = () => {
         RNFS.PicturesDirectoryPath
       }/capture_${Date.now()}.jpg`;
       await RNFS.copyFile(uri, filePath);
-      setShowModalSuccess(true);
+      modalSuccess('Berhasil disimpan digallery');
     } catch (error) {
-      setShowModalError(false);
+      modalError('Gagal disimpan digallery');
     }
   };
 
   return (
-    <DetailRekapComponent
-      captureView={captureView}
-      viewShotRef={viewShotRef}
-      showModalSuccess={showModalSuccess}
-      showModalError={showModalError}
-      setShowModalSuccess={setShowModalSuccess}
-      setShowModalError={setShowModalError}
-    />
+    <DetailRekapComponent captureView={captureView} viewShotRef={viewShotRef} />
   );
 };
 
