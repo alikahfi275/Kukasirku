@@ -42,6 +42,7 @@ const CHeader: React.FC<HeaderProps> = props => {
             <CSearch
               icon={true}
               placeholder="Search ..."
+              placeholderTextColor={'#999999'}
               iconStyle={{color: colors.teal}}
               onSearch={props.onSearch}
               value={props.value}

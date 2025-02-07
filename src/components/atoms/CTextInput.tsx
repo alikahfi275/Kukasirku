@@ -44,6 +44,7 @@ const CTextInput: React.FC<ReusableTextInputProps> = ({
             paddingLeft: horizontalScale(10),
             textAlignVertical: typeMultiline ? 'top' : 'center',
             textAlign: 'left',
+            color: '#333',
           },
 
           inputStyle,
