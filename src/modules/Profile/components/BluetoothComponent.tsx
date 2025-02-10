@@ -63,6 +63,8 @@ const BluetoothComponent = (props: any) => {
         marginRight={20}
         marginLeft={20}
         paddingTop={15}
+        paddingBottom={15}
+        style={{borderBottomWidth: 1, borderBottomColor: '#E4E4E4'}}
         alignItems="center">
         <CText fontSize={18} weight={500} style={{flex: 1}}>
           Terhubung Ke :
@@ -73,29 +75,6 @@ const BluetoothComponent = (props: any) => {
           color={connectedDevice ? colors.limegreen : colors.red1}>
           {connectedDevice ? connectedDevice : 'Tidak Ada'}
         </CText>
-      </CView>
-
-      <CView
-        flexDirection="row"
-        marginLeft={20}
-        marginRight={20}
-        paddingTop={!connectToDevice ? 15 : 0}
-        paddingBottom={15}
-        style={{borderBottomWidth: 1, borderBottomColor: '#E4E4E4'}}
-        alignItems="center">
-        {!connectToDevice && (
-          <CButton
-            title={'Disconnect'}
-            onPress={disconnectFromDevice}
-            style={{
-              flex: 1,
-              backgroundColor: isBluetoothEnabled
-                ? colors.red1
-                : colors.limegreen,
-            }}
-            marginRight={15}
-          />
-        )}
       </CView>
 
       <FlatList
