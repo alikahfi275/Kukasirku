@@ -5,7 +5,7 @@ import ListItemsCheckout from './ListItemsCheckout';
 import {colors, formatRupiah} from '../../property';
 import {useFocusEffect} from '@react-navigation/native';
 import {getStoreProfile} from '../../modules/Profile/store/ProfileService';
-import {CModal} from '../molecules';
+import {CLoading, CModal} from '../molecules';
 import Route from '../../app/routes/Routes';
 import {BluetoothEscposPrinter} from '@brooons/react-native-bluetooth-escpos-printer';
 import {getCheckoutItemsByCheckoutId} from '../../modules/History/store/HistoryService';
@@ -18,6 +18,8 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
   const [storeName, setStoreName] = useState('');
   const [deviceTerhubung, setDeviceTerhubung] = useState('');
   const [showModalCetak, setShowModalCetak] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -43,7 +45,9 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
   const printLabel = async (checkout: any) => {
     if (!deviceTerhubung) {
       setShowModalCetak(true);
+      return;
     }
+    setLoading(true);
     const itemsData: any = await getCheckoutItemsByCheckoutId(checkout.id);
     if (itemsData.length > 0) {
       try {
@@ -148,11 +152,15 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
         );
         await BluetoothEscposPrinter.printText(`Terima Kasih\r\n`, {});
         await BluetoothEscposPrinter.printText('\r\n', {});
-      } catch (error) {}
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     }
   };
   return (
     <CScrolView paddingBottom={30} paddingTop={10}>
+      <CLoading visible={loading} />
       <CModal
         visible={showModalCetak}
         onConfirm={() => {
