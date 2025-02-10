@@ -1,12 +1,167 @@
-import React from 'react';
-import {CScrolView, CText, CView} from '../atoms';
+import React, {useCallback, useState} from 'react';
+import {CButton, CScrolView, CText, CView} from '../atoms';
 import moment from 'moment';
 import ListItemsCheckout from './ListItemsCheckout';
 import {colors, formatRupiah} from '../../property';
+import {useFocusEffect} from '@react-navigation/native';
+import {getStoreProfile} from '../../modules/Profile/store/ProfileService';
+import {CModal} from '../molecules';
+import Route from '../../app/routes/Routes';
+import {BluetoothEscposPrinter} from '@brooons/react-native-bluetooth-escpos-printer';
+import {getCheckoutItemsByCheckoutId} from '../../modules/History/store/HistoryService';
+import {formatUang} from '../../property/helpers/Helpers';
 
 const ListHistory = ({checkouts}: {checkouts: any[]}) => {
+  const [photoUrl, setPhotoUrl] = useState<string>('');
+  const [storePhone, setStorePhone] = useState('');
+  const [storeAddress, setStoreAddress] = useState('');
+  const [storeName, setStoreName] = useState('');
+  const [deviceTerhubung, setDeviceTerhubung] = useState('');
+  const [showModalCetak, setShowModalCetak] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchStoreProfile = async () => {
+        try {
+          const profile = await getStoreProfile();
+          if (profile) {
+            setPhotoUrl(profile.photoUrl);
+            setStorePhone(profile.storePhone);
+            setStoreAddress(profile.storeAddress);
+            setDeviceTerhubung(profile.deviceTerhubung);
+            setStoreName(profile.storeName);
+          }
+        } catch (error) {
+          console.error('Failed to fetch store profile', error);
+        }
+      };
+
+      fetchStoreProfile();
+    }, []),
+  );
+
+  const printLabel = async (checkout: any) => {
+    if (!deviceTerhubung) {
+      setShowModalCetak(true);
+    }
+    const itemsData: any = await getCheckoutItemsByCheckoutId(checkout.id);
+    if (itemsData.length > 0) {
+      try {
+        await BluetoothEscposPrinter.printerAlign(
+          BluetoothEscposPrinter.ALIGN.CENTER,
+        );
+
+        if (photoUrl) {
+          await BluetoothEscposPrinter.printPic(photoUrl, {
+            width: 100,
+            left: 100,
+          });
+        }
+
+        await BluetoothEscposPrinter.printerAlign(
+          BluetoothEscposPrinter.ALIGN.CENTER,
+        );
+        if (storeName) {
+          await BluetoothEscposPrinter.printText(`${storeName}\r\n`, {});
+        }
+        if (storeAddress) {
+          await BluetoothEscposPrinter.printText(`${storeAddress}\r\n`, {});
+        }
+        if (storePhone) {
+          await BluetoothEscposPrinter.printText(`${storePhone}\r\n`, {});
+        }
+
+        await BluetoothEscposPrinter.printerAlign(
+          BluetoothEscposPrinter.ALIGN.LEFT,
+        );
+        await BluetoothEscposPrinter.printText(
+          '--------------------------------\r\n',
+          {},
+        );
+
+        await BluetoothEscposPrinter.printText(`${checkout.orderId}\r\n`, {
+          fonttype: 1,
+        });
+        await BluetoothEscposPrinter.printText(
+          `${moment(checkout.date).format('DD MMMM YYYY HH:mm')}\r\n`,
+          {fonttype: 1},
+        );
+        await BluetoothEscposPrinter.printText(
+          '--------------------------------\r\n',
+          {},
+        );
+
+        for (const row of itemsData) {
+          const price = formatUang(row.price);
+          await BluetoothEscposPrinter.printColumn(
+            [30],
+            [BluetoothEscposPrinter.ALIGN.LEFT],
+            [row.name],
+            {},
+          );
+
+          await BluetoothEscposPrinter.printColumn(
+            [10, 1, 10, 11],
+            [
+              BluetoothEscposPrinter.ALIGN.RIGHT,
+              BluetoothEscposPrinter.ALIGN.LEFT,
+              BluetoothEscposPrinter.ALIGN.RIGHT,
+              BluetoothEscposPrinter.ALIGN.RIGHT,
+            ],
+            [row.quantity.toString(), 'x', price, price],
+            {},
+          );
+        }
+
+        // Footer
+        await BluetoothEscposPrinter.printerAlign(
+          BluetoothEscposPrinter.ALIGN.LEFT,
+        );
+        await BluetoothEscposPrinter.printText(
+          '--------------------------------\r\n',
+          {},
+        );
+
+        const totalCheckout = formatUang(checkout.totalPrice);
+
+        const footerData = [['TOTAL', totalCheckout]];
+
+        for (const [label, value] of footerData) {
+          await BluetoothEscposPrinter.printColumn(
+            [19, 2, 11],
+            [
+              BluetoothEscposPrinter.ALIGN.LEFT,
+              BluetoothEscposPrinter.ALIGN.LEFT,
+              BluetoothEscposPrinter.ALIGN.RIGHT,
+            ],
+            [label, ':', value],
+            {},
+          );
+        }
+
+        await BluetoothEscposPrinter.printText(
+          '--------------------------------\r\n',
+          {},
+        );
+        await BluetoothEscposPrinter.printerAlign(
+          BluetoothEscposPrinter.ALIGN.CENTER,
+        );
+        await BluetoothEscposPrinter.printText(`Terima Kasih\r\n`, {});
+        await BluetoothEscposPrinter.printText('\r\n', {});
+      } catch (error) {}
+    }
+  };
   return (
     <CScrolView paddingBottom={30} paddingTop={10}>
+      <CModal
+        visible={showModalCetak}
+        onConfirm={() => {
+          Route.navigate(Route.BluetoothPrint);
+          setShowModalCetak(false);
+        }}
+        onClose={() => setShowModalCetak(false)}
+        Title="Harap Koneksikan Ke Printer Bluetooth"
+      />
       {checkouts.map(checkout => (
         <CView
           key={checkout.id}
@@ -27,10 +182,26 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
             shadowRadius: 1.41,
             elevation: 2,
           }}>
-          <CText fontSize={16} weight={600}>
-            {checkout.orderId}
-          </CText>
-          <CText>{moment(checkout.date).format('DD MMMM YYYY HH:mm')}</CText>
+          <CView
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center">
+            <CView>
+              <CText fontSize={16} weight={600}>
+                {checkout.orderId}
+              </CText>
+              <CText>
+                {moment(checkout.date).format('DD MMMM YYYY HH:mm')}
+              </CText>
+            </CView>
+            <CButton
+              title="Cetak"
+              onPress={() => printLabel(checkout)}
+              paddingLeft={20}
+              paddingRight={20}
+            />
+          </CView>
+
           <CView
             marginTop={5}
             style={{

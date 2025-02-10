@@ -214,10 +214,6 @@ const StrukContainer = () => {
       await BluetoothEscposPrinter.printerAlign(
         BluetoothEscposPrinter.ALIGN.CENTER,
       );
-      await BluetoothEscposPrinter.printText(
-        `Powered by Akael Xd Project\r\n`,
-        {fonttype: 1},
-      );
       await BluetoothEscposPrinter.printText(`Terima Kasih\r\n`, {
         fonttype: 1,
       });
