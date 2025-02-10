@@ -1,17 +1,30 @@
 import React from 'react';
 import {Button} from 'react-native';
 import {useCartStore} from '../store/useHomeStore';
-import {CHeader, CLoading, CText, CView, ListCart} from '../../../components';
+import {
+  CHeader,
+  CLoading,
+  CModal,
+  CText,
+  CView,
+  ListCart,
+} from '../../../components';
 import {colors, formatRupiah} from '../../../property';
 
 const CartComponent: React.FC = (props: any) => {
   const {totalPrice} = useCartStore();
-  const {loading, handleSubmitCheckout} = props;
+  const {loading, handleSubmitCheckout, modalVisible, setModalVisible} = props;
 
   return (
     <CView flex={1}>
       <CHeader titleHeader="Cart" typeHeader="noPrimary" />
       <CLoading visible={loading} />
+      <CModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        Title="Apakah pesananya sudah sesuai ?"
+        onConfirm={() => handleSubmitCheckout()}
+      />
       <ListCart />
       <CView>
         <CView
@@ -33,7 +46,7 @@ const CartComponent: React.FC = (props: any) => {
           <Button
             disabled={totalPrice === 0}
             title="Checkout"
-            onPress={handleSubmitCheckout}
+            onPress={() => setModalVisible(true)}
             color={colors.teal}
           />
         </CView>
