@@ -166,9 +166,7 @@ export const updateConfigAccess = async (
         });
       });
     }
-  } catch (error) {
-    console.log('=== ERROR: ', error);
-  }
+  } catch (error) {}
 };
 
 export const createConfigAccess = async (isAccess: boolean): Promise<void> => {
@@ -178,7 +176,5 @@ export const createConfigAccess = async (isAccess: boolean): Promise<void> => {
         profile.isAccess = isAccess;
       });
     });
-  } catch (error) {
-    console.log('=== ERROR: 2 ', error);
-  }
+  } catch (error) {}
 };

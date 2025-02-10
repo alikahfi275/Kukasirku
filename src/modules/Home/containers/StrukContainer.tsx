@@ -60,7 +60,6 @@ const StrukContainer = () => {
       }
     };
     fetchItems();
-    console.log('jlnnn');
   }, [checkoutItems.length, checkoutId]);
 
   useFocusEffect(
