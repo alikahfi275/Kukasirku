@@ -31,6 +31,7 @@ const StrukComponent = (props: any) => {
     printLabel,
     showModalCetak,
     setShowModalCetak,
+    storeName,
   } = props;
 
   return (
@@ -60,6 +61,11 @@ const StrukComponent = (props: any) => {
                   />
                 }
               />
+              {storeName && (
+                <CText weight={400} fontSize={12} marginTop={2}>
+                  {storeName}
+                </CText>
+              )}
               {storePhone && (
                 <CText weight={400} fontSize={12} marginTop={2}>
                   {storePhone}

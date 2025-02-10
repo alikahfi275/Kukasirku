@@ -237,6 +237,7 @@ const StrukContainer = () => {
       printLabel={printLabel}
       showModalCetak={showModalCetak}
       setShowModalCetak={setShowModalCetak}
+      storeName={storeName}
     />
   );
 };
