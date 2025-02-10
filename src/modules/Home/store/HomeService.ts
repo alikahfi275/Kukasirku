@@ -4,6 +4,8 @@ import Checkout from '../../../app/database/model/Checkout';
 import CheckoutItem from '../../../app/database/model/CheckoutItem';
 import {useCartStore} from '../../../modules/Home/store/useHomeStore';
 import {generateRandomOrderId} from '../../../property/helpers/Helpers';
+import Route from '../../../app/routes/Routes';
+import {modalError} from '../../../components';
 
 export const getCheckoutsReverse = async (): Promise<Checkout[]> => {
   try {
@@ -22,9 +24,10 @@ export const getCheckoutsReverse = async (): Promise<Checkout[]> => {
   }
 };
 
-export const handleCheckout = async () => {
+export const handleCheckout = async (setLoading: any) => {
   const {cart, clearCart} = useCartStore.getState();
 
+  setLoading(true);
   if (cart.length === 0) {
     console.warn('Cart is empty, cannot proceed with checkout.');
     return;
@@ -60,10 +63,13 @@ export const handleCheckout = async () => {
           });
       }
     });
+    setLoading(false);
+    Route.navigate(Route.Struk);
 
-    clearCart(); // Clear the cart after successful checkout
+    clearCart();
   } catch (error) {
-    console.error('Error during checkout:', error);
+    setLoading(false);
+    modalError('Checkout Gagal');
   }
 };
 
