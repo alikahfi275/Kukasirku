@@ -25,9 +25,7 @@ const BluetoothComponent = (props: any) => {
     disconnectFromDevice,
   } = props;
 
-  const devicesName = devices
-    .filter((device: any) => device.name) // Hanya ambil yang `name`-nya ada
-    .map((device: any) => device.name);
+  const devicesName = devices.filter((device: any) => device.name);
 
   const {isBluetoothEnabled, connectedDevice} = useProfileStore();
 
@@ -98,42 +96,40 @@ const BluetoothComponent = (props: any) => {
         </CView>
       )}
 
-      {devices.length > 0 && (
-        <FlatList
-          data={devices}
-          keyExtractor={(item: any) => item.address}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}: any) =>
-            item.name && (
-              <CView
-                marginRight={20}
-                marginLeft={20}
-                marginTop={15}
-                borderRadius={10}
-                borderWidth={1}
-                padding={10}
-                borderColor="#E4E4E4">
-                <CText weight={300}>
-                  {item.name} : ({item.address})
-                </CText>
-                <CButton
-                  title="Connect"
-                  onPress={() => connectToDevice(item.address)}
-                  marginTop={10}
-                />
-              </CView>
-            )
-          }
-        />
-      )}
-
-      {devicesName.length === 0 && (
-        <CView flex={1} justifyContent="center" alignItems="center">
-          <CText weight={300} color={colors.secondary2}>
-            Tidak Ada List Bluetooth
-          </CText>
-        </CView>
-      )}
+      <FlatList
+        contentContainerStyle={{flex: 1}}
+        data={devicesName}
+        keyExtractor={(item: any) => item.address}
+        ListEmptyComponent={() => (
+          <CView flex={1} justifyContent="center" alignItems="center">
+            <CText weight={300} color={colors.secondary2}>
+              Tidak Ada List Bluetooth
+            </CText>
+          </CView>
+        )}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}: any) =>
+          item.name && (
+            <CView
+              marginRight={20}
+              marginLeft={20}
+              marginTop={15}
+              borderRadius={10}
+              borderWidth={1}
+              padding={10}
+              borderColor="#E4E4E4">
+              <CText weight={300}>
+                {item.name} : ({item.address})
+              </CText>
+              <CButton
+                title="Connect"
+                onPress={() => connectToDevice(item.address)}
+                marginTop={10}
+              />
+            </CView>
+          )
+        }
+      />
 
       <CView
         flexDirection="row"

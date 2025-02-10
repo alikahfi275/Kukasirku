@@ -67,7 +67,7 @@ const BluetoothContainer = () => {
       } catch (error) {
         setIsScanning(false);
         modalError(
-          'Nyalakan GPS sebelum scanning \n setelah connect bisa di nonaktifkan \n kembali',
+          'Aktifkan GPS sebelum scanning \n setelah connect bisa di nonaktifkan \n kembali',
         );
       }
     }
