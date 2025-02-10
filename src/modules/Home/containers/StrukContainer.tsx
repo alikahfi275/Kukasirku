@@ -24,6 +24,8 @@ const StrukContainer = () => {
   const [showModalCetak, setShowModalCetak] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState([]);
 
+  const filterBase64 = photoUrl.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
+
   const checkoutLatest = listCheckout[0];
   const checkoutId = checkoutLatest?.id;
 
@@ -120,9 +122,9 @@ const StrukContainer = () => {
       );
 
       if (photoUrl) {
-        await BluetoothEscposPrinter.printPic(photoUrl, {
-          width: 100,
-          left: 100,
+        await BluetoothEscposPrinter.printPic(filterBase64, {
+          width: 200,
+          left: 90,
         });
       }
 
@@ -218,7 +220,9 @@ const StrukContainer = () => {
         fonttype: 1,
       });
       await BluetoothEscposPrinter.printText('\r\n', {});
-    } catch (error) {}
+    } catch (error) {
+      modalError('Bluetooth tidak terhubung');
+    }
   };
 
   return (

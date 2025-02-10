@@ -21,6 +21,8 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
 
   const [loading, setLoading] = useState(false);
 
+  const filterBase64 = photoUrl.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
+
   useFocusEffect(
     useCallback(() => {
       const fetchStoreProfile = async () => {
@@ -56,9 +58,9 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
         );
 
         if (photoUrl) {
-          await BluetoothEscposPrinter.printPic(photoUrl, {
-            width: 100,
-            left: 100,
+          await BluetoothEscposPrinter.printPic(filterBase64, {
+            width: 200,
+            left: 90,
           });
         }
 
