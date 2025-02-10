@@ -8,7 +8,7 @@ import {
   CTextInput,
   CView,
 } from '../../../components';
-import {DefaulFood, colors, sizeScale} from '../../../property';
+import {DefaultNoImage, colors, sizeScale} from '../../../property';
 import {useRoute, RouteProp} from '@react-navigation/native';
 import {EditDetailProductProps, RootStackParamList} from '../store/type';
 import Route from '../../../app/routes/Routes';
@@ -48,7 +48,7 @@ const EditDetailProductComponent: React.FC<EditDetailProductProps> = (
                 ? changeFotoProduct
                   ? {uri: changeFotoProduct}
                   : {uri: fotoProduct}
-                : DefaulFood
+                : DefaultNoImage
             }
             style={{
               width: sizeScale(200),

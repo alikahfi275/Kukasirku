@@ -41,18 +41,15 @@ const EditDetailContainer: React.FC<EditDetailContainerProps> = props => {
           name,
           price,
           description,
-          changeFotoProduct || fotoProduct,
+          changeFotoProduct || fotoProduct || '',
         );
-        modalSuccess('Berhasil Update Product');
 
         setTimeout(() => {
           Route.navigate(Route.EditProduct);
         }, 1000);
       }
       onSubmit();
-    } catch (error) {
-      modalError('Gagal Update Product');
-    }
+    } catch (error) {}
   };
 
   return (

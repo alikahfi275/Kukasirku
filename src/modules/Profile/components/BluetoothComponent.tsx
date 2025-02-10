@@ -74,14 +74,16 @@ const BluetoothComponent = (props: any) => {
           {connectedDevice ? connectedDevice : 'Tidak Ada'}
         </CText>
       </CView>
-      {connectToDevice === '' && (
-        <CView
-          flexDirection="row"
-          marginLeft={20}
-          paddingTop={15}
-          paddingBottom={15}
-          style={{borderBottomWidth: 1, borderBottomColor: '#E4E4E4'}}
-          alignItems="center">
+
+      <CView
+        flexDirection="row"
+        marginLeft={20}
+        marginRight={20}
+        paddingTop={!connectToDevice ? 15 : 0}
+        paddingBottom={15}
+        style={{borderBottomWidth: 1, borderBottomColor: '#E4E4E4'}}
+        alignItems="center">
+        {!connectToDevice && (
           <CButton
             title={'Disconnect'}
             onPress={disconnectFromDevice}
@@ -93,8 +95,8 @@ const BluetoothComponent = (props: any) => {
             }}
             marginRight={15}
           />
-        </CView>
-      )}
+        )}
+      </CView>
 
       <FlatList
         contentContainerStyle={{flex: 1}}

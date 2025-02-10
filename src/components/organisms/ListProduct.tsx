@@ -3,6 +3,7 @@ import {StyleSheet, Image, Pressable, Button} from 'react-native';
 import {CFlatGrid, CText, CView} from '../atoms';
 import {
   colors,
+  DefaultNoImage,
   formatRupiah,
   horizontalScale,
   verticalScale,
@@ -83,7 +84,7 @@ const ListProduct: React.FC<ListProductProps> = props => {
         onPress={() => Route.navigate(Route.DetailProduct, {itemId: item.id})}
         disabled={onPressDetail ? false : true}>
         <Image
-          source={{uri: item.imageUrl}}
+          source={item.imageUrl ? {uri: item.imageUrl} : DefaultNoImage}
           style={{
             width: '100%',
             height: 150,

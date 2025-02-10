@@ -8,7 +8,7 @@ import {
   CView,
   CScrolView,
 } from '../../../components';
-import {DefaulFood, colors, sizeScale} from '../../../property';
+import {DefaultNoImage, colors, sizeScale} from '../../../property';
 import {AddProductComponentProps} from '../store/type';
 import Route from '../../../app/routes/Routes';
 
@@ -45,7 +45,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           marginTop={10}
           marginBottom={10}>
           <Image
-            source={fotoProduct ? {uri: fotoProduct} : DefaulFood}
+            source={fotoProduct ? {uri: fotoProduct} : DefaultNoImage}
             style={{
               width: sizeScale(200),
               height: sizeScale(200),

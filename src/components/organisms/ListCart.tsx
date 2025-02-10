@@ -2,7 +2,7 @@ import {Image} from 'react-native';
 import React from 'react';
 import {CFlatList, CIcon, CText, CView} from '../atoms';
 import {
-  DefaulFood,
+  DefaultNoImage,
   colors,
   horizontalScale,
   verticalScale,
@@ -39,7 +39,7 @@ const ListCart = () => {
               borderColor: colors.secondary1,
             }}>
             <Image
-              source={item ? {uri: item.imageUrl} : DefaulFood}
+              source={item.imageUrl ? {uri: item.imageUrl} : DefaultNoImage}
               style={{
                 width: horizontalScale(60),
                 height: verticalScale(60),
