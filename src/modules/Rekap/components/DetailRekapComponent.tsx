@@ -1,8 +1,9 @@
 import React from 'react';
-import {CButton, CView, ListRekap, CLoading} from '../../../components';
+import {CButton, CView, ListRekap, CLoading, CModal} from '../../../components';
 import {useRoute} from '@react-navigation/native';
 import {colors} from '../../../property';
 import {useRekapStore} from '../store/useRekapStore';
+import Route from '../../../app/routes/Routes';
 
 interface DetailRekapComponentProps {
   viewShotRef: any;
@@ -12,7 +13,13 @@ interface DetailRekapComponentProps {
 const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
   props: any,
 ) => {
-  const {viewShotRef, captureView} = props;
+  const {
+    viewShotRef,
+    captureView,
+    printLabel,
+    showModalCetak,
+    setShowModalCetak,
+  } = props;
   const {params} = useRoute<any>();
   const {month} = params;
   const {loading} = useRekapStore();
@@ -20,6 +27,15 @@ const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
   return (
     <CView flex={1}>
       <CView flex={1}>
+        <CModal
+          visible={showModalCetak}
+          onConfirm={() => {
+            Route.navigate(Route.BluetoothPrint);
+            setShowModalCetak(false);
+          }}
+          onClose={() => setShowModalCetak(false)}
+          Title="Harap Koneksikan Ke Printer Bluetooth"
+        />
         <CLoading visible={loading} />
         <ListRekap month={month} viewShotRef={viewShotRef} />
       </CView>
@@ -42,7 +58,7 @@ const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
         />
         <CButton
           title="Cetak"
-          onPress={() => {}}
+          onPress={printLabel}
           style={{flex: 1}}
           marginLeft={15}
         />
