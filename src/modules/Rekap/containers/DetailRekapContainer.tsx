@@ -85,17 +85,19 @@ const DetailRekapContainer: React.FC = () => {
       );
       const labelHeader = [['Qty', 'Name', 'Total']];
 
-      for (const [qty, name, total] of labelHeader) {
+      for (const header of labelHeader) {
+        const [qty, name, total] = header; // Destructure each header row properly
+
         await BluetoothEscposPrinter.printColumn(
-          [10, 10, 10, 10, 10],
+          [4, 1, 12, 1, 12], // Adjust column widths
           [
             BluetoothEscposPrinter.ALIGN.LEFT,
-            BluetoothEscposPrinter.ALIGN.LEFT,
             BluetoothEscposPrinter.ALIGN.CENTER,
-            BluetoothEscposPrinter.ALIGN.RIGHT,
-            BluetoothEscposPrinter.ALIGN.RIGHT,
+            BluetoothEscposPrinter.ALIGN.CENTER,
+            BluetoothEscposPrinter.ALIGN.CENTER,
+            BluetoothEscposPrinter.ALIGN.CENTER,
           ],
-          [qty, '|', name, '|', total],
+          [qty, '|', name, '|', total], // Include separator columns
           {},
         );
       }
@@ -106,22 +108,15 @@ const DetailRekapContainer: React.FC = () => {
 
       for (const row of processedData) {
         const totalPrice = formatUang(row.totalPrice);
-        await BluetoothEscposPrinter.printColumn(
-          [30],
-          [BluetoothEscposPrinter.ALIGN.LEFT],
-          [row.name],
-          {},
-        );
 
         await BluetoothEscposPrinter.printColumn(
-          [10, 1, 10, 11],
+          [5, 12, 15],
           [
-            BluetoothEscposPrinter.ALIGN.RIGHT,
+            BluetoothEscposPrinter.ALIGN.CENTER,
             BluetoothEscposPrinter.ALIGN.LEFT,
             BluetoothEscposPrinter.ALIGN.RIGHT,
-            BluetoothEscposPrinter.ALIGN.RIGHT,
           ],
-          [row.count.toString(), '', row.name, totalPrice],
+          [row.count.toString(), row.name, totalPrice],
           {},
         );
       }
@@ -135,11 +130,11 @@ const DetailRekapContainer: React.FC = () => {
 
       for (const [label, value] of totalProduct) {
         await BluetoothEscposPrinter.printColumn(
-          [19, 2, 11],
+          [16, 2, 14],
           [
             BluetoothEscposPrinter.ALIGN.LEFT,
             BluetoothEscposPrinter.ALIGN.LEFT,
-            BluetoothEscposPrinter.ALIGN.RIGHT,
+            BluetoothEscposPrinter.ALIGN.CENTER,
           ],
           [label, '|', value],
           {},
@@ -151,11 +146,11 @@ const DetailRekapContainer: React.FC = () => {
         {},
       );
 
-      const totalPendapatan = [['TOTAL PRODUCT', formatRupiah(totalPrice)]];
+      const totalPendapatan = [['PENDAPATAN', formatUang(totalPrice)]];
 
       for (const [label, value] of totalPendapatan) {
         await BluetoothEscposPrinter.printColumn(
-          [19, 2, 11],
+          [16, 2, 14],
           [
             BluetoothEscposPrinter.ALIGN.LEFT,
             BluetoothEscposPrinter.ALIGN.LEFT,
