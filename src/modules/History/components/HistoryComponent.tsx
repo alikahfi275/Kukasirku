@@ -15,6 +15,7 @@ const HistoryComponent = (props: any) => {
         <CSearch
           icon={true}
           placeholder="Search by Order Id ...."
+          placeholderTextColor={'#999999'}
           iconStyle={{color: colors.teal}}
           value={searchQueryHistory}
           onChangeText={text => setSearchQueryHistory(text)}

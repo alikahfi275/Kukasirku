@@ -64,6 +64,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           label="Product Name"
           value={name}
           onChangeText={setName}
+          isMandatory
         />
         <CTextInput
           placeholder="Price"
@@ -71,6 +72,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           keyboardType="numeric"
           value={price.toString()}
           onChangeText={text => setPrice(Number(text))}
+          isMandatory
         />
         <CTextInput
           placeholder="Description"
@@ -86,6 +88,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           onPress={handleSubmit}
           marginTop={20}
           marginBottom={20}
+          disabled={name === '' && price === 0}
         />
       </CScrolView>
     </CView>
