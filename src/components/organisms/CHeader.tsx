@@ -18,6 +18,7 @@ interface HeaderProps extends TextInputProps {
   sizeIconLeft?: number;
   onChangeText?: (text: string) => void;
   badge?: number;
+  isProfile?: boolean;
 }
 
 const CHeader: React.FC<HeaderProps> = props => {
@@ -30,6 +31,7 @@ const CHeader: React.FC<HeaderProps> = props => {
     sizeIconRight = 20,
     sizeIconLeft = 20,
     badge = 0,
+    isProfile = false,
   } = props;
   return (
     <>
@@ -110,6 +112,7 @@ const CHeader: React.FC<HeaderProps> = props => {
         <CView
           paddingTop={35}
           paddingBottom={5}
+          paddingLeft={isProfile ? 15 : 0}
           style={{
             flexDirection: 'row',
             alignItems: 'center',

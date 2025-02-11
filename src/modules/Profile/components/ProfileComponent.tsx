@@ -15,7 +15,7 @@ const ProfileComponent: React.FC<ProfileComponentProps> = (props: any) => {
   const {photoUrl} = props;
   return (
     <CView flex={1}>
-      <CHeader iconLeft="arrow-left" titleHeader="Profile" />
+      <CHeader titleHeader="Profile" isProfile />
       <CModal
         isOneButton
         visible={showModalValidation}
