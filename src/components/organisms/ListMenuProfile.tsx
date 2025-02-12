@@ -98,7 +98,12 @@ const ListMenuProfile = (props: any) => {
         visible={modalVisible}
         onClose={closeModal}
         Title="Apakah Anda yakin ingin Keluar ?"
-        onConfirm={() => BackHandler.exitApp()}
+        onConfirm={() => {
+          closeModal();
+          setTimeout(() => {
+            BackHandler.exitApp();
+          }, 1000);
+        }}
       />
     </CView>
   );

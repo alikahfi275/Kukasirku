@@ -48,7 +48,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
           borderRadius: 8,
           justifyContent: 'center',
           flex: typeSearch === 'default' ? 0 : 1,
-          color: '#333',
         },
         ,
         containerStyle,
@@ -62,6 +61,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             flex: 1,
             fontSize: 14,
             height: verticalScale(30),
+            color: '#333',
           },
           inputStyle,
         ]}

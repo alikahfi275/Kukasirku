@@ -23,6 +23,7 @@ const StrukContainer = () => {
   const [deviceTerhubung, setDeviceTerhubung] = useState('');
   const [showModalCetak, setShowModalCetak] = useState(false);
   const [checkoutItems, setCheckoutItems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const filterBase64 = photoUrl.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
 
@@ -116,6 +117,7 @@ const StrukContainer = () => {
       return;
     }
 
+    setLoading(true);
     try {
       await BluetoothEscposPrinter.printerAlign(
         BluetoothEscposPrinter.ALIGN.CENTER,
@@ -162,7 +164,9 @@ const StrukContainer = () => {
       );
 
       for (const row of checkoutItems) {
+        const totalPrice = row.price * row.quantity;
         const price = formatUang(row.price);
+        const total = formatUang(totalPrice);
         await BluetoothEscposPrinter.printColumn(
           [30],
           [BluetoothEscposPrinter.ALIGN.LEFT],
@@ -178,7 +182,7 @@ const StrukContainer = () => {
             BluetoothEscposPrinter.ALIGN.RIGHT,
             BluetoothEscposPrinter.ALIGN.RIGHT,
           ],
-          [row.quantity.toString(), 'x', price, price],
+          [row.quantity.toString(), 'x', price, total],
           {},
         );
       }
@@ -219,8 +223,10 @@ const StrukContainer = () => {
       await BluetoothEscposPrinter.printText(`Terima Kasih\r\n`, {
         fonttype: 1,
       });
-      await BluetoothEscposPrinter.printText('\r\n', {});
+      await BluetoothEscposPrinter.printText(' \r\n', {});
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       modalError('Bluetooth tidak terhubung');
     }
   };
@@ -238,6 +244,7 @@ const StrukContainer = () => {
       showModalCetak={showModalCetak}
       setShowModalCetak={setShowModalCetak}
       storeName={storeName}
+      loading={loading}
     />
   );
 };

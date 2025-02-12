@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CButton,
+  CLoading,
   CModal,
   CScrolView,
   CText,
@@ -32,20 +33,22 @@ const StrukComponent = (props: any) => {
     showModalCetak,
     setShowModalCetak,
     storeName,
+    loading,
   } = props;
 
   return (
     <CView flex={1}>
+      <CLoading visible={loading} />
+      <CModal
+        visible={showModalCetak}
+        onConfirm={() => {
+          Route.navigate(Route.BluetoothPrint);
+          setShowModalCetak(false);
+        }}
+        onClose={() => setShowModalCetak(false)}
+        Title="Harap Koneksikan Ke Printer Bluetooth"
+      />
       <CView flex={1} marginTop={20}>
-        <CModal
-          visible={showModalCetak}
-          onConfirm={() => {
-            Route.navigate(Route.BluetoothPrint);
-            setShowModalCetak(false);
-          }}
-          onClose={() => setShowModalCetak(false)}
-          Title="Harap Koneksikan Ke Printer Bluetooth"
-        />
         <ViewShot ref={viewShotRefStruk} style={{backgroundColor: 'white'}}>
           <CScrolView
             paddingTop={20}
