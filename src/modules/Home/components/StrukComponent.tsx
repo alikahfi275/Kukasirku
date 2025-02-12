@@ -66,15 +66,16 @@ const StrukComponent = (props: any) => {
                   {storeName}
                 </CText>
               )}
-              {storePhone && (
-                <CText weight={400} fontSize={12} marginTop={2}>
-                  {storePhone}
-                </CText>
-              )}
 
               {storeAddress && (
                 <CText weight={400} fontSize={12}>
                   {storeAddress}
+                </CText>
+              )}
+
+              {storePhone && (
+                <CText weight={400} fontSize={12} marginTop={2}>
+                  {storePhone}
                 </CText>
               )}
             </CView>

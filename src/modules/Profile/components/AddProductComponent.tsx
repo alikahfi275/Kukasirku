@@ -88,7 +88,7 @@ const AddProductComponent: React.FC<AddProductComponentProps> = (
           onPress={handleSubmit}
           marginTop={20}
           marginBottom={20}
-          disabled={name === '' && price === 0}
+          disabled={name === '' || price === 0}
         />
       </CScrolView>
     </CView>
