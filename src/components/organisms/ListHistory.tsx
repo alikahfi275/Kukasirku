@@ -236,10 +236,10 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
                 style={{textAlign: 'right'}}
                 weight={600}
                 marginRight={10}>
-                Total
+                Total :
               </CText>
             </CView>
-            <CView style={{justifyContent: 'flex-start'}} flex={0.5}>
+            <CView style={{alignItems: 'flex-end'}} flex={0.8} marginRight={15}>
               <CText fontSize={16} weight={600}>
                 {formatRupiah(checkout.totalPrice)}
               </CText>

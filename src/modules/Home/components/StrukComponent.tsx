@@ -100,23 +100,23 @@ const StrukComponent = (props: any) => {
             <ListItemsCheckout checkoutId={checkoutLatest?.id} />
             <LineDashed marginTop={5} />
             <CView flex={1} flexDirection="row">
-              <CView flex={1.5}>
-                <CText
-                  weight={600}
-                  fontSize={16}
-                  marginTop={2}
-                  color={colors.black}
-                  style={{textAlign: 'right'}}
-                  marginRight={20}>
-                  Total
-                </CText>
-              </CView>
               <CView flex={1}>
                 <CText
                   weight={600}
                   fontSize={16}
                   marginTop={2}
-                  color={colors.black}>
+                  color={colors.black}
+                  style={{textAlign: 'right'}}>
+                  Total :
+                </CText>
+              </CView>
+              <CView flex={1} alignItems="flex-end">
+                <CText
+                  weight={600}
+                  fontSize={16}
+                  marginTop={2}
+                  color={colors.black}
+                  marginRight={15}>
                   {formatRupiah(checkoutLatest?.totalPrice)}
                 </CText>
               </CView>
