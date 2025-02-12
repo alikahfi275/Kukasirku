@@ -22,7 +22,7 @@ const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
   } = props;
   const {params} = useRoute<any>();
   const {month} = params;
-  const {loading} = useRekapStore();
+  const {loading, totalProducts} = useRekapStore();
 
   return (
     <CView flex={1}>
@@ -61,6 +61,7 @@ const DetailRekapComponent: React.FC<DetailRekapComponentProps> = (
           onPress={printLabel}
           style={{flex: 1}}
           marginLeft={15}
+          disabled={totalProducts === 0}
         />
       </CView>
     </CView>

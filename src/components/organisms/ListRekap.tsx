@@ -84,7 +84,7 @@ const ListRekap = ({month, viewShotRef}: any) => {
                 <CText
                   style={{textAlign: 'center'}}
                   fontSize={16}
-                  marginRight={20}
+                  marginRight={10}
                   marginLeft={20}>
                   {details.count}
                 </CText>
@@ -96,7 +96,9 @@ const ListRekap = ({month, viewShotRef}: any) => {
                 marginRight={5}
                 marginLeft={5}>
                 <CView>
-                  <CText style={{textAlign: 'left'}} fontSize={16}>
+                  <CText
+                    style={{textAlign: 'left', maxWidth: 180}}
+                    fontSize={16}>
                     {name}
                   </CText>
                 </CView>
