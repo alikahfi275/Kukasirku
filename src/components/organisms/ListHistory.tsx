@@ -98,7 +98,9 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
         );
 
         for (const row of itemsData) {
+          const totalPrice = row.price * row.quantity;
           const price = formatUang(row.price);
+          const total = formatUang(totalPrice);
           await BluetoothEscposPrinter.printColumn(
             [30],
             [BluetoothEscposPrinter.ALIGN.LEFT],
@@ -114,7 +116,7 @@ const ListHistory = ({checkouts}: {checkouts: any[]}) => {
               BluetoothEscposPrinter.ALIGN.RIGHT,
               BluetoothEscposPrinter.ALIGN.RIGHT,
             ],
-            [row.quantity.toString(), 'x', price, price],
+            [row.quantity.toString(), 'x', price, total],
             {},
           );
         }
